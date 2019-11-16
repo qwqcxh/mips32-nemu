@@ -178,8 +178,6 @@ bool isopnd(int idx){
 }
 
 uint32_t eval(int p,int q,bool* success){
-  //debug
-  printf("p is %d q is %d\n",p,q);
   if (p > q) {
     *success=false;
     return -1;
@@ -192,18 +190,13 @@ uint32_t eval(int p,int q,bool* success){
     if(tokens[p].type==TK_NUM){
       uint32_t val;
       sscanf(tokens[p].str,"%d",&val);
-      //debug
-      printf("val is %d\n",val);
       return val;
     }else if(tokens[p].type==TK_HEX){
       uint32_t val;
       sscanf(tokens[p].str,"%x",&val);
-      //debug
-      printf("val is %d\n",val);
       return val;
     }else{
       *success=false;
-      printf("strange opnd at index %d total is %d\n",p,nr_token);//debug
       return -1; 
     }
   }
@@ -227,7 +220,6 @@ uint32_t eval(int p,int q,bool* success){
   }
   else {
     int master_op_idx = get_master_op(p,q);
-    printf("master op idx %d\n",master_op_idx);//debug
     uint32_t val1 = eval(p, master_op_idx - 1,success);
     if(*success==false) return -1;
     uint32_t val2 = eval(master_op_idx + 1, q,success);
