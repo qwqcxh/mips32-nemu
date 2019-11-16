@@ -126,6 +126,7 @@ static bool make_token(char *e) {
 
 /********************work****************************/
 bool check_parentheses(int p,int q){ 
+  if(tokens[p].type!='('||tokens[q].type!=')') return false;
   int bracket=0;//bracket++ when facing '(' and bracket-- facing ')'
   for(int i=p;i<=q;i++){
     if(tokens[i].type=='(') bracket++;
