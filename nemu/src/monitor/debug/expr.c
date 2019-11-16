@@ -163,7 +163,7 @@ int get_master_op(int p,int q){
       case '+':case '-':case '*':case '/':  //arithmatic op
       case TK_DEREF:case TK_MINUS:  // special op
         if(cnt!=0) break;
-        if(res==-1||get_pri(tokens[i].type)<=get_pri(tokens[res].type)) {res=i;break;}
+        if(res==-1||get_pri(tokens[i].type)>=get_pri(tokens[res].type)) {res=i;break;}
       default:
         break;
     }
