@@ -224,6 +224,7 @@ uint32_t eval(int p,int q,bool* success){
   }
   else {
     int master_op_idx = get_master_op(p,q);
+    printf("master op idx %d\n",master_op_idx);//debug
     uint32_t val1 = eval(p, master_op_idx - 1,success);
     if(*success==false) return -1;
     uint32_t val2 = eval(master_op_idx + 1, q,success);
