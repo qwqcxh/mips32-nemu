@@ -189,13 +189,18 @@ uint32_t eval(int p,int q,bool* success){
     if(tokens[p].type==TK_NUM){
       uint32_t val;
       sscanf(tokens[p].str,"%d",&val);
+      //debug
+      printf("val is %d\n",val);
       return val;
     }else if(tokens[p].type==TK_HEX){
       uint32_t val;
       sscanf(tokens[p].str,"%x",&val);
+      //debug
+      printf("val is %d\n",val);
       return val;
     }else{
       *success=false;
+      printf("strange opnd\n");
       return -1; 
     }
   }
