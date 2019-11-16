@@ -43,7 +43,7 @@ static int cmd_si(char* args){  //si N
   int n=0;
   if(args==NULL) n=1; // if no parameter with si,set the default n to 1
   else{
-    while(*args) args++;//omit space character
+    while(*args==' ') args++;//omit space character
     while(*args){
       if(isdigit(args[0])) 
         n=n*10+args[0]-'0';
