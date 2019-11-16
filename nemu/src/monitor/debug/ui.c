@@ -75,10 +75,12 @@ static int cmd_info(char*args){
 
 static int cmd_x(char* args){ // X N expr
   int n;
-  unsigned int addr;
-  if(sscanf(args,"%d %x",&n,&addr)!=2){
+  vaddr_t va;
+  if(sscanf(args,"%d %x",&n,&va)!=2)
     printf("usage x N expr\n");
-  }
+  else 
+    for(int i=0;i<n;i++)
+      printf("%10x  %10x\n",va+i*4,vaddr_read(va+i*4,4));
   return 0;
 }
 
