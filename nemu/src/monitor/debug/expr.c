@@ -177,6 +177,8 @@ bool isopnd(int idx){
 }
 
 uint32_t eval(int p,int q,bool* success){
+  //debug
+  printf("p is %d q is %d\n",p,q);
   if (p > q) {
     *success=false;
     return -1;
