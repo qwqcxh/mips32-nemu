@@ -200,7 +200,7 @@ uint32_t eval(int p,int q,bool* success){
       return val;
     }else{
       *success=false;
-      printf("strange opnd\n");
+      printf("strange opnd at index %d total is %d\n",p,nr_token);//debug
       return -1; 
     }
   }
