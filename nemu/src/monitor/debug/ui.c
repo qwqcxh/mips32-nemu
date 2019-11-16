@@ -51,6 +51,7 @@ static int cmd_si(char* args){  //si N
     }
     args++;
   }
+  if(n==0) n=1; // if no parameter with si,set the default n to 1
   cpu_exec(n);
   return 0;
 }
