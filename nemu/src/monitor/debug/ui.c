@@ -72,6 +72,16 @@ static int cmd_info(char*args){
     printf("invalid SUBCOMMAND,should be 'r' or 'w'\n");
   return 0;
 }
+
+static int cmd_x(char* args){ // X N expr
+  int n;
+  unsigned int addr;
+  if(sscanf(args,"%d %x",&n,&addr)!=2){
+    printf("usage x N expr\n");
+  }
+  return 0;
+}
+
 static struct {
   char *name;
   char *description;
@@ -82,6 +92,7 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   { "si", "Single instruction",cmd_si},
   { "info", "register info or watchpoint info",cmd_info},
+  { "x", "print memrory info", cmd_x},
   /* TODO: Add more commands */
 
 };
