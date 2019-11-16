@@ -7,7 +7,11 @@ const char *regsl[] = {
   "t8", "t9", "k0", "k1", "gp", "sp", "s8", "ra"
 };
 
-void isa_reg_display() {
+/*******************work********************/
+void isa_reg_display() {   
+  for(int i=0;i<32;i++){
+    printf("%-10s%x\n",regsl[i],reg_l(i));
+  }
 }
 
 uint32_t isa_reg_str2val(const char *s, bool *success) {

@@ -2,7 +2,6 @@
 #include "monitor/expr.h"
 #include "monitor/watchpoint.h"
 #include "nemu.h"
-
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -37,6 +36,7 @@ static int cmd_q(char *args) {
 }
 
 static int cmd_help(char *args);
+
 /**************************************work******************************/
 //TODO1
 static int cmd_si(char* args){  //si N
@@ -48,13 +48,28 @@ static int cmd_si(char* args){  //si N
       if(isdigit(args[0])) 
         n=n*10+args[0]-'0';
       else{
-        printf("invalid SI command!\n");
+        printf("usage si N\n");
         break;
       }
       args++;
     }
   }
   cpu_exec(n);
+  return 0;
+}
+
+extern void isa_reg_display();
+static int cmd_info(char*args){
+  while(args!=NULL&&*args==' ') args++;
+  if(args==NULL)
+    printf("usage \"info r\" or \"info w\"\n");
+  else if(*args=='r')
+    isa_reg_display();
+  else if(*args=='w'){
+    //TODO
+  }
+  else
+    printf("invalid SUBCOMMAND,should be 'r' or 'w'\n");
   return 0;
 }
 static struct {
@@ -66,7 +81,7 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
   { "si", "Single instruction",cmd_si},
-
+  { "info", "register info or watchpoint info",cmd_info},
   /* TODO: Add more commands */
 
 };
