@@ -41,17 +41,19 @@ static int cmd_help(char *args);
 //TODO1
 static int cmd_si(char* args){  //si N
   int n=0;
-  while(!args[0]) args++;//omit space character
-  while(args[0]){
-    if(isdigit(args[0])) 
-      n=n*10+args[0]-'0';
-    else{
-      printf("invalid SI command!\n");
-      break;
+  if(args==NULL) n=1; // if no parameter with si,set the default n to 1
+  else{
+    while(*args) args++;//omit space character
+    while(*args){
+      if(isdigit(args[0])) 
+        n=n*10+args[0]-'0';
+      else{
+        printf("invalid SI command!\n");
+        break;
+      }
+      args++;
     }
-    args++;
   }
-  if(n==0) n=1; // if no parameter with si,set the default n to 1
   cpu_exec(n);
   return 0;
 }
