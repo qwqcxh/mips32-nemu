@@ -84,6 +84,15 @@ static int cmd_x(char* args){ // X N expr
   return 0;
 }
 
+// extern uint32_t expr(char *e, bool *success);
+static int cmd_p(char* args){
+  bool valid=true;
+  uint32_t val=expr(args,&valid);
+  if(valid==false) printf("invalid expression\n");
+  else printf("%10d %10x\n",val,val);
+  return 0;
+}
+
 static struct {
   char *name;
   char *description;
@@ -95,6 +104,7 @@ static struct {
   { "si", "Single instruction",cmd_si},
   { "info", "register info or watchpoint info",cmd_info},
   { "x", "print memrory info", cmd_x},
+  { "p", "get the value of expression", cmd_p},
   /* TODO: Add more commands */
 
 };
