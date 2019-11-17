@@ -129,10 +129,10 @@ static bool make_token(char *e) {
 bool check_parentheses(int p,int q){ 
   if(tokens[p].type!='('||tokens[q].type!=')') return false;
   int bracket=0;//bracket++ when facing '(' and bracket-- facing ')'
-  for(int i=p;i<=q;i++){
+  for(int i=p+1;i<q;i++){
     if(tokens[i].type=='(') bracket++;
     else if(tokens[i].type==')') bracket--;
-    if(bracket<=0) return false;
+    if(bracket<0) return false;
   }
   return bracket==0;
 }
