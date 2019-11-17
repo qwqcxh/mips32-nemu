@@ -99,7 +99,8 @@ static bool make_token(char *e) {
           case TK_NUM:
           case TK_HEX:
             Assert(substr_len<32,"digit string is too long!\n");
-            strncpy(tokens[nr_token].str,substr_start,substr_len);
+            strncpy(tokens[nr_token].str,substr_start,substr_len); //what a fuck!!! strncpy won't add '\0' in the end
+            tokens[nr_token].str[substr_len]='\0'; //fix the bug above
           case '+':
           case '-':
           case '*':
