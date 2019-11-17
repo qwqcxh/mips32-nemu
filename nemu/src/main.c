@@ -13,6 +13,7 @@ int main(int argc, char *argv[]) {
 
   /***********work***************/
   FILE* fp=fopen("../tools/gen-expr/input","r");
+  Assert(fp!=NULL,"open input failed!\n");
   unsigned res;
   int line=1;
   while(fscanf(fp,"%u",&res)==1){
