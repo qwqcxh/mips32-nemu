@@ -189,7 +189,7 @@ bool isopnd(int idx){
   return type==TK_NUM||type==TK_HEX||type==')';//(a+b)-c in this case ')' should be treated as opnd
 }
 
-uint32_t eval(int p,int q,bool* success){
+unsigned long long eval(int p,int q,bool* success){
   printf("p %d q %d\n",p,q);
   if (p > q) {
     *success=false;
@@ -201,15 +201,15 @@ uint32_t eval(int p,int q,bool* success){
      * Return the value of the number.
      */
     if(tokens[p].type==TK_NUM){
-      uint32_t val;
-      sscanf(tokens[p].str,"%u",&val);
+      unsigned long long val;
+      sscanf(tokens[p].str,"%llu",&val);
       //debug
-      printf("str is %s and val is %u\n",tokens[p].str,val);
-      printf("now the val is digit num  %u\n",val); //debug
+      printf("str is %s and val is %llu\n",tokens[p].str,val);
+      printf("now the val is digit num  %llu\n",val); //debug
       return val;
     }else if(tokens[p].type==TK_HEX){
-      uint32_t val;
-      sscanf(tokens[p].str,"%xu",&val);
+      unsigned long long val;
+      sscanf(tokens[p].str,"%llxu",&val);
       return val;
     }else{
       *success=false;
@@ -227,7 +227,7 @@ uint32_t eval(int p,int q,bool* success){
     int master_op_idx = get_master_op(p,q);
     if(tokens[master_op_idx].type==TK_MINUS){
       Assert(master_op_idx==p,"master_op should be equal to p\n");
-      uint32_t val=eval(master_op_idx+1,q,success);
+      unsigned long long val=eval(master_op_idx+1,q,success);
       return -val;
     }
     else if(tokens[master_op_idx].type==TK_DEREF){
@@ -236,22 +236,22 @@ uint32_t eval(int p,int q,bool* success){
       return vaddr_read(addr,4);
     }
     else{
-      uint32_t val1 = eval(p, master_op_idx - 1,success);
+      unsigned long long val1 = eval(p, master_op_idx - 1,success);
       if(*success==false) return -1;
-      uint32_t val2 = eval(master_op_idx + 1, q,success);
+      unsigned long long val2 = eval(master_op_idx + 1, q,success);
       if(*success==false) return -1;
       switch (tokens[master_op_idx].type) {
         case '+': 
-          printf("now the val is + %u\n",val1+val2); //debug
+          printf("now the val is + %llu\n",val1+val2); //debug
           return val1 + val2;
         case '-': 
-          printf("now the val is - %u\n",val1-val2); //debug
+          printf("now the val is - %llu\n",val1-val2); //debug
           return val1 - val2;
         case '*': 
-          printf("now the val is * %u\n",val1*val2); //debug
+          printf("now the val is * %llu\n",val1*val2); //debug
           return val1 * val2;
         case '/': 
-          printf("now the val is / %u\n",val1/val2); //debug
+          printf("now the val is / %llu\n",val1/val2); //debug
           return val1 / val2;
         default: assert(0);return -1;
       }
