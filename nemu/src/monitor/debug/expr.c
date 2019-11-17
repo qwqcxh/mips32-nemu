@@ -204,8 +204,8 @@ uint32_t eval(int p,int q,bool* success){
       uint32_t val;
       sscanf(tokens[p].str,"%u",&val);
       //debug
-      printf("str is %s and val is %u\n",tokens[p].str,val);
-      printf("now the val is digit num  %u\n",val); //debug
+      // printf("str is %s and val is %u\n",tokens[p].str,val);
+      // printf("now the val is digit num  %u\n",val); //debug
       return val;
     }else if(tokens[p].type==TK_HEX){
       uint32_t val;
@@ -242,16 +242,16 @@ uint32_t eval(int p,int q,bool* success){
       if(*success==false) return -1;
       switch (tokens[master_op_idx].type) {
         case '+': 
-          printf("now the val is + %u\n",val1+val2); //debug
+          //printf("now the val is + %u\n",val1+val2); //debug
           return val1 + val2;
         case '-': 
-          printf("now the val is - %u\n",val1-val2); //debug
+          //printf("now the val is - %u\n",val1-val2); //debug
           return val1 - val2;
         case '*': 
-          printf("now the val is * %u\n",val1*val2); //debug
+          //printf("now the val is * %u\n",val1*val2); //debug
           return val1 * val2;
         case '/': 
-          printf("now the val is / %u\n",val1/val2); //debug
+          //printf("now the val is / %u\n",val1/val2); //debug
           return val1 / val2;
         default: assert(0);return -1;
       }
