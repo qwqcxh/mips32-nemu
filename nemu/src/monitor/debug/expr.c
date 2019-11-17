@@ -262,8 +262,11 @@ uint32_t expr(char *e, bool *success) {
   for(int i=0;i<nr_token;i++){
     if(tokens[i].type=='*'&&(i==0||!isopnd(i-1)))
       tokens[i].type=TK_DEREF;
-    else if(tokens[i].type=='-'&&(i==0||!isopnd(i-1)))
+    else if(tokens[i].type=='-'&&(i==0||!isopnd(i-1))){
       tokens[i].type=TK_MINUS;
+      //debug
+      printf("token %d is changed to minus\n",i);
+    }
   }
 
   return eval(0,nr_token-1,success);
