@@ -4,21 +4,23 @@
 #include <time.h>
 #include <assert.h>
 #include <string.h>
+#include <ctype.h>
 
 // this should be enough
 static char buf[65536];
 /********************work***********************/
 #define MAX_NUMBER 60000
 unsigned choose(unsigned x){//gen num randomly in range[0,x];
-  return (unsigned)((double)rand()/RAND_MAX*x); 
+  return rand()%x;
 }
 
 int gen_num(int idx){//gen num randomly in range[0,0xffffffff];
   char str[20];
-  unsigned int val=choose(-1); 
+  unsigned int val=rand()%RAND_MAX;
   sprintf(str,"%u",val);
   strcpy(buf+idx,str); //fix a bug
   idx+=strlen(str);
+  buf[idx++]=' ';
   return idx;
 }
 
@@ -39,7 +41,7 @@ int gen_rand_op(int idx){ //gen a operator randmly
 
 static inline int gen_rand_expr(int idx) {
   if(idx>MAX_NUMBER) return gen_num(idx); //if idx is big enough,ending gen_rand_expr as fast as possible
-  switch (choose(3)) {
+  switch (rand()%3) {
     case 0: return gen_num(idx);
     case 1: 
       buf[idx++]='(';
@@ -81,13 +83,18 @@ int main(int argc, char *argv[]) {
     buf[gen_rand_expr(0)]='\0';
 
     sprintf(code_buf, code_format, buf);
+    //change the constant to unsigned
+    for(int j=0;code_buf[j];j++){
+      if(code_buf[j]==' '&&j&&isdigit(code_buf[j-1]))
+        code_buf[j]='u';
+    }
 
     FILE *fp = fopen("/tmp/.code.c", "w");
     assert(fp != NULL);
     fputs(code_buf, fp);
     fclose(fp);
 
-    int ret = system("gcc -w /tmp/.code.c -o /tmp/.expr"); //close waring of integer overflow
+    int ret = system("gcc -w /tmp/.code.c -o /tmp/.expr");
     if (ret != 0) continue;
 
     fp = popen("/tmp/.expr", "r");
