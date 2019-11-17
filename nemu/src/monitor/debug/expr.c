@@ -186,7 +186,7 @@ int get_master_op(int p,int q){
 bool isopnd(int idx){
   Assert(idx>=0&&idx<nr_token,"idx of isopnd should in range [0,nrtoken)\n");
   int type=tokens[idx].type;
-  return type==TK_NUM||type==TK_HEX;
+  return type==TK_NUM||type==TK_HEX||type==')';//(a+b)-c in this case ')' should be treated as opnd
 }
 
 uint32_t eval(int p,int q,bool* success){
