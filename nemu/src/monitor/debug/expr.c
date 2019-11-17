@@ -202,6 +202,8 @@ uint32_t eval(int p,int q,bool* success){
     if(tokens[p].type==TK_NUM){
       uint32_t val;
       sscanf(tokens[p].str,"%u",&val);
+      //debug
+      printf("str is %s and val is %u\n",tokens[p].str,val);
       return val;
     }else if(tokens[p].type==TK_HEX){
       uint32_t val;
