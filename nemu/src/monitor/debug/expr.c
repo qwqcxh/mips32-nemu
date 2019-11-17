@@ -153,9 +153,14 @@ int get_pri(int type){
   }
 }
 
+bool is_right_bound(int type){
+  return type==TK_DEREF||type==TK_MINUS;
+}
+
 int get_master_op(int p,int q){
   int cnt=0;
   int res=-1;
+  int pri1,pri2;
   for(int i=p;i<=q;i++){
     switch (tokens[i].type){
       case '(':cnt++;break;
@@ -163,7 +168,9 @@ int get_master_op(int p,int q){
       case '+':case '-':case '*':case '/':  //arithmatic op
       case TK_DEREF:case TK_MINUS:  // special op
         if(cnt!=0) break;
-        if(res==-1||get_pri(tokens[i].type)>=get_pri(tokens[res].type)) {res=i;break;}
+        pri1=get_pri(tokens[i].type);
+        pri2=get_pri(tokens[res].type);
+        if(res==-1||pri1>pri2||(pri1==pri2&&!is_right_bound(tokens[i].type))) {res=i;break;}
       default:
         break;
     }
@@ -197,6 +204,7 @@ uint32_t eval(int p,int q,bool* success){
       return val;
     }else{
       *success=false;
+      Log("only one token but it's not opnd\n");
       return -1; 
     }
   }
@@ -220,16 +228,26 @@ uint32_t eval(int p,int q,bool* success){
   }
   else {
     int master_op_idx = get_master_op(p,q);
-    uint32_t val1 = eval(p, master_op_idx - 1,success);
-    if(*success==false) return -1;
-    uint32_t val2 = eval(master_op_idx + 1, q,success);
-    if(*success==false) return -1;
-    switch (tokens[master_op_idx].type) {
-      case '+': return val1 + val2;
-      case '-': return val1 - val2;
-      case '*': return val1 * val2;
-      case '/': return val1 / val2;
-      default: assert(0);return -1;
+    if(tokens[master_op_idx].type==TK_MINUS){
+      uint32_t val=eval(q,q,success);
+      return -val;
+    }
+    else if(tokens[master_op_idx].type==TK_DEREF){
+      uint32_t addr=eval(q,q,success);
+      return vaddr_read(addr,4);
+    }
+    else{
+      uint32_t val1 = eval(p, master_op_idx - 1,success);
+      if(*success==false) return -1;
+      uint32_t val2 = eval(master_op_idx + 1, q,success);
+      if(*success==false) return -1;
+      switch (tokens[master_op_idx].type) {
+        case '+': return val1 + val2;
+        case '-': return val1 - val2;
+        case '*': return val1 * val2;
+        case '/': return val1 / val2;
+        default: assert(0);return -1;
+      }
     }
   }
 }
