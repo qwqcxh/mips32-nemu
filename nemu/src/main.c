@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
   int is_batch_mode = init_monitor(argc, argv);
 
   /***********work***************/
-  FILE* fp=fopen("../../tools/gen-expr/input","r");
+  FILE* fp=fopen("tools/gen-expr/input","r");
   Assert(fp!=NULL,"open input failed!\n");
   unsigned res;
   int line=1;
