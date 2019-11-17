@@ -214,26 +214,16 @@ uint32_t eval(int p,int q,bool* success){
      */
     return eval(p + 1, q - 1,success);
   }
-  // else if (p+1==q){
-  //   if(tokens[p].type==TK_MINUS){
-  //     uint32_t val=eval(q,q,success);
-  //     return -val;
-  //   }
-  //   else if(tokens[p].type==TK_DEREF){
-  //     uint32_t addr=eval(q,q,success);
-  //     return vaddr_read(addr,4);
-  //   }
-  //   panic("unknown type\n");
-  //   return -1;
-  // }
   else {
     int master_op_idx = get_master_op(p,q);
     if(tokens[master_op_idx].type==TK_MINUS){
-      uint32_t val=eval(q,q,success);
+      Assert(master_op_idx==p,"master_op should be equal to p\n");
+      uint32_t val=eval(master_op_idx+1,q,success);
       return -val;
     }
     else if(tokens[master_op_idx].type==TK_DEREF){
-      uint32_t addr=eval(q,q,success);
+      Assert(master_op_idx==p,"master_op should be equal to p\n");
+      uint32_t addr=eval(master_op_idx+1,q,success);
       return vaddr_read(addr,4);
     }
     else{
