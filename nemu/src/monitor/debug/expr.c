@@ -214,18 +214,18 @@ uint32_t eval(int p,int q,bool* success){
      */
     return eval(p + 1, q - 1,success);
   }
-  else if (p+1==q){
-    if(tokens[p].type==TK_MINUS){
-      uint32_t val=eval(q,q,success);
-      return -val;
-    }
-    else if(tokens[p].type==TK_DEREF){
-      uint32_t addr=eval(q,q,success);
-      return vaddr_read(addr,4);
-    }
-    panic("unknown type\n");
-    return -1;
-  }
+  // else if (p+1==q){
+  //   if(tokens[p].type==TK_MINUS){
+  //     uint32_t val=eval(q,q,success);
+  //     return -val;
+  //   }
+  //   else if(tokens[p].type==TK_DEREF){
+  //     uint32_t addr=eval(q,q,success);
+  //     return vaddr_read(addr,4);
+  //   }
+  //   panic("unknown type\n");
+  //   return -1;
+  // }
   else {
     int master_op_idx = get_master_op(p,q);
     if(tokens[master_op_idx].type==TK_MINUS){
@@ -262,11 +262,8 @@ uint32_t expr(char *e, bool *success) {
   for(int i=0;i<nr_token;i++){
     if(tokens[i].type=='*'&&(i==0||!isopnd(i-1)))
       tokens[i].type=TK_DEREF;
-    else if(tokens[i].type=='-'&&(i==0||!isopnd(i-1))){
+    else if(tokens[i].type=='-'&&(i==0||!isopnd(i-1)))
       tokens[i].type=TK_MINUS;
-      //debug
-      printf("token %d is changed to minus\n",i);
-    }
   }
 
   return eval(0,nr_token-1,success);
