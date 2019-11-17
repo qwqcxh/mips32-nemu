@@ -89,7 +89,7 @@ static int cmd_p(char* args){
   bool valid=true;
   uint32_t val=expr(args,&valid);
   if(valid==false) printf("invalid expression\n");
-  else printf("0x%010x\n",val);
+  else printf("0x%08x\n",val);
   return 0;
 }
 
