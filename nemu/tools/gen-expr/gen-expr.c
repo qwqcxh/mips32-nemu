@@ -7,9 +7,58 @@
 
 // this should be enough
 static char buf[65536];
-static inline void gen_rand_expr() {
-  buf[0] = '\0';
+/********************work***********************/
+#define MAX_NUMBER 60000
+unsigned choose(unsigned x){//gen num randomly in range[0,x];
+  return (unsigned)((double)rand()/RAND_MAX*x); 
 }
+
+int gen_num(int idx){//gen num randomly in range[0,0xffffffff];
+  char str[20];
+  unsigned int val=choose(-1); 
+  sprintf(str,"%u",val);
+  strcpy(buf+idx,str); //fix a bug
+  idx+=strlen(str);
+  return idx;
+}
+
+int gen_rand_space(int idx){ //gen a space randomly
+  if(rand()%2){
+    buf[idx]=' ';
+    return idx+1;
+  }
+  else return idx;
+}
+
+int gen_rand_op(int idx){ //gen a operator randmly
+  static char ops[]={'+','-','*','/'};
+  int len=sizeof(ops)/sizeof(char);
+  buf[idx]=ops[rand()%len];
+  return idx+1;
+}
+
+static inline int gen_rand_expr(int idx) {
+  if(idx>MAX_NUMBER) return gen_num(idx); //if idx is big enough,ending gen_rand_expr as fast as possible
+  switch (choose(3)) {
+    case 0: return gen_num(idx);
+    case 1: 
+      buf[idx++]='(';
+      idx=gen_rand_space(idx);
+      idx=gen_rand_expr(idx);
+      idx=gen_rand_space(idx);
+      buf[idx++]=')'; 
+      return idx;
+    default: 
+      idx=gen_rand_expr(idx);
+      idx=gen_rand_space(idx);
+      idx=gen_rand_op(idx);
+      idx=gen_rand_space(idx);
+      idx=gen_rand_expr(idx);
+      return idx;
+  }
+}
+/**********************done***************************/
+
 
 static char code_buf[65536];
 static char *code_format =
@@ -29,7 +78,7 @@ int main(int argc, char *argv[]) {
   }
   int i;
   for (i = 0; i < loop; i ++) {
-    gen_rand_expr();
+    buf[gen_rand_expr(0)]='\0';
 
     sprintf(code_buf, code_format, buf);
 
@@ -38,14 +87,16 @@ int main(int argc, char *argv[]) {
     fputs(code_buf, fp);
     fclose(fp);
 
-    int ret = system("gcc /tmp/.code.c -o /tmp/.expr");
+    int ret = system("gcc -w /tmp/.code.c -o /tmp/.expr"); //close waring of integer overflow
     if (ret != 0) continue;
 
     fp = popen("/tmp/.expr", "r");
     assert(fp != NULL);
 
     int result;
-    fscanf(fp, "%d", &result);
+    if(fscanf(fp, "%d", &result)!=1){ //check divid zero
+      i--;pclose(fp);continue; //gen an exp again
+    }
     pclose(fp);
 
     printf("%u %s\n", result, buf);
