@@ -132,7 +132,7 @@ bool check_parentheses(int p,int q){
   for(int i=p;i<=q;i++){
     if(tokens[i].type=='(') bracket++;
     else if(tokens[i].type==')') bracket--;
-    if(bracket<0) return false;
+    if(bracket<=0) return false;
   }
   return bracket==0;
 }
