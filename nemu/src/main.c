@@ -22,7 +22,6 @@ int main(int argc, char *argv[]) {
     int len=strlen(buf);
     Assert(buf[len-1]=='\n',"fgets doesn't save '\'n character");
     buf[strlen(buf)-1]='\0';
-    printf("buf is :%s:\n",buf);//debug
     bool valid=true;
     unsigned test_val=expr(buf,&valid);
     Assert(valid,"expression is invalid!");
