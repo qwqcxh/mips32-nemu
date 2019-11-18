@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
     Assert(res==test_val,"test %d failed: expected %u but get %u\n",line,res,test_val);
     line++;
   }
-  printf("test %4d:"GREEN"passed!!!\n" NONE,line);
+  printf("test %4d:"GREEN"passed!!!\n" NONE,line-1);
   /* Receive commands from user. */
   ui_mainloop(is_batch_mode);
 
