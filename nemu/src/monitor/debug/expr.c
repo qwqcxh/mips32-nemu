@@ -84,8 +84,10 @@ static bool make_token(char *e) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
 
+        #ifdef DEBUG
         Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
+        #endif
         position += substr_len;
 
         /* TODO: Now a new token is recognized with rules[i]. Add codes
