@@ -26,9 +26,9 @@ int main(int argc, char *argv[]) {
     unsigned test_val=expr(buf,&valid);
     Assert(valid,"expression is invalid!");
     Assert(res==test_val,"expr function test failed at line:%d ,expected val %u but get %u\n",line,res,test_val);
-    printf("test %d passed!\n",line);
     line++;
   }
+  
   /* Receive commands from user. */
   ui_mainloop(is_batch_mode);
 
