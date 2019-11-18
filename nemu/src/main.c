@@ -41,8 +41,8 @@ int main(int argc, char *argv[]) {
     bool valid=true;
     unsigned test_val=expr(buf,&valid);
     Assert(valid,"expression is invalid!");
-    Assert(res==test_val,"test "YELLOW"%d:"NONE RED"failed: expected %u but get %u\n"NONE,line,res,test_val);
-    printf("test %4d:"GREEN"passed!!!\n" NONE,line);
+    Assert(res!=test_val,"test "YELLOW"%d:"NONE RED"failed: expected %u but get %u\n"NONE,line,res,test_val);
+    //printf("test %4d:"GREEN"passed!!!\n" NONE,line);
     line++;
   }
   /* Receive commands from user. */
