@@ -11,9 +11,9 @@ enum {
 
   /* TODO: Add more token types */
   /* opnd type */
-  TK_NUM,TK_HEX,
+  TK_NUM,TK_HEX,TK_REG,
   /* operator type */
-  TK_MINUS,TK_DEREF
+  TK_MINUS,TK_DEREF,TK_NEQ,TK_AND
 };
 
 static struct rule { //词法规则
@@ -34,8 +34,11 @@ static struct rule { //词法规则
   //opnd
   {"[0-9]+",TK_NUM},
   {"0x[0-9A-Za-z]+",TK_HEX}, //hex
+  {"\\$[0-9a-z]+", TK_REG},  //register
   //logic op
   {"==", TK_EQ},        // equal
+  {"\\!=", TK_NEQ},     // not equal
+  {"&&", TK_AND},       // logic and
   //bracket
   {"\\(", '('},         //left  bracket
   {"\\)", ')'}          //right bracket
@@ -100,6 +103,7 @@ static bool make_token(char *e) {
           case TK_NOTYPE: break;
           case TK_NUM:
           case TK_HEX:
+          case TK_REG:  // watch point add
             Assert(substr_len<32,"digit string is too long!\n");
             strncpy(tokens[nr_token].str,substr_start,substr_len); //what a fuck!!! strncpy won't add '\0' in the end
             tokens[nr_token].str[substr_len]='\0'; //fix the bug above
@@ -109,6 +113,9 @@ static bool make_token(char *e) {
           case '/':
           case '(':
           case ')':
+          case TK_AND:  // watch point add
+          case TK_EQ:   // watch point add
+          case TK_NEQ:  // watch point add
             tokens[nr_token++].type=rules[i].token_type;break;
           default: TODO();
         }
@@ -128,6 +135,8 @@ static bool make_token(char *e) {
 
 
 /********************work****************************/
+extern uint32_t isa_reg_str2val(const char *s, bool *success);
+
 bool check_parentheses(int p,int q){ 
   if(tokens[p].type!='('||tokens[q].type!=')') return false;
   int bracket=0;//bracket++ when facing '(' and bracket-- facing ')'
@@ -150,6 +159,11 @@ int get_pri(int type){
     case '+':
     case '-':
       return 4;
+    case TK_EQ:
+    case TK_NEQ:
+      return 7;
+    case TK_AND:
+      return 11;
     default:
       panic("unknown type\n");
       return -1;
@@ -170,6 +184,7 @@ int get_master_op(int p,int q){
       case ')':cnt--;break;
       case '+':case '-':case '*':case '/':  //arithmatic op
       case TK_DEREF:case TK_MINUS:  // special op
+      case TK_EQ:case TK_NEQ:case TK_AND: //logic op
         if(cnt!=0) break;
         if(res==-1) res=i;
         else{
@@ -188,7 +203,7 @@ int get_master_op(int p,int q){
 bool isopnd(int idx){
   Assert(idx>=0&&idx<nr_token,"idx of isopnd should in range [0,nrtoken)\n");
   int type=tokens[idx].type;
-  return type==TK_NUM||type==TK_HEX||type==')';//(a+b)-c in this case ')' should be treated as opnd
+  return type==TK_NUM||type==TK_HEX||type==TK_REG||type==')';//(a+b)-c in this case ')' should be treated as opnd
 }
 
 uint32_t eval(int p,int q,bool* success){
@@ -213,7 +228,11 @@ uint32_t eval(int p,int q,bool* success){
       uint32_t val;
       sscanf(tokens[p].str,"%xu",&val);
       return val;
-    }else{
+    }else if(tokens[p].type==TK_REG){
+      Assert(tokens[p].str[0]=='$',"recognize an error reg token!\n");
+      return isa_reg_str2val(tokens[p].str+1, success);
+    }
+    else{
       *success=false;
       Log("only one token but it's not opnd\n");
       return -1; 
@@ -255,6 +274,12 @@ uint32_t eval(int p,int q,bool* success){
         case '/': 
           //printf("now the val is / %u\n",val1/val2); //debug
           return val1 / val2;
+        case TK_AND:
+          return val1 && val2;
+        case TK_EQ:
+          return val1 == val2;
+        case TK_NEQ:
+          return val1 != val2;
         default: assert(0);return -1;
       }
     }
