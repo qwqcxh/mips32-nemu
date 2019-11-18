@@ -94,16 +94,16 @@ int main(int argc, char *argv[]) {
     fputs(code_buf, fp);
     fclose(fp);
 
-    int ret = system("gcc -w /tmp/.code.c -o /tmp/.expr");
-    if (ret != 0) continue;
+    int ret = system("gcc -Werror /tmp/.code.c -o /tmp/.expr 2>/dev/null");
+    if (ret != 0) {
+      i--;continue;
+    }
 
     fp = popen("/tmp/.expr", "r");
     assert(fp != NULL);
 
     int result;
-    if(fscanf(fp, "%d", &result)!=1){ //check divid zero
-      i--;pclose(fp);continue; //gen an exp again
-    }
+    assert(fscanf(fp, "%d", &result)==1);
     pclose(fp);
 
     printf("%u %s\n", result, buf);
