@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
     bool valid=true;
     unsigned test_val=expr(buf,&valid);
     Assert(valid,"expression is invalid!");
-    Assert(res!=test_val,"test %d failed: expected %u but get %u\n",line,res,test_val);
+    Assert(res==test_val,"test %d failed: expected %u but get %u\n",line,res,test_val);
     printf("test %4d:"GREEN"passed!!!\n" NONE,line);
     line++;
   }
