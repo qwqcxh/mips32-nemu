@@ -95,6 +95,10 @@ static int cmd_p(char* args){
 
 extern WP* new_wp();
 static int cmd_w(char* args){
+  if(args==NULL){
+    printf("usage w EXPR\n");
+    return -1;
+  }
   Assert(strlen(args)<32,"exp is too long!\n");
   bool valid=true;
   uint32_t val=expr(args,&valid);
