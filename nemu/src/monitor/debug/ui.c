@@ -93,6 +93,21 @@ static int cmd_p(char* args){
   return 0;
 }
 
+extern WP* new_wp();
+static int cmd_w(char* args){
+  Assert(strlen(args)<32,"exp is too long!\n");
+  bool valid=true;
+  uint32_t val=expr(args,&valid);
+  if(!valid){
+    printf("invalid expression in watchpoint!\n");
+    return -1;
+  }
+  WP* pwp=new_wp();
+  strcpy(pwp->exp_str,args); //fill in exp_str
+  pwp->old_val=val; //fill_in old_val
+  return 0;
+}
+
 static struct {
   char *name;
   char *description;
@@ -105,6 +120,7 @@ static struct {
   { "info", "register info or watchpoint info",cmd_info},
   { "x", "print memrory info", cmd_x},
   { "p", "get the value of expression", cmd_p},
+  { "w", "stop when a given exp is changed",cmd_w},
   /* TODO: Add more commands */
 
 };

@@ -27,7 +27,7 @@ static uint64_t g_nr_guest_instr = 0;
 void monitor_statistic(void) {
   Log("total guest instructions = %ld", g_nr_guest_instr);
 }
-
+extern void wp_check();
 /* Simulate how the CPU works. */
 void cpu_exec(uint64_t n) {
   switch (nemu_state.state) {
@@ -59,6 +59,8 @@ void cpu_exec(uint64_t n) {
   }
 
     /* TODO: check watchpoints here. */
+    /***************work***************/
+    if(!wp_check()) nemu_state=NEMU_STOP;
 
 #endif
 
