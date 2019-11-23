@@ -81,7 +81,8 @@ static int cmd_x(char* args){ // X N expr
   if(sscanf(args,"%d",&n)!=1)
     printf("usage x N expr\n");
   else{
-    while(*args==' '||isdigit(*args)) args++;
+    while(*args==' ') args++;
+    while(isdigit(*args)) args++;
     va=expr(args,&valid);
     if(!valid) printf("usage x N expr\n");
     else 
