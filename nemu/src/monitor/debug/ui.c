@@ -87,7 +87,7 @@ static int cmd_x(char* args){ // X N expr
     if(!valid) printf("usage x N expr\n");
     else 
       for(int i=0;i<n;i++)
-        printf("%10x  %10x\n",va+i*4,vaddr_read(va+i*4,4));
+        printf("%0x10x  %0x10x\n",va+i*4,vaddr_read(va+i*4,4));
   }
   return 0;
 }
