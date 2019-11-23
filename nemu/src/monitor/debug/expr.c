@@ -32,8 +32,8 @@ static struct rule { //词法规则
   {"\\*", '*'},         // multiply
   {"/",   '/'},         // divid
   //opnd
-  {"[0-9]+",TK_NUM},
   {"0x[0-9A-Za-z]+",TK_HEX}, //hex
+  {"[0-9]+",TK_NUM},
   {"\\$[0-9a-z]+", TK_REG},  //register
   //logic op
   {"==", TK_EQ},        // equal
