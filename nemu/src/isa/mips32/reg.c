@@ -10,7 +10,7 @@ const char *regsl[] = {
 /*******************work********************/
 void isa_reg_display() {   
   for(int i=0;i<32;i++){
-    printf("%-10s%x\n",regsl[i],reg_l(i));
+    printf("%-10s0x%x\n",regsl[i],reg_l(i));
   }
 }
 
