@@ -59,6 +59,7 @@ static int cmd_si(char* args){  //si N
 }
 
 extern void isa_reg_display();
+extern void wp_show();
 static int cmd_info(char*args){
   while(args!=NULL&&*args==' ') args++;
   if(args==NULL)
@@ -66,7 +67,7 @@ static int cmd_info(char*args){
   else if(*args=='r')
     isa_reg_display();
   else if(*args=='w'){
-    //TODO
+    wp_show();
   }
   else
     printf("invalid SUBCOMMAND,should be 'r' or 'w'\n");
@@ -76,15 +77,20 @@ static int cmd_info(char*args){
 static int cmd_x(char* args){ // X N expr
   int n;
   vaddr_t va;
-  if(sscanf(args,"%d %x",&n,&va)!=2)
+  bool valid=true;
+  if(sscanf(args,"%d",&n)!=1)
     printf("usage x N expr\n");
-  else 
-    for(int i=0;i<n;i++)
-      printf("%10x  %10x\n",va+i*4,vaddr_read(va+i*4,4));
+  else{
+    while(*args==' '||isdigit(*args)) args++;
+    va=expr(args,&valid);
+    if(!valid) printf("usage x N expr\n");
+    else 
+      for(int i=0;i<n;i++)
+        printf("%10x  %10x\n",va+i*4,vaddr_read(va+i*4,4));
+  }
   return 0;
 }
 
-// extern uint32_t expr(char *e, bool *success);
 static int cmd_p(char* args){
   bool valid=true;
   uint32_t val=expr(args,&valid);
