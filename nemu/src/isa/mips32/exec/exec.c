@@ -29,6 +29,8 @@ static OpcodeEntry opcode_table [64] = {
 
 void isa_exec(vaddr_t *pc) {
   decinfo.isa.instr.val = instr_fetch(pc, 4);
+  //print instrtions value to debug
+  printf("current ins is 0x%x with opcode 0x%x\n",decinfo.isa.instr.val,decinfo.isa.instr.opcode);//debug
   decinfo.width = opcode_table[decinfo.isa.instr.opcode].width;
   idex(pc, &opcode_table[decinfo.isa.instr.opcode]);
 }
