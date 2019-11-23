@@ -70,10 +70,10 @@ void free_wp(int wp_num){
 }
 
 void wp_show(){
-  printf("%-5s %-10s %-30s\n","WP_NO","OLD_VAL","EXPRESSION");
+  printf("%-10s %-10s %-30s\n","WP_NO","OLD_VAL","EXPRESSION");
   WP* pwp=head;
   while(pwp){
-    printf("%-5d 0x%-10x %-30s\n",pwp->NO,pwp->old_val,pwp->exp_str);
+    printf("%-10d 0x%-10x %-30s\n",pwp->NO,pwp->old_val,pwp->exp_str);
     pwp=pwp->next;
   }
 }
