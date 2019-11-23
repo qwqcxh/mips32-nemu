@@ -230,7 +230,9 @@ uint32_t eval(int p,int q,bool* success){
       return val;
     }else if(tokens[p].type==TK_REG){
       Assert(tokens[p].str[0]=='$',"recognize an error reg token!\n");
-      return isa_reg_str2val(tokens[p].str+1, success);
+      uint32_t val = isa_reg_str2val(tokens[p].str+1, success);
+      if(!success) printf("%s is not a valid register name!\n",tokens[p].str);
+      return val;
     }
     else{
       *success=false;
