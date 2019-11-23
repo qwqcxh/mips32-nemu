@@ -119,6 +119,20 @@ static int cmd_w(char* args){
   return 0;
 }
 
+extern void free_wp(int wp_num);
+static int cmd_d(char* args){
+  if(args==NULL){
+    printf("usage: d N\n");
+    return -1;
+  }
+  int num;
+  if(sscanf(args,"%d",&num)!=1){
+    printf("usage: d N\n");
+    return -1;
+  }
+  free_wp(num);
+  return 0;
+}
 static struct {
   char *name;
   char *description;
@@ -132,6 +146,7 @@ static struct {
   { "x", "print memrory info", cmd_x},
   { "p", "get the value of expression", cmd_p},
   { "w", "stop when a given exp is changed",cmd_w},
+  { "d", "delete a watch point", cmd_d},
   /* TODO: Add more commands */
 
 };
