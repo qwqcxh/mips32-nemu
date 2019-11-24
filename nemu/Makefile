@@ -62,7 +62,7 @@ override ARGS ?= -l $(BUILD_DIR)/nemu-log.txt
 override ARGS += -d $(QEMU_SO)
 
 # Command to execute NEMU
-IMG :=
+IMG := ../nexus-am/tests/cputest/build/dummy-mips32-nemu.bin
 NEMU_EXEC := $(BINARY) $(ARGS) $(IMG)
 
 $(BINARY): $(OBJS)
