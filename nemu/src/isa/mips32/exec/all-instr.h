@@ -14,3 +14,4 @@ make_EHelper(or);
 make_EHelper(addiu);
 make_EHelper(jal);
 make_EHelper(jr);
+make_EHelper(nop);
