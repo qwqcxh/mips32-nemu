@@ -6,3 +6,8 @@ make_EHelper(jal){
     rtl_j(((cpu.pc+4)&0xf0000000)|(id_dest->val << 2));
     print_asm("jal  0x%x",cpu.pc);
 }
+
+make_EHelper(jr){
+    rtl_jr(&id_src->val);
+    print_asm("jr  %s",reg_name(id_src->val,4));
+}

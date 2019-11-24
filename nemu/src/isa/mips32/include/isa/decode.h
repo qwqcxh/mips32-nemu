@@ -41,4 +41,5 @@ make_DHelper(st);
 make_DHelper(or);
 make_DHelper(addiu);
 make_DHelper(jal);
+make_DHelper(jr);
 #endif
