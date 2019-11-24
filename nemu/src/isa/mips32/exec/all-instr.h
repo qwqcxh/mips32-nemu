@@ -7,3 +7,7 @@ make_EHelper(st);
 
 make_EHelper(inv);
 make_EHelper(nemu_trap);
+
+
+/*************work******************/
+make_EHelper(or);

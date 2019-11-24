@@ -6,3 +6,8 @@ make_EHelper(lui) {
 
   print_asm_template3(lui);
 }
+
+/*******work***********/
+make_EHelper(or) {
+  rtl_or(&reg_l(id_dest->reg),&id_src->val,&id_src2->val);
+}

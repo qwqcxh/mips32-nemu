@@ -4,7 +4,7 @@
 // decode operand helper
 #define make_DopHelper(name) void concat(decode_op_, name) (Operand *op, uint32_t val, bool load_val)
 
-static inline make_DopHelper(i) {
+static inline make_DopHelper(i) { //decode_op_i(Oprand *op,uint32_t val,bool load_val)
   op->type = OP_TYPE_IMM;
   op->imm = val;
   rtl_li(&op->val, op->imm);
@@ -12,7 +12,7 @@ static inline make_DopHelper(i) {
   print_Dop(op->str, OP_STR_SIZE, "%d", op->imm);
 }
 
-static inline make_DopHelper(r) {
+static inline make_DopHelper(r) { //decode_op_r(Oprand* op,uint32_t val,bool load_val)
   op->type = OP_TYPE_REG;
   op->reg = val;
   if (load_val) {
@@ -22,7 +22,7 @@ static inline make_DopHelper(r) {
   print_Dop(op->str, OP_STR_SIZE, "%s", reg_name(op->reg, 4));
 }
 
-make_DHelper(IU) {
+make_DHelper(IU) { //lui rt,imm  GPR[rt]<- upper_imm|0_16
   decode_op_r(id_src, decinfo.isa.instr.rs, true);
   decode_op_i(id_src2, decinfo.isa.instr.imm, true);
   decode_op_r(id_dest, decinfo.isa.instr.rt, false);
@@ -47,4 +47,10 @@ make_DHelper(ld) {
 make_DHelper(st) {
   decode_addr(NULL);
   decode_op_r(id_dest, decinfo.isa.instr.rt, true);
+}
+
+make_DHelper(or){ //OR rd,rs,rt    GPR[rd]<-GRP[rs] or GPR[rt]
+  decode_op_r(id_src,decinfo.isa.instr.rs,true);
+  decode_op_r(id_src2,decinfo.isa.instr.rt,true);
+  decode_op_r(id_dest,decinfo.isa.instr.rd,false);
 }
