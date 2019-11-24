@@ -9,5 +9,5 @@ make_EHelper(jal){
 
 make_EHelper(jr){
     rtl_jr(&id_src->val);
-    print_asm("jr  %s",reg_name(id_src->val,4));
+    print_asm("jr  %s",reg_name(id_src->reg,4));
 }
