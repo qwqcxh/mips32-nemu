@@ -60,3 +60,7 @@ make_DHelper(addiu){ //addiu rt,rs,imm  GPR[rt]<-GPR[rs]+sign_ext_imm
   decode_op_i(id_src2,decinfo.isa.instr.imm,true);
   decode_op_r(id_dest,decinfo.isa.instr.rt,false);
 }
+
+make_DHelper(jal){ //jal target 
+  decode_op_i(id_dest,decinfo.isa.instr.jmp_target,false);
+}
