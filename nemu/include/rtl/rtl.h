@@ -132,12 +132,17 @@ void interpret_rtl_exit(int state, vaddr_t halt_pc, uint32_t halt_ret);
 
 static inline void rtl_not(rtlreg_t *dest, const rtlreg_t* src1) {
   // dest <- ~src1
-  TODO();
+  // TODO();
+  rtl_li(dest,-1);
+  rtl_xor(dest,src1,dest);
 }
 
 static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- signext(src1[(width * 8 - 1) .. 0])
-  TODO();
+  // TODO();
+  rtl_li(&ir,32-width*8);
+  rtl_shl(dest,src1,&ir);
+  rtl_sar(dest,dest,&ir);
 }
 
 static inline void rtl_setrelopi(uint32_t relop, rtlreg_t *dest,
@@ -148,12 +153,16 @@ static inline void rtl_setrelopi(uint32_t relop, rtlreg_t *dest,
 
 static inline void rtl_msb(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- src1[width * 8 - 1]
-  TODO();
+  // TODO();
+  rtl_shri(dest,src1,width*8-1);
+  rtl_andi(dest,dest,1);
 }
 
 static inline void rtl_mux(rtlreg_t* dest, const rtlreg_t* cond, const rtlreg_t* src1, const rtlreg_t* src2) {
   // dest <- (cond ? src1 : src2)
-  TODO();
+  // TODO();
+  if(*cond) rtl_mv(dest,src1);
+  else rtl_mv(dest,src2);
 }
 
 #include "isa/rtl.h"

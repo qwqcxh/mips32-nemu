@@ -39,5 +39,5 @@ make_DHelper(ld);
 make_DHelper(st);
 /*******work*************/
 make_DHelper(or);
-
+make_DHelper(addiu);
 #endif

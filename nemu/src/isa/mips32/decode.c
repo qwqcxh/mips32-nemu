@@ -54,3 +54,9 @@ make_DHelper(or){ //OR rd,rs,rt    GPR[rd]<-GRP[rs] or GPR[rt]
   decode_op_r(id_src2,decinfo.isa.instr.rt,true);
   decode_op_r(id_dest,decinfo.isa.instr.rd,false);
 }
+
+make_DHelper(addiu){ //addiu rt,rs,imm  GPR[rt]<-GPR[rs]+sign_ext_imm
+  decode_op_r(id_src,decinfo.isa.instr.rs,true);
+  decode_op_i(id_src2,decinfo.isa.instr.imm,true);
+  decode_op_r(id_dest,decinfo.isa.instr.rt,false);
+}

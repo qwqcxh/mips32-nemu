@@ -11,3 +11,4 @@ make_EHelper(nemu_trap);
 
 /*************work******************/
 make_EHelper(or);
+make_EHelper(addiu);
