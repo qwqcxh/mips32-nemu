@@ -42,4 +42,7 @@ make_DHelper(or);
 make_DHelper(addiu);
 make_DHelper(jal);
 make_DHelper(jr);
+make_DHelper(addu);
+make_DHelper(xor);
+make_DHelper(sltiu);
 #endif

@@ -6,7 +6,7 @@ static OpcodeEntry special_table [64] = {
   /* b001 */ IDEX(jr,jr), EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
   /* b010 */ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
   /* b011 */ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
-  /* b100 */ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, IDEX(or,or), EMPTY, EMPTY,
+  /* b100 */ EMPTY, IDEX(addu,addu), EMPTY, EMPTY, EMPTY, IDEX(or,or), IDEX(xor,xor), EMPTY,
   /* b101 */ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
   /* b110 */ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
   /* b111 */ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
@@ -18,7 +18,7 @@ static make_EHelper(special) {
 
 static OpcodeEntry opcode_table [64] = {
   /* b000 */ EX(special), EMPTY, EMPTY, IDEX(jal,jal), EMPTY, EMPTY, EMPTY, EMPTY,
-  /* b001 */ EMPTY, IDEX(addiu,addiu), EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, IDEX(IU, lui),
+  /* b001 */ EMPTY, IDEX(addiu,addiu), EMPTY, IDEX(sltiu,sltiu), EMPTY, EMPTY, EMPTY, IDEX(IU, lui),
   /* b010 */ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
   /* b011 */ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
   /* b100 */ EMPTY, EMPTY, EMPTY, IDEXW(ld, ld, 4), EMPTY, EMPTY, EMPTY, EMPTY,

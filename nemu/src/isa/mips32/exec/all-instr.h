@@ -15,3 +15,6 @@ make_EHelper(addiu);
 make_EHelper(jal);
 make_EHelper(jr);
 make_EHelper(nop);
+make_EHelper(addu);
+make_EHelper(xor);
+make_EHelper(sltiu);

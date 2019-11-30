@@ -68,3 +68,21 @@ make_DHelper(jal){ //jal target
 make_DHelper(jr){ //jr rs
   decode_op_r(id_src,decinfo.isa.instr.rs,true);
 }
+
+make_DHelper(addu){//addu rd,rs,rt
+  decode_op_r(id_src,decinfo.isa.instr.rs,true);
+  decode_op_r(id_src2,decinfo.isa.instr.rt,true);
+  decode_op_r(id_dest,decinfo.isa.instr.rd,false);
+}
+
+make_DHelper(xor){ //xor rd,rs,rt
+  decode_op_r(id_src,decinfo.isa.instr.rs,true);
+  decode_op_r(id_src2,decinfo.isa.instr.rt,true);
+  decode_op_r(id_dest,decinfo.isa.instr.rd,false);  
+}
+
+make_DHelper(sltiu){ //sltiu rt,rs,imm
+  decode_op_r(id_src,decinfo.isa.instr.rs,true);
+  decode_op_i(id_src2,decinfo.isa.instr.imm,true);
+  decode_op_r(id_dest,decinfo.isa.instr.rt,false);
+}
