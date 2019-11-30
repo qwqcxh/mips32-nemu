@@ -37,3 +37,11 @@ make_EHelper(sltiu){ //sltiu rt,rs,imm  GPR[rt]<-(GPR[rs]<imm)
   rtl_mux(&reg_l(id_dest->reg),&s0,&ir,&id_dest->val);
   print_asm("sltiu %s,%s,%u",id_dest->str,id_src->str,id_src2->val);
 }
+
+make_EHelper(sltu){ //sltu rd,rs,rt GPR[rd]<-(GPR[rs]<GPR[rt])
+  rtl_setrelop(RELOP_LEU,&s0,&id_src->val,&id_src2->val);
+  rtl_li(&ir,1);
+  rtl_li(&id_dest->val,0);
+  rtl_mux(&reg_l(id_dest->reg),&s0,&ir,&id_dest->val);
+  print_asm("sltu %s,%s,%u",id_dest->str,id_src->str,id_src2->val); 
+}
