@@ -86,3 +86,9 @@ make_DHelper(sltiu){ //sltiu rt,rs,imm
   decode_op_i(id_src2,decinfo.isa.instr.imm,true);
   decode_op_r(id_dest,decinfo.isa.instr.rt,false);
 }
+
+make_DHelper(beq){ //beq rs,rt,offset
+  decode_op_r(id_src,decinfo.isa.instr.rs,true);
+  decode_op_r(id_src2,decinfo.isa.instr.rt,true);
+  decode_op_i(id_dest,decinfo.isa.instr.imm,true);
+}
