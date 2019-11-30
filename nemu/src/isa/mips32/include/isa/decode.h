@@ -46,4 +46,5 @@ make_DHelper(addu);
 make_DHelper(xor);
 make_DHelper(sltiu);
 make_DHelper(beq);
+make_DHelper(bne);
 #endif

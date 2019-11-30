@@ -19,3 +19,4 @@ make_EHelper(addu);
 make_EHelper(xor);
 make_EHelper(sltiu);
 make_EHelper(beq);
+make_EHelper(bne);
