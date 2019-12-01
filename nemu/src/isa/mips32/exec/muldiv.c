@@ -1,8 +1,8 @@
 #include "cpu/exec.h"
 
 make_EHelper(div){ //div rs,rt LO<-GPR[rs]/GPR[rt] HI<-GPR[rs]%GPR[rt]
-    rtl_div_q(&lo,&id_src->val,&id_src2->val);
-    rtl_div_r(&hi,&id_src->val,&id_src2->val);
+    rtl_idiv_q(&lo,&id_src->val,&id_src2->val);
+    rtl_idiv_r(&hi,&id_src->val,&id_src2->val);
 }
 
 make_EHelper(mfhi){ //mfhi rd   GPR[rd]<-HI
