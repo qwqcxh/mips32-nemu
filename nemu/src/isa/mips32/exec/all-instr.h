@@ -36,3 +36,4 @@ make_EHelper(div);
 make_EHelper(mfhi);
 make_EHelper(mflo);
 make_EHelper(mul);
+make_EHelper(slti);

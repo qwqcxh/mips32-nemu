@@ -63,4 +63,5 @@ make_DHelper(div);
 make_DHelper(mfhi);
 make_DHelper(mflo);
 make_DHelper(mul);
+make_DHelper(slti);
 #endif

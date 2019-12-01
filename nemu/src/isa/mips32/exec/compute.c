@@ -46,6 +46,13 @@ make_EHelper(sltu){ //sltu rd,rs,rt GPR[rd]<-(GPR[rs]<GPR[rt])
   print_asm("sltu %s,%s,%s",id_dest->str,id_src->str,id_src2->str); 
 }
 
+make_EHelper(slti){ //slti rt,rs,imm GPR[rt]<-(GPR[rs]< sign-exten[imm])
+  rtl_setrelop(RELOP_LT,&s0,&id_src->val,&id_src2->val);
+  rtl_li(&ir,1);
+  rtl_li(&id_dest->val,0);
+  rtl_mux(&reg_l(id_dest->reg),&s0,&ir,&id_dest->val);
+}
+
 make_EHelper(sra){ //sra rd,rt,sa  GPR[rd]<-(GPR[rt]>> sa)
   rtl_sar(&reg_l(id_dest->reg),&id_src->val,&id_src2->val);
   print_asm("sra %s,%s,0x%x",id_dest->str,id_src->str,id_src2->val);
