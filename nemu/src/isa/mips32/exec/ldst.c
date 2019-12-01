@@ -29,7 +29,8 @@ make_EHelper(lbu) { //lbu rt,offset(rs)
 }
 
 make_EHelper(lh){  //lh rt,offset(rs)
-  rtl_lm(&reg_l(id_dest->reg),&id_src->addr,decinfo.width);
+  rtl_lm(&s0,&id_src->addr,decinfo.width);
+  rtl_sext(&reg_l(id_dest->reg),&s0,decinfo.width);
   print_asm("lh %s,%s",id_dest->str,id_src->str);
 }
 
