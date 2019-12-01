@@ -31,7 +31,7 @@ make_EHelper(xor){ //xor rd,rs,rt GPR[rd]<-GPR[rs]+GPR[rt]
 
 make_EHelper(sltiu){ //sltiu rt,rs,imm  GPR[rt]<-(GPR[rs]<imm)
   rtl_sext(&id_src2->val,&id_src2->val,2);
-  rtl_setrelop(RELOP_LEU,&s0,&id_src->val,&id_src2->val);
+  rtl_setrelop(RELOP_LTU,&s0,&id_src->val,&id_src2->val);
   rtl_li(&ir,1);
   rtl_li(&id_dest->val,0);
   rtl_mux(&reg_l(id_dest->reg),&s0,&ir,&id_dest->val);
@@ -39,7 +39,7 @@ make_EHelper(sltiu){ //sltiu rt,rs,imm  GPR[rt]<-(GPR[rs]<imm)
 }
 
 make_EHelper(sltu){ //sltu rd,rs,rt GPR[rd]<-(GPR[rs]<GPR[rt])
-  rtl_setrelop(RELOP_LEU,&s0,&id_src->val,&id_src2->val);
+  rtl_setrelop(RELOP_LTU,&s0,&id_src->val,&id_src2->val);
   rtl_li(&ir,1);
   rtl_li(&id_dest->val,0);
   rtl_mux(&reg_l(id_dest->reg),&s0,&ir,&id_dest->val);
