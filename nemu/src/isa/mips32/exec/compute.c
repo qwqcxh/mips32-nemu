@@ -83,3 +83,11 @@ make_EHelper(and){ //and rd,rs,rt
   rtl_and(&reg_l(id_dest->reg),&id_src->val,&id_src2->val);
   print_asm("and %s,%s,%s",id_dest->str,id_src->str,id_src2->str);
 }
+
+make_EHelper(slt){ //slt rd,rs,rt
+  rtl_setrelop(RELOP_LT,&s0,&id_src->val,&id_src2->val);
+  rtl_li(&ir,1);
+  rtl_li(&id_dest->val,0);
+  rtl_mux(&reg_l(id_dest->reg),&s0,&ir,&id_dest->val);
+  print_asm("slt %s,%s,%s",id_dest->str,id_src->str,id_src2->str);
+}

@@ -161,3 +161,9 @@ make_DHelper(and){ //and rd,rs,rt
   decode_op_r(id_src2,decinfo.isa.instr.rt,true);
   decode_op_r(id_dest,decinfo.isa.instr.rd,false);
 }
+
+make_DHelper(slt){ //slt rd,rs,rt
+  decode_op_r(id_src,decinfo.isa.instr.rs,true);
+  decode_op_r(id_src2,decinfo.isa.instr.rt,true);
+  decode_op_r(id_dest,decinfo.isa.instr.rd,false);
+}
