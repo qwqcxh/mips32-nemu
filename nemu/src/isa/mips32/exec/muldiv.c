@@ -14,3 +14,8 @@ make_EHelper(mflo){ //mflo rd GPR[rd]<-LO
     rtl_mv(&reg_l(id_dest->reg),&lo);
     print_asm("mflo %s",id_dest->str);
 }
+
+make_EHelper(mul){ //mul rd,rs,rt
+    rtl_mul_lo(&reg_l(id_dest->reg),&id_src->val,&id_src2->val);
+    print_asm("mul %s,%s,%s",id_dest->str,id_src->str,id_src2->str);
+}

@@ -180,3 +180,9 @@ make_DHelper(mfhi){ //mfhi rd
 make_DHelper(mflo){ //mflo rd
   decode_op_r(id_dest,decinfo.isa.instr.rd,false);
 }
+
+make_DHelper(mul) { //mul rd,rs,rt
+  decode_op_r(id_src,decinfo.isa.instr.rs,true);
+  decode_op_r(id_src2,decinfo.isa.instr.rt,true);
+  decode_op_r(id_dest,decinfo.isa.instr.rd,false);
+}
