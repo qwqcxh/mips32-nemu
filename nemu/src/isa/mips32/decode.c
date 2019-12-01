@@ -198,3 +198,9 @@ make_DHelper(subu){ //subu rd,rs,rt
   decode_op_r(id_src2,decinfo.isa.instr.rt,true);
   decode_op_r(id_dest,decinfo.isa.instr.rd,false); 
 }
+
+make_DHelper(movn){ //movn rd,rs,rt
+  decode_op_r(id_src,decinfo.isa.instr.rs,true);
+  decode_op_r(id_src2,decinfo.isa.instr.rt,true);
+  decode_op_r(id_dest,decinfo.isa.instr.rd,true);   
+}

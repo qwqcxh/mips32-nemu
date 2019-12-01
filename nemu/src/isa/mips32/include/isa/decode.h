@@ -65,4 +65,5 @@ make_DHelper(mflo);
 make_DHelper(mul);
 make_DHelper(slti);
 make_DHelper(subu);
+make_DHelper(movn);
 #endif

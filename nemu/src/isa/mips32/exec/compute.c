@@ -103,3 +103,8 @@ make_EHelper(subu){ //subu rd,rs,rt
   rtl_sub(&reg_l(id_dest->reg),&id_src->val,&id_src2->val);
   print_asm("subu %s,%s,%s",id_dest->str,id_src->str,id_src2->str);
 } 
+
+make_EHelper(movn){ //movn rd,rs,rt     rt!=0 then GPR[rd]<-GPR[rs]
+  rtl_mux(&reg_l(id_dest->reg),&id_src2->val,&id_src->val,&id_dest->val);
+  print_asm("mov %s,%s,%s",id_dest->str,id_src->str,id_src2->str);
+}
