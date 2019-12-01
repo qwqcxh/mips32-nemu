@@ -30,3 +30,4 @@ make_EHelper(sb);
 make_EHelper(xori);
 make_EHelper(sh);
 make_EHelper(nor);
+make_EHelper(and);

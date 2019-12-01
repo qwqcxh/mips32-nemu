@@ -78,3 +78,8 @@ make_EHelper(nor){ //nor rd,rs,rt
   rtl_not(&reg_l(id_dest->reg),&s0);
   print_asm("nor %s,%s,%s",id_dest->str,id_src->str,id_src2->str);
 }
+
+make_EHelper(and){ //and rd,rs,rt
+  rtl_and(&reg_l(id_dest->reg),&id_src->val,&id_src2->val);
+  print_asm("and %s,%s,%s",id_dest->str,id_src->str,id_src2->str);
+}

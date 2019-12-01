@@ -6,7 +6,7 @@ static OpcodeEntry special_table [64] = {
   /* b001 */ IDEX(jr,jr), EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
   /* b010 */ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
   /* b011 */ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
-  /* b100 */ EMPTY, IDEX(addu,addu), EMPTY, EMPTY, EMPTY, IDEX(or,or), IDEX(xor,xor), IDEX(nor,nor),
+  /* b100 */ EMPTY, IDEX(addu,addu), EMPTY, EMPTY, IDEX(and,and), IDEX(or,or), IDEX(xor,xor), IDEX(nor,nor),
   /* b101 */ EMPTY, EMPTY, EMPTY, IDEX(sltu,sltu), EMPTY, EMPTY, EMPTY, EMPTY,
   /* b110 */ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
   /* b111 */ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,

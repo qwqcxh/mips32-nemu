@@ -57,4 +57,5 @@ make_DHelper(sb);
 make_DHelper(xori);
 make_DHelper(sh);
 make_DHelper(nor);
+make_DHelper(and);
 #endif
