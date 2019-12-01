@@ -122,7 +122,7 @@ make_DHelper(sltu){ //sltu rd,rs,rt
 
 make_DHelper(sra){ //sra rd,rt,sa
   decode_op_r(id_src,decinfo.isa.instr.rt,true);
-  decode_op_r(id_src2,decinfo.isa.instr.sa,true);
+  decode_op_i(id_src2,decinfo.isa.instr.sa,true);
   decode_op_r(id_dest,decinfo.isa.instr.rd,false);
 }
 
