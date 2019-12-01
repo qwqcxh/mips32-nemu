@@ -59,4 +59,7 @@ make_DHelper(sh);
 make_DHelper(nor);
 make_DHelper(and);
 make_DHelper(slt);
+make_DHelper(div);
+make_DHelper(mfhi);
+make_DHelper(mflo);
 #endif
