@@ -48,4 +48,11 @@ make_DHelper(sltiu);
 make_DHelper(beq);
 make_DHelper(bne);
 make_DHelper(sltu);
+make_DHelper(sra);
+make_DHelper(lbu);
+make_DHelper(andi);
+make_DHelper(srlv);
+make_DHelper(sllv);
+make_DHelper(sb);
+make_DHelper(xori);
 #endif

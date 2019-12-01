@@ -49,7 +49,16 @@ make_DHelper(st) {
   decode_op_r(id_dest, decinfo.isa.instr.rt, true);
 }
 
-make_DHelper(or){ //OR rd,rs,rt    GPR[rd]<-GRP[rs] or GPR[rt]
+make_DHelper(lbu){  //lbu rt,offset(rs)
+  decode_addr(NULL);
+  decode_op_r(id_dest,decinfo.isa.instr.rt,false);
+}
+
+make_DHelper(sb){  //sb rt,offset(rs)
+  decode_addr(NULL);
+  decode_op_r(id_dest,decinfo.isa.instr.rt,true);
+}
+make_DHelper(or){ //or rd,rs,rt    GPR[rd]<-GRP[rs] or GPR[rt]
   decode_op_r(id_src,decinfo.isa.instr.rs,true);
   decode_op_r(id_src2,decinfo.isa.instr.rt,true);
   decode_op_r(id_dest,decinfo.isa.instr.rd,false);
@@ -103,4 +112,34 @@ make_DHelper(sltu){ //sltu rd,rs,rt
   decode_op_r(id_src,decinfo.isa.instr.rs,true);
   decode_op_r(id_src2,decinfo.isa.instr.rt,true);
   decode_op_r(id_dest,decinfo.isa.instr.rd,false);
+}
+
+make_DHelper(sra){ //sra rd,rt,sa
+  decode_op_r(id_src,decinfo.isa.instr.rt,true);
+  decode_op_r(id_src2,decinfo.isa.instr.sa,true);
+  decode_op_r(id_dest,decinfo.isa.instr.rd,false);
+}
+
+make_DHelper(andi){ //andi rt,rs,imm
+  decode_op_r(id_src,decinfo.isa.instr.rs,true);
+  decode_op_i(id_src2,decinfo.isa.instr.imm,true);
+  decode_op_r(id_dest,decinfo.isa.instr.rt,false);
+}
+
+make_DHelper(srlv){ //srlv rd,rt,rs
+  decode_op_r(id_src,decinfo.isa.instr.rt,true);
+  decode_op_r(id_src2,decinfo.isa.instr.rs,true);
+  decode_op_r(id_dest,decinfo.isa.instr.rd,false);
+}
+
+make_DHelper(sllv){ //sllv rd,rt,rs
+  decode_op_r(id_src,decinfo.isa.instr.rt,true);
+  decode_op_r(id_src2,decinfo.isa.instr.rs,true);
+  decode_op_r(id_dest,decinfo.isa.instr.rd,false);
+}
+
+make_DHelper(xori){ //xori rt,rs,imm
+  decode_op_r(id_src,decinfo.isa.instr.rs,true);
+  decode_op_i(id_src2,decinfo.isa.instr.rs,true);
+  decode_op_r(id_dest,decinfo.isa.instr.rt,false);
 }

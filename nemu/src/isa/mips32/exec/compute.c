@@ -45,3 +45,31 @@ make_EHelper(sltu){ //sltu rd,rs,rt GPR[rd]<-(GPR[rs]<GPR[rt])
   rtl_mux(&reg_l(id_dest->reg),&s0,&ir,&id_dest->val);
   print_asm("sltu %s,%s,%s",id_dest->str,id_src->str,id_src2->str); 
 }
+
+make_EHelper(sra){ //sra rd,rt,sa  GPR[rd]<-(GPR[rt]>> sa)
+  rtl_sar(&reg_l(id_dest->reg),&id_src->val,&id_src2->val);
+  print_asm("sra %s,%s,0x%x",id_dest->str,id_src->str,id_src2->val);
+}
+
+make_EHelper(andi){ //andi rt,rs,imm GPR[rt]<-(GPR[rs] and zero-extended(imm))
+  rtl_and(&reg_l(id_dest->reg),&id_src->val,&id_src2->val);
+  print_asm("andi %s,%s,0x%x",id_dest->str,id_src->str,id_src2->val);
+}
+
+make_EHelper(srlv){ //srlv rd,rt,rs 
+  rtl_andi(&id_src2->val,&id_src2->val,0x1f);
+  rtl_shr(&reg_l(id_dest->reg),&id_src->val,&id_src2->val);
+  print_asm("srlv %s,%s,%s",id_dest->str,id_src->str,id_src2->str);
+}
+
+make_EHelper(sllv){ //sllv rd,rt,rs
+  rtl_andi(&id_src2->val,&id_src2->val,0x1f);
+  rtl_shl(&reg_l(id_dest->reg),&id_src->val,&id_src2->val);
+  print_asm("sllv %s,%s,%s",id_dest->str,id_src->str,id_src2->str);
+}
+
+make_EHelper(xori){ //xori rt,rs,imm
+  rtl_xor(&reg_l(id_dest->reg),&id_src->val,&id_src2->val);
+  print_asm("xori %s,%s,0x%x",id_dest->str,id_src->str,id_src2->val);
+}
+
