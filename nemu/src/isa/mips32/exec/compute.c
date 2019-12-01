@@ -73,3 +73,8 @@ make_EHelper(xori){ //xori rt,rs,imm
   print_asm("xori %s,%s,0x%x",id_dest->str,id_src->str,id_src2->val);
 }
 
+make_EHelper(nor){ //nor rd,rs,rt
+  rtl_or(&s0,&id_src->val,&id_src2->val);
+  rtl_not(&reg_l(id_dest->reg),&s0);
+  print_asm("nor %s,%s,%s",id_dest->str,id_src->str,id_src2->str);
+}

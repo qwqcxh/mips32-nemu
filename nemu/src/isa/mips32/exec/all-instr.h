@@ -29,3 +29,4 @@ make_EHelper(sllv);
 make_EHelper(sb);
 make_EHelper(xori);
 make_EHelper(sh);
+make_EHelper(nor);
