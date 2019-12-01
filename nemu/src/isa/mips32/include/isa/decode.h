@@ -70,4 +70,5 @@ make_DHelper(ori);
 make_DHelper(multu);
 make_DHelper(srl);
 make_DHelper(sll);
+make_DHelper(lh);
 #endif

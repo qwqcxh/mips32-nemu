@@ -28,6 +28,11 @@ make_EHelper(lbu) { //lbu rt,offset(rs)
   print_asm("lbu %s,%s",id_dest->str,id_src->str);
 }
 
+make_EHelper(lh){  //lh rt,offset(rs)
+  rtl_lm(&reg_l(id_dest->reg),&id_src->addr,decinfo.width);
+  print_asm("lh %s,%s",id_dest->str,id_src->str);
+}
+
 make_EHelper(sb){ //sb rt,offset(rs)
   rtl_sm(&id_src->addr,&id_dest->val,decinfo.width);
   print_asm("sb %s,%s",id_dest->str,id_src->str);

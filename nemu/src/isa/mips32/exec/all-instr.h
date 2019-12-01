@@ -43,3 +43,4 @@ make_EHelper(ori);
 make_EHelper(multu);
 make_EHelper(srl);
 make_EHelper(sll);
+make_EHelper(lh);
