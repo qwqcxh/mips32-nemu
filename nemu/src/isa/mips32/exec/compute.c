@@ -119,3 +119,13 @@ make_EHelper(multu){ //multu rs,rt HI<-high32(GPR[rs]*GPR[rt]) LO<-low32(GPR[rs]
   rtl_mul_lo(&lo,&id_src->val,&id_src2->val);
   print_asm("multu %s,%s",id_src->str,id_src2->str);
 }
+
+make_EHelper(srl){  //srl rd,rt,sa
+  rtl_shr(&reg_l(id_dest->reg),&id_src->val,&id_src2->val);
+  print_asm("shr %s,%s,0x%x",id_dest->str,id_src->str,id_src2->val);
+}
+
+make_EHelper(sll){ //sll rd,rt,sa
+  rtl_shl(&reg_l(id_dest->reg),&id_src->val,&id_src2->val);
+  print_asm("sll %s,%s,0x%x",id_dest->str,id_src->str,id_src2->val);
+}

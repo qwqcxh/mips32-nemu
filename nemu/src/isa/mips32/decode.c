@@ -215,3 +215,15 @@ make_DHelper(ori){ //ori rt,rs,imm
   decode_op_i(id_src2,decinfo.isa.instr.imm,true);
   decode_op_r(id_dest,decinfo.isa.instr.rt,false);
 }
+
+make_DHelper(srl){ //srl rd,rt,sa
+  decode_op_r(id_src,decinfo.isa.instr.rt,true);
+  decode_op_i(id_src2,decinfo.isa.instr.sa,true);
+  decode_op_r(id_dest,decinfo.isa.instr.rd,false);
+}
+
+make_DHelper(sll){ //sll rd,rt,sa
+  decode_op_r(id_src,decinfo.isa.instr.rt,true);
+  decode_op_i(id_src2,decinfo.isa.instr.sa,true);
+  decode_op_r(id_dest,decinfo.isa.instr.rd,false);  
+}

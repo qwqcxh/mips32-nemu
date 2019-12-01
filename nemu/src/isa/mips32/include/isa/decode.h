@@ -68,4 +68,6 @@ make_DHelper(subu);
 make_DHelper(movn);
 make_DHelper(ori);
 make_DHelper(multu);
+make_DHelper(srl);
+make_DHelper(sll);
 #endif
