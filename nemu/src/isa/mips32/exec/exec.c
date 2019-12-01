@@ -18,7 +18,7 @@ static make_EHelper(special) {
 
 static OpcodeEntry opcode_table [64] = {
   /* b000 */ EX(special), EMPTY, EMPTY, IDEX(jal,jal), IDEX(beq,beq), IDEX(bne,bne), EMPTY, EMPTY,
-  /* b001 */ EMPTY, IDEX(addiu,addiu), IDEX(slti,slti), IDEX(sltiu,sltiu), IDEX(andi,andi), EMPTY, IDEX(xori,xori), IDEX(IU, lui),
+  /* b001 */ EMPTY, IDEX(addiu,addiu), IDEX(slti,slti), IDEX(sltiu,sltiu), IDEX(andi,andi), IDEX(ori,ori), IDEX(xori,xori), IDEX(IU, lui),
   /* b010 */ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
   /* b011 */ EMPTY, EMPTY, EMPTY, EMPTY, IDEX(mul,mul), EMPTY, EMPTY, EMPTY,
   /* b100 */ EMPTY, EMPTY, EMPTY, IDEXW(ld, ld, 4), IDEXW(lbu,lbu,1), EMPTY, EMPTY, EMPTY,
