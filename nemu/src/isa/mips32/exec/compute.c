@@ -98,3 +98,8 @@ make_EHelper(slt){ //slt rd,rs,rt
   rtl_mux(&reg_l(id_dest->reg),&s0,&ir,&id_dest->val);
   print_asm("slt %s,%s,%s",id_dest->str,id_src->str,id_src2->str);
 }
+
+make_EHelper(subu){ //subu rd,rs,rt
+  rtl_sub(&reg_l(id_dest->reg),&id_src->val,&id_src2->val);
+  print_asm("subu %s,%s,%s",id_dest->str,id_src->str,id_src2->str);
+} 
