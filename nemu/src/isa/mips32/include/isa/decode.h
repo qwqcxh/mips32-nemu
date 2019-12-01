@@ -55,4 +55,5 @@ make_DHelper(srlv);
 make_DHelper(sllv);
 make_DHelper(sb);
 make_DHelper(xori);
+make_DHelper(sh);
 #endif

@@ -32,3 +32,8 @@ make_EHelper(sb){ //sb rt,offset(rs)
   rtl_sm(&id_src->addr,&id_dest->val,decinfo.width);
   print_asm("sb %s,%s",id_dest->str,id_src->str);
 }
+
+make_EHelper(sh){ //sh rt,offset(rs)
+  rtl_sm(&id_src->addr,&id_dest->val,decinfo.width);
+  print_asm("sh %s,%s",id_dest->str,id_src->str);
+}

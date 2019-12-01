@@ -22,7 +22,7 @@ static OpcodeEntry opcode_table [64] = {
   /* b010 */ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
   /* b011 */ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
   /* b100 */ EMPTY, EMPTY, EMPTY, IDEXW(ld, ld, 4), IDEXW(lbu,lbu,1), EMPTY, EMPTY, EMPTY,
-  /* b101 */ IDEXW(sb,sb,1), EMPTY, EMPTY, IDEXW(st, st, 4), EMPTY, EMPTY, EMPTY, EMPTY,
+  /* b101 */ IDEXW(sb,sb,1), IDEXW(sh,sh,2), EMPTY, IDEXW(st, st, 4), EMPTY, EMPTY, EMPTY, EMPTY,
   /* b110 */ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
   /* b111 */ EMPTY, EMPTY, EMPTY, EMPTY, EX(nemu_trap), EMPTY, EMPTY, EMPTY,
 };

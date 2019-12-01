@@ -58,6 +58,12 @@ make_DHelper(sb){  //sb rt,offset(rs)
   decode_addr(NULL);
   decode_op_r(id_dest,decinfo.isa.instr.rt,true);
 }
+
+make_DHelper(sh){ //sh rt,offset(rs)
+  decode_addr(NULL);
+  decode_op_r(id_dest,decinfo.isa.instr.rt,true);
+}
+
 make_DHelper(or){ //or rd,rs,rt    GPR[rd]<-GRP[rs] or GPR[rt]
   decode_op_r(id_src,decinfo.isa.instr.rs,true);
   decode_op_r(id_src2,decinfo.isa.instr.rt,true);
@@ -143,3 +149,4 @@ make_DHelper(xori){ //xori rt,rs,imm
   decode_op_i(id_src2,decinfo.isa.instr.rs,true);
   decode_op_r(id_dest,decinfo.isa.instr.rt,false);
 }
+
