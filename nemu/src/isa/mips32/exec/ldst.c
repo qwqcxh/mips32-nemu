@@ -40,9 +40,11 @@ make_EHelper(lhu){ //lhu rt,offset(rs)
 }
 
 make_EHelper(lwl){ //lwl rt,offset(rs)
-  rtl_lm(&s0,&id_src->addr,id_src->val&3);
-  rtl_shri(&reg_l(id_dest->reg),&reg_l(id_dest->reg),8*(id_src->val&3));
-  rtl_shli(&reg_l(id_dest->reg),&reg_l(id_dest->reg),8*(id_src->val&3));
+  int bytes=((id_src->addr&3)==0)?4:(id_src->addr&3);
+  rtl_andi(&s0,&id_src->addr,0xfffffffc);
+  rtl_lm(&s0,&s0,bytes);
+  rtl_shri(&reg_l(id_dest->reg),&reg_l(id_dest->reg),8*bytes);
+  rtl_shli(&reg_l(id_dest->reg),&reg_l(id_dest->reg),8*bytes);
   rtl_or(&reg_l(id_dest->reg),&reg_l(id_dest->reg),&s0);
   print_asm("lwl %s,%s",id_dest->str,id_src->str);
 }
