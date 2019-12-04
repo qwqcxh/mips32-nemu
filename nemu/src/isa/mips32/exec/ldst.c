@@ -39,6 +39,24 @@ make_EHelper(lhu){ //lhu rt,offset(rs)
   print_asm("lhu %s,%s",id_dest->str,id_src->str);
 }
 
+make_EHelper(lwl){ //lwl rt,offset(rs)
+  rtl_lm(&s0,&id_src->addr,id_src->val&3);
+  rtl_shri(&reg_l(id_dest->reg),&reg_l(id_dest->reg),8*(id_src->val&3));
+  rtl_shli(&reg_l(id_dest->reg),&reg_l(id_dest->reg),8*(id_src->val&3));
+  rtl_or(&reg_l(id_dest->reg),&reg_l(id_dest->reg),&s0);
+  print_asm("lwl %s,%s",id_dest->str,id_src->str);
+}
+
+make_EHelper(lwr){ //lwr rt,offset(rs)
+  int bytes=(4-(id_src->val&3))&3;
+  rtl_lm(&s0,&id_src->addr,bytes);
+  rtl_shli(&s0,&s0,8*(id_src->val&3));
+  rtl_shli(&reg_l(id_dest->reg),&reg_l(id_dest->reg),bytes*8);
+  rtl_shri(&reg_l(id_dest->reg),&reg_l(id_dest->reg),bytes*8);
+  rtl_or(&reg_l(id_dest->reg),&reg_l(id_dest->reg),&s0);
+  print_asm("lwr %s,%s",id_dest->str,id_src->str);
+}
+
 make_EHelper(sb){ //sb rt,offset(rs)
   rtl_sm(&id_src->addr,&id_dest->val,decinfo.width);
   print_asm("sb %s,%s",id_dest->str,id_src->str);

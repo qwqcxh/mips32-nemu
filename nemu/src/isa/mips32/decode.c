@@ -63,6 +63,17 @@ make_DHelper(lhu){ //lhu rt,offset(rs)
   decode_addr(NULL);
   decode_op_r(id_dest,decinfo.isa.instr.rt,false);
 }
+
+make_DHelper(lwl){ //lwl rt,offset(rs)
+  decode_addr(NULL);
+  decode_op_r(id_dest,decinfo.isa.instr.rt,false);
+}
+
+make_DHelper(lwr){ //lwr rt,offset(rs)
+  decode_addr(NULL);
+  decode_op_r(id_dest,decinfo.isa.instr.rt,false);
+}
+
 make_DHelper(sb){  //sb rt,offset(rs)
   decode_addr(NULL);
   decode_op_r(id_dest,decinfo.isa.instr.rt,true);

@@ -72,4 +72,6 @@ make_DHelper(srl);
 make_DHelper(sll);
 make_DHelper(lh);
 make_DHelper(lhu);
+make_DHelper(lwl);
+make_DHelper(lwr);
 #endif
