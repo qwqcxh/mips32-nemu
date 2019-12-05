@@ -41,6 +41,6 @@ make_EHelper(blez){ //blez rs,offset
     rtl_shli(&id_src2->val,&id_src2->val,2);
     rtl_addi(&id_src2->val,&id_src2->val,cpu.pc+4);
     rtl_li(&ir,0);
-    rtl_jrelop(RELOP_LEU,&id_src->val,&ir,id_src->val);
+    rtl_jrelop(RELOP_LEU,&id_src->val,&ir,id_src2->val);
     print_asm("blez %s,0x%x",id_src->str,id_src2->val);
 }
