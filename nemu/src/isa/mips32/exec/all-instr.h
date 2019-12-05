@@ -51,3 +51,5 @@ make_EHelper(mult);
 make_EHelper(jalr);
 make_EHelper(blez);
 make_EHelper(srav);
+make_EHelper(swl);
+make_EHelper(swr);

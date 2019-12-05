@@ -78,4 +78,6 @@ make_DHelper(mult);
 make_DHelper(jalr);
 make_DHelper(blez);
 make_DHelper(srav);
+make_DHelper(swl);
+make_DHelper(swr);
 #endif

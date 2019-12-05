@@ -77,3 +77,17 @@ make_EHelper(sh){ //sh rt,offset(rs)
   rtl_sm(&id_src->addr,&id_dest->val,decinfo.width);
   print_asm("sh %s,%s",id_dest->str,id_src->str);
 }
+
+make_EHelper(swl){ //swl rt,offset(rs)
+  int bytes=(id_src->addr&3)+1;
+  rtl_shri(&s0,&id_dest->val,4-bytes);
+  rtl_andi(&s1,&id_src->addr,0xfffffffc);
+  rtl_sm(&s1,&s0,bytes);
+  print_asm("swl %s,%s",id_dest->str,id_src->str);
+}
+
+make_EHelper(swr){ //swr rt,offset(rs)
+  int bytes=4-(id_src->addr&3);
+  rtl_sm(&id_src->addr,&id_dest->val,bytes);
+  print_asm("swr %s,%s",id_dest->str,id_src->str);
+}
