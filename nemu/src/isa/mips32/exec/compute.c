@@ -121,8 +121,8 @@ make_EHelper(multu){ //multu rs,rt HI<-high32(GPR[rs]*GPR[rt]) LO<-low32(GPR[rs]
 }
 
 make_EHelper(mult){
-  rtl_mul_hi(&hi,&id_src->val,&id_src2->val);
-  rtl_mul_lo(&lo,&id_src->val,&id_src2->val);
+  rtl_imul_hi(&hi,&id_src->val,&id_src2->val);
+  rtl_imul_lo(&lo,&id_src->val,&id_src2->val);
   print_asm("mult %s,%s",id_src->str,id_src2->str);
 }
 make_EHelper(srl){  //srl rd,rt,sa
