@@ -36,6 +36,7 @@ make_EHelper(bne){ //bne rs,rt,offset
 }
 
 make_EHelper(blez){ //blez rs,offset
+    printf("id_src2->val 0x%x\n",id_src2->val); //debug
     rtl_sext(&id_src2->val,&id_src2->val,2);
     rtl_shli(&id_src2->val,&id_src2->val,2);
     rtl_addi(&id_src2->val,&id_src2->val,cpu.pc+4);
