@@ -257,3 +257,8 @@ make_DHelper(sll){ //sll rd,rt,sa
   decode_op_i(id_src2,decinfo.isa.instr.sa,true);
   decode_op_r(id_dest,decinfo.isa.instr.rd,false);  
 }
+
+make_DHelper(blez){ //blez rs,offset
+  decode_op_r(id_src,decinfo.isa.instr.rs,true);
+  decode_op_i(id_src2,decinfo.isa.instr.imm,true);
+}

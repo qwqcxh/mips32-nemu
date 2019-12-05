@@ -34,3 +34,12 @@ make_EHelper(bne){ //bne rs,rt,offset
     rtl_jrelop(RELOP_NE,&id_src->val,&id_src2->val,id_dest->val);
     print_asm("bne %s,%s,0x%x",id_src->str,id_src2->str,id_dest->val);
 }
+
+make_EHelper(blez){ //blez rs,offset
+    rtl_sext(&id_src2->val,&id_src2->val,2);
+    rtl_shli(&id_src2->val,&id_src2->val,2);
+    rtl_addi(&id_src2->val,&id_src2->val,cpu.pc+4);
+    rtl_li(&ir,0);
+    rtl_jrelop(RELOP_LEU,&id_src->val,&ir,id_src->val);
+    print_asm("blez %s,0x%x",id_src->str,id_src2->val);
+}
