@@ -125,6 +125,7 @@ make_EHelper(mult){
   rtl_imul_lo(&lo,&id_src->val,&id_src2->val);
   print_asm("mult %s,%s",id_src->str,id_src2->str);
 }
+
 make_EHelper(srl){  //srl rd,rt,sa
   rtl_shr(&reg_l(id_dest->reg),&id_src->val,&id_src2->val);
   print_asm("shr %s,%s,0x%x",id_dest->str,id_src->str,id_src2->val);

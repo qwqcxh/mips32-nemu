@@ -220,7 +220,7 @@ make_DHelper(multu){ //multu rs,rt
 
 make_DHelper(mult){ //mult rs,rt
   decode_op_r(id_src,decinfo.isa.instr.rs,true);
-  decode_op_r(id_src,decinfo.isa.instr.rt,true);
+  decode_op_r(id_src2,decinfo.isa.instr.rt,true);
 }
 
 make_DHelper(subu){ //subu rd,rs,rt
