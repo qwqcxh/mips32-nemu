@@ -43,9 +43,11 @@ make_EHelper(lwl){ //lwl rt,offset(rs)
   int bytes=((id_src->addr&3)==0)?4:(id_src->addr&3);
   rtl_andi(&s0,&id_src->addr,0xfffffffc);
   rtl_lm(&s0,&s0,bytes);
+  printf("lwl memroy value 0x%x",s0);//debug
   rtl_shri(&reg_l(id_dest->reg),&reg_l(id_dest->reg),8*bytes);
   rtl_shli(&reg_l(id_dest->reg),&reg_l(id_dest->reg),8*bytes);
   rtl_or(&reg_l(id_dest->reg),&reg_l(id_dest->reg),&s0);
+  printf("lwl id_dest value 0x%x",reg_l(id_dest->reg));//debug
   print_asm("lwl %s,%s",id_dest->str,id_src->str);
 }
 
