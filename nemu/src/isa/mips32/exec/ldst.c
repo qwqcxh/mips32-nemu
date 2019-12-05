@@ -77,7 +77,7 @@ make_EHelper(sh){ //sh rt,offset(rs)
 
 make_EHelper(swl){ //swl rt,offset(rs)
   int bytes=(id_src->addr&3)+1;
-  rtl_shri(&s0,&id_dest->val,4-bytes);
+  rtl_shri(&s0,&id_dest->val,8*(4-bytes));
   //debug
   printf("swl val 0x%x\n",s0);
   rtl_andi(&s1,&id_src->addr,0xfffffffc);
