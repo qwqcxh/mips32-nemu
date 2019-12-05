@@ -77,4 +77,5 @@ make_DHelper(lwr);
 make_DHelper(mult);
 make_DHelper(jalr);
 make_DHelper(blez);
+make_DHelper(srav);
 #endif

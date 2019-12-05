@@ -2,7 +2,7 @@
 #include "all-instr.h"
 
 static OpcodeEntry special_table [64] = {
-  /* b000 */ IDEX(sll,sll), EMPTY, IDEX(srl,srl), IDEX(sra,sra), IDEX(sllv,sllv), EMPTY, IDEX(srlv,srlv), EMPTY,
+  /* b000 */ IDEX(sll,sll), EMPTY, IDEX(srl,srl), IDEX(sra,sra), IDEX(sllv,sllv), EMPTY, IDEX(srlv,srlv), IDEX(srav,srav),
   /* b001 */ IDEX(jr,jr), IDEX(jalr,jalr), EMPTY, IDEX(movn,movn), EMPTY, EMPTY, EMPTY, EMPTY,
   /* b010 */ IDEX(mfhi,mfhi), EMPTY, IDEX(mflo,mflo), EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
   /* b011 */ IDEX(mult,mult), IDEX(multu,multu), IDEX(div,div), EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,

@@ -175,6 +175,12 @@ make_DHelper(sllv){ //sllv rd,rt,rs
   decode_op_r(id_dest,decinfo.isa.instr.rd,false);
 }
 
+make_DHelper(srav){ //srav rd,rt,rs
+  decode_op_r(id_src,decinfo.isa.instr.rt,true);
+  decode_op_r(id_src2,decinfo.isa.instr.rs,true);
+  decode_op_r(id_dest,decinfo.isa.instr.rd,false);  
+}
+
 make_DHelper(xori){ //xori rt,rs,imm
   decode_op_r(id_src,decinfo.isa.instr.rs,true);
   decode_op_i(id_src2,decinfo.isa.instr.imm,true);

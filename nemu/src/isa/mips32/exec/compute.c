@@ -135,3 +135,9 @@ make_EHelper(sll){ //sll rd,rt,sa
   rtl_shl(&reg_l(id_dest->reg),&id_src->val,&id_src2->val);
   print_asm("sll %s,%s,0x%x",id_dest->str,id_src->str,id_src2->val);
 }
+
+make_EHelper(srav){ //srav rd,rt,rs
+  rtl_andi(&id_src->val,&id_src->val,0x1f);
+  rtl_sar(&reg_l(id_dest->reg),&id_src2->val,&id_src->val);
+  print_asm("srav %s,%s,%s",id_dest->str,id_src2->str,id_src->str);
+}
