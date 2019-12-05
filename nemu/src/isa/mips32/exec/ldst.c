@@ -40,6 +40,7 @@ make_EHelper(lhu){ //lhu rt,offset(rs)
 }
 
 make_EHelper(lwl){ //lwl rt,offset(rs)
+  printf("debug addr is 0x%x\n",id_src->addr);
   if((id_src->addr&3)==0){
     rtl_subi(&id_src->addr,&id_src->addr,4);
     rtl_lm(&reg_l(id_dest->reg),&id_src->addr,4);
