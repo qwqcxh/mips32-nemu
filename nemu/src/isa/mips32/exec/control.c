@@ -7,6 +7,13 @@ make_EHelper(jal){
     print_asm("jal  0x%x",cpu.pc);
 }
 
+make_EHelper(jalr){ //GPR[rd]<-pc+8 pc<-GPR[rs]
+    rtl_li(&ir,cpu.pc+8);
+    rtl_sr(id_dest->reg,&ir,4);
+    rtl_j(id_src->val);
+    print_asm("jalr %s,%s",id_dest->str,id_src->str);
+}
+
 make_EHelper(jr){
     rtl_jr(&id_src->val);
     print_asm("jr  %s",reg_name(id_src->reg,4));

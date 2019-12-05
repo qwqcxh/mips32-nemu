@@ -48,3 +48,4 @@ make_EHelper(lhu);
 make_EHelper(lwl);
 make_EHelper(lwr);
 make_EHelper(mult);
+make_EHelper(jalr);

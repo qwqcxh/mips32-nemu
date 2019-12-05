@@ -100,6 +100,11 @@ make_DHelper(jal){ //jal target
   decode_op_i(id_dest,decinfo.isa.instr.jmp_target,false);
 }
 
+make_DHelper(jalr){ //jalr rd,rs
+  decode_op_r(id_src,decinfo.isa.instr.rs,true);
+  decode_op_r(id_dest,decinfo.isa.instr.rd,false);
+}
+
 make_DHelper(jr){ //jr rs
   decode_op_r(id_src,decinfo.isa.instr.rs,true);
 }
