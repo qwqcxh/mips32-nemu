@@ -88,3 +88,8 @@ make_EHelper(swr){ //swr rt,offset(rs)
   rtl_sm(&id_src->addr,&id_dest->val,bytes);
   print_asm("swr %s,%s",id_dest->str,id_src->str);
 }
+
+make_EHelper(lb){ //lb rt,offset(rs)
+  rtl_lm(&reg_l(id_dest->reg),&id_src->addr,decinfo.width);
+  print_asm("lb %s,%s",id_dest->str,id_src->str);
+}

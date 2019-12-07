@@ -80,4 +80,5 @@ make_DHelper(blez);
 make_DHelper(srav);
 make_DHelper(swl);
 make_DHelper(swr);
+make_DHelper(lb);
 #endif

@@ -278,3 +278,8 @@ make_DHelper(swr){ //swr rt,offset(rs)
   decode_addr(NULL);
   decode_op_r(id_dest,decinfo.isa.instr.rt,true);
 }
+
+make_DHelper(lb){ //lb rt,offset(base)
+  decode_addr(NULL);
+  decode_op_r(id_dest,decinfo.isa.instr.rt,false);
+}
