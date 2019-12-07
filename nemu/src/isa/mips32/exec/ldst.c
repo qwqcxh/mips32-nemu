@@ -45,8 +45,9 @@ make_EHelper(lwl){ //lwl rt,offset(rs)
   rtl_lm(&s0,&s0,bytes);
   if(bytes==4) rtl_mv(&reg_l(id_dest->reg),&s0);
   else{
-    rtl_shri(&reg_l(id_dest->reg),&reg_l(id_dest->reg),8*bytes);
     rtl_shli(&reg_l(id_dest->reg),&reg_l(id_dest->reg),8*bytes);
+    rtl_shri(&reg_l(id_dest->reg),&reg_l(id_dest->reg),8*bytes);
+    rtl_shli(&s0,&s0,8*(4-bytes));
     rtl_or(&reg_l(id_dest->reg),&reg_l(id_dest->reg),&s0);
   }
   print_asm("lwl %s,%s",id_dest->str,id_src->str);
