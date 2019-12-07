@@ -31,7 +31,7 @@ static char* number(char* str,unsigned long num,int base){
     else tmp[i]=tmp[i]-10+'a';
     i++;
   }
-  while(--i){
+  while(--i>=0){
     *str++=tmp[i];
   }
   return str;
@@ -45,7 +45,7 @@ int vsprintf(char *out, const char *fmt, va_list ap){
       *str++ = *fmt;
       continue;
     }
-
+    fmt++;//skip '%'
     /* Default base */
     base = 10;
     unsigned long num=-1;
