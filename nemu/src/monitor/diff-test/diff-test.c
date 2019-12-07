@@ -2,6 +2,7 @@
 
 #include "nemu.h"
 #include "monitor/monitor.h"
+#include "cpu/decode.h"
 
 void (*ref_difftest_memcpy_from_dut)(paddr_t dest, void *src, size_t n) = NULL;
 void (*ref_difftest_getregs)(void *c) = NULL;
@@ -94,6 +95,12 @@ void difftest_step(vaddr_t ori_pc, vaddr_t next_pc) {
   CPU_state ref_r;
 
   if (is_detach) return;
+
+  uint32_t opcode=decinfo.isa.instr.opcode;
+  uint32_t func=decinfo.isa.instr.func;
+  if((opcode>=2&&opcode<=7) || (func>=8&&func<=9)){
+    difftest_skip_dut(1,2);
+  }
 
   if (skip_dut_nr_instr > 0) {
     ref_difftest_getregs(&ref_r);
