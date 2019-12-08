@@ -51,4 +51,5 @@ make_EHelper(j){ //j target
     rtl_add(&id_dest->val,&id_dest->val,&s0);
     rtl_j(id_dest->val);
     print_asm("j 0x%x",id_dest->val);
+    printf("debug         !!!!!!!!!!!!!!!!!!!!!!!!!j 0x%x\n",id_dest->val);
 }
