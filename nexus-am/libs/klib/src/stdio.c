@@ -10,6 +10,10 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {
 
 #define is_digit(x) ((x)>='0' && (x) <= '9')
 static char* number(char* str,unsigned long num,int base){
+  if(num==0) { //special case
+    *str++='0';
+    return str;
+  }
   char tmp[100];
   int i=0;
   while(num){
