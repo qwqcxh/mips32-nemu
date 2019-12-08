@@ -283,3 +283,7 @@ make_DHelper(lb){ //lb rt,offset(base)
   decode_addr(NULL);
   decode_op_r(id_dest,decinfo.isa.instr.rt,false);
 }
+
+make_DHelper(j){  //j target
+  decode_op_i(id_dest,decinfo.isa.instr.jmp_target,true);
+}

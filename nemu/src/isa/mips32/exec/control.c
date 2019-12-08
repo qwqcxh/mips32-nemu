@@ -43,3 +43,11 @@ make_EHelper(blez){ //blez rs,offset
     rtl_jrelop(RELOP_LEU,&id_src->val,&ir,id_src2->val);
     print_asm("blez %s,0x%x",id_src->str,id_src2->val);
 }
+
+make_EHelper(j){ //j target
+    rtl_shli(&id_dest->val,&id_dest->val,2);
+    rtl_li(&s0,cpu.pc+4);
+    rtl_add(&reg_l(id_dest->reg),&id_dest->val,&s0);
+    rtl_j(id_dest->val);
+    print_asm("j 0x%x",id_dest->val);
+}
