@@ -83,4 +83,6 @@ make_DHelper(swr);
 make_DHelper(lb);
 make_DHelper(j);
 make_DHelper(divu);
+make_DHelper(bgez);
+
 #endif

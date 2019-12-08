@@ -40,8 +40,17 @@ make_EHelper(blez){ //blez rs,offset
     rtl_shli(&id_src2->val,&id_src2->val,2);
     rtl_addi(&id_src2->val,&id_src2->val,cpu.pc+4);
     rtl_li(&ir,0);
-    rtl_jrelop(RELOP_LEU,&id_src->val,&ir,id_src2->val);
+    rtl_jrelop(RELOP_LE,&id_src->val,&ir,id_src2->val);
     print_asm("blez %s,0x%x",id_src->str,id_src2->val);
+}
+
+make_EHelper(bgez){ //bgez rs,offset
+    rtl_sext(&id_dest->val,&id_dest->val,2);
+    rtl_shli(&id_dest->val,&id_dest->val,2);
+    rtl_addi(&id_dest->val,&id_dest->val,cpu.pc+4);
+    rtl_li(&ir,0);
+    rtl_jrelop(RELOP_GE,&id_src->val,&ir,id_dest->val);
+    print_asm("bgez %s,0x%x",id_src->str,id_dest->val);
 }
 
 make_EHelper(j){ //j target
@@ -51,5 +60,4 @@ make_EHelper(j){ //j target
     rtl_add(&id_dest->val,&id_dest->val,&s0);
     rtl_j(id_dest->val);
     print_asm("j 0x%x",id_dest->val);
-    //printf("debug         !!!!!!!!!!!!!!!!!!!!!!!!!j 0x%x\n",id_dest->val);
 }

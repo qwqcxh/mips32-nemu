@@ -145,6 +145,11 @@ make_DHelper(bne){ //bne rs,rt,offset
   decode_op_i(id_dest,decinfo.isa.instr.imm,true);  
 }
 
+make_DHelper(bgez){ //bgez rs,offset
+  decode_op_r(id_src,decinfo.isa.instr.rs,true);
+  decode_op_i(id_dest,decinfo.isa.instr.imm,true);
+}
+
 make_DHelper(sltu){ //sltu rd,rs,rt
   decode_op_r(id_src,decinfo.isa.instr.rs,true);
   decode_op_r(id_src2,decinfo.isa.instr.rt,true);
