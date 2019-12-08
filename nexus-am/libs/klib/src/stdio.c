@@ -3,10 +3,6 @@
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
-int printf(const char *fmt, ...) {
-  return 0;
-}
-
 // int vsprintf(char *out, const char *fmt, va_list ap) {
 //   return 0;
 // }
@@ -78,6 +74,18 @@ int sprintf(char *out, const char *fmt, ...)
     va_end(args);
 
     return n;
+}
+
+int printf(const char *fmt, ...) {
+  static char buf[100];
+  va_list args;
+  int n;
+  va_start(args,fmt);
+  n=vsprintf(buf,fmt,args);
+  va_end(args);
+  for(int i=0;buf[i]!='\0';i++)
+    _putc(buf[i]);
+  return n;
 }
 
 #endif
