@@ -210,6 +210,11 @@ make_DHelper(div){ //div rs,rt
   decode_op_r(id_src2,decinfo.isa.instr.rt,true);
 }
 
+make_DHelper(divu){ //div rs,rt
+  decode_op_r(id_src,decinfo.isa.instr.rs,true);
+  decode_op_r(id_src2,decinfo.isa.instr.rt,true);  
+}
+
 make_DHelper(mfhi){ //mfhi rd
   decode_op_r(id_dest,decinfo.isa.instr.rd,false);
 }

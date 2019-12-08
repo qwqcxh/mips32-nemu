@@ -55,3 +55,4 @@ make_EHelper(swl);
 make_EHelper(swr);
 make_EHelper(lb);
 make_EHelper(j);
+make_EHelper(divu);
