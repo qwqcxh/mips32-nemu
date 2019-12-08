@@ -47,7 +47,8 @@ make_EHelper(blez){ //blez rs,offset
 make_EHelper(j){ //j target
     rtl_shli(&id_dest->val,&id_dest->val,2);
     rtl_li(&s0,cpu.pc+4);
-    rtl_add(&reg_l(id_dest->reg),&id_dest->val,&s0);
+    rtl_andi(&s0,&s0,0xf0000000);
+    rtl_add(&id_dest->val,&id_dest->val,&s0);
     rtl_j(id_dest->val);
     print_asm("j 0x%x",id_dest->val);
 }
