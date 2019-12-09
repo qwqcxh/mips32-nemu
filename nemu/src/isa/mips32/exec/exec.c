@@ -24,7 +24,7 @@ static OpcodeEntry special_table2 [64] = {
 };
 
 static OpcodeEntry regimm_table[32] = {
-  /* b000 */ EMPTY,IDEX(bgez,bgez),EMPTY,EMPTY,
+  /* b000 */ IDEX(bltz,bltz),IDEX(bgez,bgez),EMPTY,EMPTY,
   /* b001 */ EMPTY,EMPTY,EMPTY,EMPTY,
   /* b010 */ EMPTY,EMPTY,EMPTY,EMPTY,
   /* b011 */ EMPTY,EMPTY,EMPTY,EMPTY,

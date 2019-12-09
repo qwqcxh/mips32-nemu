@@ -84,5 +84,5 @@ make_DHelper(lb);
 make_DHelper(j);
 make_DHelper(divu);
 make_DHelper(bgez);
-
+make_DHelper(bltz);
 #endif

@@ -53,6 +53,15 @@ make_EHelper(bgez){ //bgez rs,offset
     print_asm("bgez %s,0x%x",id_src->str,id_dest->val);
 }
 
+make_EHelper(bltz){
+    rtl_sext(&id_dest->val,&id_dest->val,2);
+    rtl_shli(&id_dest->val,&id_dest->val,2);
+    rtl_addi(&id_dest->val,&id_dest->val,cpu.pc+4);
+    rtl_li(&ir,0);
+    rtl_jrelop(RELOP_LT,&id_src->val,&ir,id_dest->val);
+    print_asm("bltz %s,0x%x",id_src->str,id_dest->val);
+}
+
 make_EHelper(j){ //j target
     rtl_shli(&id_dest->val,&id_dest->val,2);
     rtl_li(&s0,cpu.pc+4);

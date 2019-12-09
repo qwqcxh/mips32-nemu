@@ -57,3 +57,4 @@ make_EHelper(lb);
 make_EHelper(j);
 make_EHelper(divu);
 make_EHelper(bgez);
+make_EHelper(bltz);
