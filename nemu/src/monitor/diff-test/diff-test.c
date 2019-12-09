@@ -117,7 +117,6 @@ void difftest_step(vaddr_t ori_pc, vaddr_t next_pc) {
 
   if (is_skip_ref) {
     // to skip the checking of an instruction, just copy the reg state to reference design
-    printf("qemu set args now\n");//debug
     ref_difftest_setregs(&cpu);
     is_skip_ref = false;
     return;
