@@ -289,6 +289,11 @@ make_DHelper(blez){ //blez rs,offset
   decode_op_i(id_src2,decinfo.isa.instr.imm,true);
 }
 
+make_DHelper(bgtz){ //bgtz rs,offset
+  decode_op_r(id_src,decinfo.isa.instr.rs,true);
+  decode_op_i(id_dest,decinfo.isa.instr.imm,true);
+}
+
 make_DHelper(swl){ //swl rt,offset(rs)
   decode_addr(NULL);
   decode_op_r(id_dest,decinfo.isa.instr.rt,true);

@@ -86,4 +86,5 @@ make_DHelper(divu);
 make_DHelper(bgez);
 make_DHelper(bltz);
 make_DHelper(movz);
+make_DHelper(bgtz);
 #endif
