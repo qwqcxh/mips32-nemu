@@ -109,6 +109,12 @@ make_EHelper(movn){ //movn rd,rs,rt     rt!=0 then GPR[rd]<-GPR[rs]
   print_asm("mov %s,%s,%s",id_dest->str,id_src->str,id_src2->str);
 }
 
+make_EHelper(movz){ //movz rd,rs,rt rt==0 then GPR[rd]<-GPR[rs]
+  rtl_setrelopi(RELOP_EQ,&s0,&id_src2->val,0);
+  rtl_mux(&reg_l(id_dest->reg),&s0,&id_src->val,&id_dest->val);
+  print_asm("movz %s,%s,%s",id_dest->str,id_src->str,id_src2->str);
+}
+
 make_EHelper(ori){  //ori rt,rs,imm GPR[rt]<-(GPR[rs] or zeor-extended(imm))
   rtl_or(&reg_l(id_dest->reg),&id_src->val,&id_src2->val);
   print_asm("ori %s,%s,0x%x",id_dest->str,id_src->str,id_src2->val);

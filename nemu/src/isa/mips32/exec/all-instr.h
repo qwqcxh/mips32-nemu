@@ -58,3 +58,4 @@ make_EHelper(j);
 make_EHelper(divu);
 make_EHelper(bgez);
 make_EHelper(bltz);
+make_EHelper(movz);
