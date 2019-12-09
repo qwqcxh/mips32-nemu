@@ -65,6 +65,7 @@ make_EHelper(bltz){
 make_EHelper(bgtz){ //bgtz rs,offset
     rtl_sext(&id_dest->val,&id_dest->val,2);
     rtl_shli(&id_dest->val,&id_dest->val,2);
+    rtl_addi(&id_dest->val,&id_dest->val,cpu.pc+4);
     rtl_li(&ir,0);
     rtl_jrelop(RELOP_GT,&id_src->val,&ir,id_dest->val);
     print_asm("bgtz %s,0x%x",id_src->str,id_dest->val);
