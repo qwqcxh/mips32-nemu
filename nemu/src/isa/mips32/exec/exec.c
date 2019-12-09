@@ -38,7 +38,7 @@ static make_EHelper(special) {
   idex(pc, &special_table[decinfo.isa.instr.func]);
 }
 static make_EHelper(regimm) {
-  idex(pc, &regimm_table[decinfo.isa.instr.rs]);
+  idex(pc, &regimm_table[decinfo.isa.instr.rt]);
 }
 
 static make_EHelper(special2){
