@@ -17,7 +17,8 @@ static bool is_detach = false;
 // can not produce consistent behavior with NEMU
 void difftest_skip_ref() {
   is_skip_ref = true;
-  printf("cpu.pc is %d\n",cpu.pc);//debug
+  if(cpu.pc==0xa1000048)
+    printf("cpu.pc is %d\n",cpu.pc);//debug
   // If such an instruction is one of the instruction packing in QEMU
   // (see below), we end the process of catching up with QEMU's pc to
   // keep the consistent behavior in our best.
