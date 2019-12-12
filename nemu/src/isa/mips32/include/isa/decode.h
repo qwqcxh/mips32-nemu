@@ -26,6 +26,9 @@ typedef union {
     uint32_t rs     : 5;
 //  uint32_t opcode : 6;
   };
+  struct {
+    uint32_t sel    : 3;
+  };
   uint32_t val;
 } Instr;
 
@@ -87,4 +90,6 @@ make_DHelper(bgez);
 make_DHelper(bltz);
 make_DHelper(movz);
 make_DHelper(bgtz);
+make_DHelper(mfc0);
+make_DHelper(mtc0);
 #endif

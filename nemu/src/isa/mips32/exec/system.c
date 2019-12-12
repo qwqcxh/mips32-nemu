@@ -6,3 +6,27 @@ make_EHelper(syscall){
     rtl_ori(&cpu.status,&cpu.status,0x2);
     rtl_j(0x80000180);
 }
+
+make_EHelper(mfc0){
+    rtl_shli(&id_src->val,&id_src->val,3);
+    rtl_or(&id_src->val,&id_src->val,&id_src2->val);
+    switch(id_src->val){
+        case 8:rtl_mv(&reg_l(id_dest->reg),&cpu.badvaddr);break;
+        case 12:rtl_mv(&reg_l(id_dest->reg),&cpu.status);break;
+        case 13:rtl_mv(&reg_l(id_dest->reg),&cpu.cause);break;
+        case 14:rtl_mv(&reg_l(id_dest->reg),&cpu.epc);break;
+        default: assert(0);break;
+    }
+}
+
+make_EHelper(mtc0){
+    rtl_shli(&id_src->val,&id_src->val,3);
+    rtl_or(&id_src->val,&id_src->val,&id_src2->val);
+    switch(id_src->val){
+        case 8:rtl_mv(&cpu.badvaddr,&reg_l(id_dest->reg));break;
+        case 12:rtl_mv(&cpu.status,&reg_l(id_dest->reg));break;
+        case 13:rtl_mv(&cpu.cause,&reg_l(id_dest->reg));break;
+        case 14:rtl_mv(&cpu.epc,&reg_l(id_dest->reg));break;
+        default: assert(0);break;
+    }
+}

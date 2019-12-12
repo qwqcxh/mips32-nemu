@@ -312,3 +312,15 @@ make_DHelper(lb){ //lb rt,offset(base)
 make_DHelper(j){  //j target
   decode_op_i(id_dest,decinfo.isa.instr.jmp_target,true);
 }
+
+make_DHelper(mfc0){ //mfc0 rt,rd,sel
+  decode_op_r(id_dest,decinfo.isa.instr.rt,false);
+  decode_op_r(id_src,decinfo.isa.instr.rd,true);
+  decode_op_i(id_src2,decinfo.isa.instr.sel,true);
+}
+
+make_DHelper(mtc0){ //mtc0 rt,rd,sel
+  decode_op_r(id_src,decinfo.isa.instr.rd,true);
+  decode_op_r(id_src2,decinfo.isa.instr.sel,true);
+  decode_op_r(id_dest,decinfo.isa.instr.rt,true);
+}
