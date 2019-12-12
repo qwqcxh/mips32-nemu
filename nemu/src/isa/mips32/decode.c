@@ -312,3 +312,8 @@ make_DHelper(lb){ //lb rt,offset(base)
 make_DHelper(j){  //j target
   decode_op_i(id_dest,decinfo.isa.instr.jmp_target,true);
 }
+
+make_DHelper(syscall){ //syscall
+  decode_op_i(id_dest,decinfo.isa.instr.val,true);//code
+  rtl_shri(&id_dest->val,&id_dest->val,6); //get the code
+}

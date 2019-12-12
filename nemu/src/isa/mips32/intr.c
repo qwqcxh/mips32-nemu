@@ -1,7 +1,7 @@
 #include "rtl/rtl.h"
 #include <setjmp.h>
 
-void raise_intr(uint32_t NO, vaddr_t epc) {
+void raise_intr(uint32_t NO, vaddr_t epc) {  //no use in mips32 because there is no IDT in mips 23333333
   /* TODO: Trigger an interrupt/exception with ``NO''.
    * That is, use ``NO'' to index the IDT.
    */

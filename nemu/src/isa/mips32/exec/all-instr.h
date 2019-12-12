@@ -60,3 +60,4 @@ make_EHelper(bgez);
 make_EHelper(bltz);
 make_EHelper(movz);
 make_EHelper(bgtz);
+make_EHelper(syscall);

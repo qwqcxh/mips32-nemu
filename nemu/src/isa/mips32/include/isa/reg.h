@@ -10,7 +10,7 @@ typedef struct {
     rtlreg_t _32;
   } gpr[32];
 
-  rtlreg_t pad[5];
+  rtlreg_t status,lo,hi,badvaddr,cause,epc;//fuck source code!!! 
 
   vaddr_t pc;
 
