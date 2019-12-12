@@ -39,7 +39,7 @@ static OpcodeEntry cop0_table[32] = {
   /* b001 */ IDEX(mtc0,mtc0),EMPTY,EMPTY,EMPTY,
   /* b010 */ EMPTY,EMPTY,EMPTY,EMPTY,
   /* b011 */ EMPTY,EMPTY,EMPTY,EMPTY,
-  /* b100 */ EMPTY,EMPTY,EMPTY,EMPTY,
+  /* b100 */ EX(cop0_func),EMPTY,EMPTY,EMPTY,
   /* b101 */ EMPTY,EMPTY,EMPTY,EMPTY,
   /* b110 */ EMPTY,EMPTY,EMPTY,EMPTY,
   /* b111 */ EMPTY,EMPTY,EMPTY,EMPTY,  

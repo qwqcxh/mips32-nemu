@@ -26,3 +26,13 @@ make_EHelper(mtc0){
         default: assert(0);break;
     }
 }
+
+make_EHelper(cop0_func){
+    switch(decinfo.isa.instr.func){
+        case 0x18: //ERET
+            rtl_andi(&cpu.status,&cpu.status,0xfffffffd);
+            rtl_j(cpu.epc+4);
+            break;
+        default: assert(0);
+    }
+}

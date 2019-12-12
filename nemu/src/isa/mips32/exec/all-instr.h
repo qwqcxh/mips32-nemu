@@ -65,3 +65,4 @@ make_EHelper(mfc0);
 make_EHelper(mtc0);
 make_EHelper(mtlo);
 make_EHelper(mthi);
+make_EHelper(cop0_func);
