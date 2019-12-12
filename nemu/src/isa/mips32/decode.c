@@ -317,10 +317,12 @@ make_DHelper(mfc0){ //mfc0 rt,rd,sel
   decode_op_r(id_dest,decinfo.isa.instr.rt,false);
   decode_op_r(id_src,decinfo.isa.instr.rd,true);
   decode_op_i(id_src2,decinfo.isa.instr.sel,true);
+  printf("mfc0 sel %d rd %d rt %d\n",id_src2->val,id_src->val,id_dest->val);//debug
 }
 
 make_DHelper(mtc0){ //mtc0 rt,rd,sel
   decode_op_r(id_src,decinfo.isa.instr.rd,true);
   decode_op_r(id_src2,decinfo.isa.instr.sel,true);
   decode_op_r(id_dest,decinfo.isa.instr.rt,true);
+  printf("mtc0 sel %d rt %d rd %d\n",id_src2->val,id_src->val,id_dest->val); //debug
 }
