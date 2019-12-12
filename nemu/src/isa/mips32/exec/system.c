@@ -13,7 +13,7 @@ make_EHelper(mfc0){
         case 12:rtl_mv(&reg_l(id_dest->reg),&cpu.status);break;
         case 13:rtl_mv(&reg_l(id_dest->reg),&cpu.cause);break;
         case 14:rtl_mv(&reg_l(id_dest->reg),&cpu.epc);break;
-        default: printf("%d\n",id_src->val);assert(0);break;
+        default: assert(0);break;
     }
 }
 

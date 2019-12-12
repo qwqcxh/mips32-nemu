@@ -1,9 +1,14 @@
 #include <am.h>
 #include <mips32.h>
-
+#include <klib.h>
 static _Context* (*user_handler)(_Event, _Context*) = NULL;
 
 _Context* __am_irq_handle(_Context *c) {
+  //debug
+  for(int i=0;i<32;i++) printf("%d ",c->gpr[i]);
+  printf("\n");
+  printf("lo is %d hi is %d cause is %d status is %d epc is %d\n",c->lo,c->hi,c->cause,c->status,c->epc);
+  //over
   _Context *next = c;
   if (user_handler) {
     _Event ev = {0};
