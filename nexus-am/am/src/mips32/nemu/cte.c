@@ -13,6 +13,7 @@ _Context* __am_irq_handle(_Context *c) {
   if (user_handler) {
     _Event ev = {0};
     uint32_t ex_code = (c->cause>>2)&0x1f;
+    printf("excode is %d\n",ex_code);//debug
     switch (ex_code) {
       case 13: ev.event = _EVENT_YIELD; break; //not correct completely, solve it later
       default: ev.event = _EVENT_ERROR; break;
