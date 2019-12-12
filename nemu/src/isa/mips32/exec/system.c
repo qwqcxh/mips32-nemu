@@ -2,8 +2,17 @@
 
 make_EHelper(syscall){
     rtl_mv(&cpu.epc,&cpu.pc);
-    rtl_ori(&cpu.cause,&cpu.cause,0x20);//set cause.execode
-    rtl_ori(&cpu.status,&cpu.status,0x2);
+    rtl_andi(&cpu.cause,&cpu.cause,0xffffffc3);
+    rtl_andi(&cpu.status,&cpu.status,0xfffffffd);
+    switch(decinfo.isa.instr.val>>6){
+        case 1:
+            rtl_ori(&cpu.cause,&cpu.cause,0x34);
+            rtl_ori(&cpu.status,&cpu.status,0x2);
+            break;
+        default:
+            rtl_ori(&cpu.cause,&cpu.cause,0x20);//set cause.execode
+            rtl_ori(&cpu.status,&cpu.status,0x2);
+    }
     rtl_j(0x80000180);
 }
 
