@@ -63,3 +63,5 @@ make_EHelper(bgtz);
 make_EHelper(syscall);
 make_EHelper(mfc0);
 make_EHelper(mtc0);
+make_EHelper(mtlo);
+make_EHelper(mthi);

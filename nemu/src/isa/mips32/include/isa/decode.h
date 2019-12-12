@@ -92,4 +92,6 @@ make_DHelper(movz);
 make_DHelper(bgtz);
 make_DHelper(mfc0);
 make_DHelper(mtc0);
+make_DHelper(mthi);
+make_DHelper(mtlo);
 #endif

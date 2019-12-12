@@ -26,3 +26,13 @@ make_EHelper(mul){ //mul rd,rs,rt
     rtl_mul_lo(&reg_l(id_dest->reg),&id_src->val,&id_src2->val);
     print_asm("mul %s,%s,%s",id_dest->str,id_src->str,id_src2->str);
 }
+
+make_EHelper(mtlo){ //mtlo rs LO<-GPR[rs]
+    rtl_mv(&cpu.lo,&id_src->val);
+    print_asm("mtlo %s",id_src->str);
+}
+
+make_EHelper(mthi){ //mthi rs HI<-GPR[rs]
+    rtl_mv(&cpu.hi,&id_src->val);
+    print_asm("mthi %s",id_src->str);
+}

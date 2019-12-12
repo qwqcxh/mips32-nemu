@@ -324,3 +324,11 @@ make_DHelper(mtc0){ //mtc0 rt,rd,sel
   decode_op_i(id_src2,decinfo.isa.instr.sel,true);
   decode_op_r(id_dest,decinfo.isa.instr.rt,true);
 }
+
+make_DHelper(mtlo){ //mtlo rs
+  decode_op_r(id_src,decinfo.isa.instr.rs,true);
+}
+
+make_DHelper(mthi){ //mthi rs
+  decode_op_r(id_src,decinfo.isa.instr.rs,true);
+}
