@@ -2,7 +2,7 @@
 
 make_EHelper(syscall){
     rtl_mv(&cpu.epc,&cpu.pc);
-    rtl_andi(&cpu.cause,&cpu.cause,0xffffffc3);
+    rtl_andi(&cpu.cause,&cpu.cause,0xffffff83);
     rtl_andi(&cpu.status,&cpu.status,0xfffffffd);
     switch(decinfo.isa.instr.val>>6){
         case 1:
