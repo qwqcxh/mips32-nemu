@@ -25,7 +25,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     uint32_t p_offset=phdr.p_offset;
     uint32_t p_filesz=phdr.p_filesz;
     uint32_t p_memsz=phdr.p_memsz;
-    uint32_t p_paddr=phdr.p_paddr;
+    void*    p_paddr=(void*)phdr.p_paddr;
     memset((void*)p_paddr,0,p_memsz);
     ramdisk_read((void*)p_paddr,p_offset,p_filesz);
   }
