@@ -87,5 +87,4 @@ make_DHelper(bgez);
 make_DHelper(bltz);
 make_DHelper(movz);
 make_DHelper(bgtz);
-make_DHelper(syscall);
 #endif
