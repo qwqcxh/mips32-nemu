@@ -2,9 +2,10 @@
 #include <assert.h>
 
 int main() {
+  printf("test-1 passed\n"); //debug
   FILE *fp = fopen("/share/texts/num", "r+");
   assert(fp);
-
+  printf("test0 passed\n"); //debug
   fseek(fp, 0, SEEK_END);
   long size = ftell(fp);
   assert(size == 5000);
