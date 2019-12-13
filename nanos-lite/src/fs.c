@@ -25,11 +25,13 @@ size_t invalid_write(const void *buf, size_t offset, size_t len) {
 }
 
 extern size_t serial_write(const void *buf, size_t offset, size_t len);
+extern size_t events_read(void *buf, size_t offset, size_t len) ;
 /* This is the information about all files in disk. */
 static Finfo file_table[] __attribute__((used)) = {
   {"stdin", 0, 0, 0, invalid_read, invalid_write},
   {"stdout", 0, 0, 0, invalid_read, serial_write},
   {"stderr", 0, 0, 0, invalid_read, serial_write},
+  {"/dev/events",0,0,0,events_read, invalid_write},
 #include "files.h"
 };
 
@@ -50,6 +52,7 @@ int fs_open(const char *pathname, int flags, int mode){
 
 extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
 size_t fs_read(int fd, void *buf, size_t len){
+  if(file_table[fd].read) return file_table[fd].read(buf,0,len);
   size_t real_off=file_table[fd].disk_offset + file_table[fd].open_offset;
   ramdisk_read(buf, real_off, len);
   file_table[fd].open_offset+=len;
