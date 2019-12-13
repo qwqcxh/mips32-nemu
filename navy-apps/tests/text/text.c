@@ -8,6 +8,7 @@ int main() {
   printf("test0 passed\n"); //debug
   fseek(fp, 0, SEEK_END);
   long size = ftell(fp);
+  printf("size if %d\n",size);
   assert(size == 5000);
   printf("test1 passed\n");//debug
   fseek(fp, 500 * 5, SEEK_SET);
