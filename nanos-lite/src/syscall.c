@@ -16,7 +16,7 @@ _Context* do_syscall(_Context *c) {
           _putc(p[i]);
         c->GPRx=count;
       }
-      else c->GPRx=0;
+      else c->GPRx=-1;
       break;
     }
     case SYS_exit: _halt(c->GPR2); break;
