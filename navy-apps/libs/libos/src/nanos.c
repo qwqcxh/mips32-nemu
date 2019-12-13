@@ -60,9 +60,9 @@ int _open(const char *path, int flags, mode_t mode) {
 
 int _write(int fd, void *buf, size_t count) {
   intptr_t ret = _syscall_(SYS_write,fd,(intptr_t)buf,count);
-  if(ret!=-1) _exit(0);
-  else _exit(1);
-  return 0;
+  // if(ret!=-1) _exit(0);
+  // else _exit(1);
+  return ret;
 }
 
 void *_sbrk(intptr_t increment) {
