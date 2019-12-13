@@ -22,15 +22,15 @@ _Context* do_syscall(_Context *c) {
     case SYS_close:c->GPRx=fs_close(c->GPR2);break;
     case SYS_lseek:c->GPRx=fs_lseek(c->GPR2,c->GPR3,c->GPR4);break;
     case SYS_write:{
-      int fd=c->GPR2;
-      char* p=(char*)c->GPR3;
-      size_t count = c->GPR4;
-      if(fd==1 || fd == 2){
-        for(int i=0;i<count;i++)
-          _putc(p[i]);
-        c->GPRx=count;
-      }
-      else c->GPRx = fs_write(c->GPR2,(void*)c->GPR3,c->GPR4);
+      // int fd=c->GPR2;
+      // char* p=(char*)c->GPR3;
+      // size_t count = c->GPR4;
+      // if(fd==1 || fd == 2){
+      //   for(int i=0;i<count;i++)
+      //     _putc(p[i]);
+      //   c->GPRx=count;
+      // }
+      c->GPRx = fs_write(c->GPR2,(void*)c->GPR3,c->GPR4);
       break;
     }
     default: panic("Unhandled syscall ID = %d", a[0]);
