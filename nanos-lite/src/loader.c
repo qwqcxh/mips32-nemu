@@ -26,7 +26,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   int ph_offset=elfhdr.e_phoff;
   int ph_num=elfhdr.e_phnum;
   int ph_entry_size=elfhdr.e_phentsize;
-  printf("elf offset %d num %d entry_size %d entry %d\n",ph_offset,ph_num,ph_entry_size,elfhdr.e_entry);
+  // printf("elf offset %d num %d entry_size %d entry %d\n",ph_offset,ph_num,ph_entry_size,elfhdr.e_entry);
   Elf_Phdr phdr;
   for(int i=0;i<ph_num;i++){
     // ramdisk_read(&phdr,ph_offset+i*ph_entry_size,sizeof(Elf_Phdr));
