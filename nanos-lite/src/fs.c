@@ -72,5 +72,6 @@ size_t fs_lseek(int fd, size_t offset, int whence){
   if(whence == SEEK_SET ) file_table[fd].open_offset = offset;
   else if(whence == SEEK_CUR) file_table[fd].open_offset+=offset;
   else file_table[fd].open_offset=file_table[fd].size+offset;
+  printf("lseek location is %d\n",file_table[fd].open_offset);//debug
   return file_table[fd].open_offset;
 }
