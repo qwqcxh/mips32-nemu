@@ -27,6 +27,7 @@ int NDL_OpenDisplay(int w, int h) {
     has_nwm = 0;
   }
 
+  printf("test2 passed\n"); //debug
   if (has_nwm) {
     printf("\033[X%d;%ds", w, h); fflush(stdout);
     evtdev = stdin;
