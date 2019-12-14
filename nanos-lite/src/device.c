@@ -44,6 +44,7 @@ size_t fb_write(const void *buf, size_t offset, size_t len) {
   int height = screen_height();
   int x = offset % (width-1);
   int y = offset / width;
+  printf("x y w h %d %d %d %d\n",x,y,width,height);//debug
   draw_rect((uint32_t*)buf,x,y,width,height);
   return len;
 }
