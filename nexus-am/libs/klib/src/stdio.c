@@ -58,6 +58,8 @@ int vsprintf(char *out, const char *fmt, va_list ap){
         for (int i = 0; i < len; ++i) *str++ = *s++;
         continue;
       }
+      case 'u':
+        flag = 1;
       case 'd':
         num=(unsigned long)va_arg(ap,int);
         break;
