@@ -74,7 +74,7 @@ void *_sbrk(intptr_t increment) {
     addr+=increment;
     return ret;
   }
-  else {printf("bug in sbrk\n");return (void*)-1;}
+  else {printf("bug in sbrk\n");_exit(1);return (void*)-1;}
 }
 
 int _read(int fd, void *buf, size_t count) {
