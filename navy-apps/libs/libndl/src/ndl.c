@@ -27,7 +27,6 @@ int NDL_OpenDisplay(int w, int h) {
     has_nwm = 0;
   }
 
-  printf("test2 passed\n"); //debug
   if (has_nwm) {
     printf("\033[X%d;%ds", w, h); fflush(stdout);
     evtdev = stdin;
@@ -62,7 +61,6 @@ int NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
     }
   } else {
     for (int i = 0; i < h; i ++) {
-      printf("canvas h is %d now\n",i);//debug
       for (int j = 0; j < w; j ++) {
         canvas[(i + y) * canvas_w + (j + x)] = pixels[i * w + j];
       }

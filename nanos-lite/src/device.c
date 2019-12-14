@@ -34,24 +34,20 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   int tail = strlen(dispinfo);
   if(offset >= tail) return 0;
   int ret = len < tail - offset ? len : tail - offset;
-  printf("dispinfo read offset len ret: %u %u %d\n",offset,len,ret);//debug
   memcpy(buf,dispinfo+offset,ret);
   return ret;
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
   int width  = screen_width();
-  int height = screen_height();
   offset/=4;
   int x = offset % width;
   int y = offset / width;
-  printf("x y w h len offset %d %d %d %d %d %u\n",x,y,width,height,len,offset);//debug
   draw_rect((uint32_t*)buf,x,y,len/4,1);
   return len;
 }
 
 size_t fbsync_write(const void *buf, size_t offset, size_t len) {
-  printf("draw sync now\n");//debug
   draw_sync();
   return len;
 }
