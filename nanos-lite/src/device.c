@@ -29,6 +29,7 @@ size_t events_read(void *buf, size_t offset, size_t len) {
     }
     // else return snprintf(buf,len,"t %u\n",uptime());
     else{
+      printf("len is %d\n",len);
       sprintf(buf,"t %u\n\0",uptime());
       printf("come here %s\n",buf);
       return  10;
