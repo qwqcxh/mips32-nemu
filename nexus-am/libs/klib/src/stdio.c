@@ -3,8 +3,18 @@
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
+static char buf[4096];
 int snprintf(char *out, size_t n, const char *fmt, ...) {
-  return 0;
+    va_list args;
+    int num;
+
+    va_start(args, fmt);
+    num = vsprintf(buf, fmt, args);
+    va_end(args);
+
+    if(num>n) {num=n;buf[n-1]='\0';}
+    strcpy(out,buf);
+    return num;  
 }
 
 
