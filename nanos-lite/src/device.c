@@ -65,5 +65,5 @@ void init_device() {
   // fs_lseek(fd,0,SEEK_SET);
   // fs_read(fd,dispinfo,sz);
   // fs_close(fd);
-  sprintf(dispinfo,"WIDTH:%d\nHEIGHT:%d\n",screen_width(),screen_height());
+  sprintf(dispinfo,"WIDTH:%d\nHEIGHT:%d\n\0",screen_width(),screen_height());
 }
