@@ -37,7 +37,7 @@ static Finfo file_table[] __attribute__((used)) = {
   {"/dev/events",0,0,0,events_read, invalid_write},
   {"/dev/fb", 0, 0 ,0 ,invalid_read, fb_write},
   {"/dev/fbsync", 0 , 0 , 0 , invalid_read, fbsync_write},
-  {"/proc/dispinfo", 21 ,0 ,0 , dispinfo_read , invalid_write},
+  {"/proc/dispinfo", 0 ,0 ,0 , dispinfo_read , invalid_write},
 #include "files.h"
 };
 
@@ -60,10 +60,11 @@ int fs_open(const char *pathname, int flags, int mode){
 extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
 size_t fs_read(int fd, void *buf, size_t len){
   size_t real_off=file_table[fd].disk_offset + file_table[fd].open_offset;
-  if(file_table[fd].read) file_table[fd].read(buf,0,len);
-  else ramdisk_read(buf, real_off, len);
-  file_table[fd].open_offset+=len;
-  return len;
+  size_t ret;
+  if(file_table[fd].read) ret = file_table[fd].read(buf,0,len);
+  else ret = ramdisk_read(buf, real_off, len);
+  file_table[fd].open_offset+=ret;
+  return ret;
 }
 
 extern size_t ramdisk_write(const void *buf, size_t offset, size_t len);
