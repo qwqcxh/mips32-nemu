@@ -46,7 +46,7 @@ size_t fb_write(const void *buf, size_t offset, size_t len) {
   int x = offset % width;
   int y = offset / width;
   printf("x y w h len offset %d %d %d %d %d %u\n",x,y,width,height,len,offset);//debug
-  draw_rect((uint32_t*)buf,x,y,4,4);
+  draw_rect((uint32_t*)buf,x,y,len/4,1);
   return len;
 }
 
