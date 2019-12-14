@@ -29,7 +29,7 @@
 # define FB_ADDR      0xa0000000
 #endif
 
-#define PMEM_SIZE (128 * 1024 * 1024)
+#define PMEM_SIZE (512 * 1024 * 1024)
 #define PGSIZE    4096
 
 #define MMIO_BASE 0xa0000000
