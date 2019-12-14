@@ -18,7 +18,7 @@ static char* number(char* str,unsigned long num,int base,int flag){
     *str++='0';
     return str;
   }
-  if(flag) {
+  if(flag==0&&(int)num < 0) {
     *str++ = '-';
     num = -(int)num;
   }
