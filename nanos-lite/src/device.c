@@ -55,21 +55,11 @@ size_t fbsync_write(const void *buf, size_t offset, size_t len) {
   return len;
 }
 
-// extern int fs_open(const char *pathname, int flags, int mode);
-// extern size_t fs_read(int fd, void *buf, size_t len);
-// extern size_t fs_lseek(int fd, size_t offset, int whence);
-// extern int fs_close(int fd);
-
 void init_device() {
   Log("Initializing devices...");
   _ioe_init();
 
   // TODO: print the string to array `dispinfo` with the format
   // described in the Navy-apps convention
-  // int fd = fs_open("/proc/dispinfo",0,0);
-  // int sz = fs_lseek(fd,0,SEEK_END);
-  // fs_lseek(fd,0,SEEK_SET);
-  // fs_read(fd,dispinfo,sz);
-  // fs_close(fd);
   sprintf(dispinfo,"WIDTH:%d\nHEIGHT:%d\n\0",screen_width(),screen_height());
 }
