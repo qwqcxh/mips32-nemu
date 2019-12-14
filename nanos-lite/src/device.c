@@ -24,7 +24,8 @@ size_t events_read(void *buf, size_t offset, size_t len) {
     if (key != _KEY_NONE) {
       printf("%s %s\n",down ? "kd" : "ku" ,keyname[key]);//debug
       ((char*)buf)[0]='\n';
-      return snprintf(buf,len,"%s %s\n", down ? "kd" : "ku" , keyname[key]);
+      return 1;
+      // return snprintf(buf,len,"%s %s\n", down ? "kd" : "ku" , keyname[key]);
     }
     else return snprintf(buf,len,"t %u\n",uptime());
 }
