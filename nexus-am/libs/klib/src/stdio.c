@@ -9,10 +9,18 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {
 
 
 #define is_digit(x) ((x)>='0' && (x) <= '9')
-static char* number(char* str,unsigned long num,int base){
+static char* number(char* str,unsigned long num,int base,int flag){
+  if(base == 16){
+    *str++ = '0';
+    *str++ = 'x';
+  }
   if(num==0) { //special case
     *str++='0';
     return str;
+  }
+  if(flag) {
+    *str++ = '-';
+    num = -(int)num;
   }
   char tmp[100];
   int i=0;
@@ -32,15 +40,15 @@ static char* number(char* str,unsigned long num,int base){
 int vsprintf(char *out, const char *fmt, va_list ap){
   char *str;
   for (str = out; *fmt; fmt++){
-    int base = 10; //default base if 10
     if (*fmt != '%'){ //regular character
       *str++ = *fmt;
       continue;
     }
     fmt++;//skip '%'
     /* Default base */
-    base = 10;
+    int base = 10;
     unsigned long num=-1;
+    int flag=0;//0->signed 1->unsigned
     switch (*fmt){
       case 's':{
         int len;
@@ -50,11 +58,16 @@ int vsprintf(char *out, const char *fmt, va_list ap){
         for (int i = 0; i < len; ++i) *str++ = *s++;
         continue;
       }
-      case 'd':{
+      case 'd':
         num=(unsigned long)va_arg(ap,int);
-      }
+        break;
+      case 'x':
+        num=(unsigned long)va_arg(ap,unsigned);
+        base = 16;
+        flag = 1;
+        break;
     }
-    str = number(str, num, base);
+    str = number(str, num, base ,flag);
   }
   *str = '\0';
   return str - out;
