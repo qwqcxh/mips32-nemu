@@ -27,8 +27,12 @@ size_t events_read(void *buf, size_t offset, size_t len) {
       return 1;
       // return snprintf(buf,len,"%s %s\n", down ? "kd" : "ku" , keyname[key]);
     }
-    //else return snprintf(buf,len,"t %u\n",uptime());
-    else {((char*)buf)[0]='\n';return 1;}
+    // else return snprintf(buf,len,"t %u\n",uptime());
+    else{
+      snprintf(buf,len,"t %u\n\0",uptime());
+      printf("come here %s\n",buf);
+      return  10;
+    }
 }
 
 static char dispinfo[128] __attribute__((used)) = {};
