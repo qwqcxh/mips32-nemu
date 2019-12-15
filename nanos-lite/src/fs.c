@@ -59,20 +59,30 @@ int fs_open(const char *pathname, int flags, int mode){
 
 extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
 size_t fs_read(int fd, void *buf, size_t len){
-  size_t real_off=file_table[fd].disk_offset + file_table[fd].open_offset;
+  size_t real_off= file_table[fd].disk_offset + file_table[fd].open_offset;
+  size_t file_sz = file_table[fd].size ;
   size_t ret;
   if(file_table[fd].read) ret = file_table[fd].read(buf,real_off,len);
-  else ret = ramdisk_read(buf, real_off, len);
+  else {
+    size_t maxread = file_sz - file_table[fd].open_offset;
+    ret = len < maxread ? len : maxread ;
+    ramdisk_read(buf, real_off, ret);
+  }
   file_table[fd].open_offset+=ret;
   return ret;
 }
 
 extern size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 size_t fs_write(int fd, const void *buf, size_t len){
-  size_t real_off=file_table[fd].disk_offset + file_table[fd].open_offset;
+  size_t real_off= file_table[fd].disk_offset + file_table[fd].open_offset;
+  size_t file_sz = file_table[fd].size;
   size_t ret;
   if(file_table[fd].write) ret = file_table[fd].write(buf,real_off,len);
-  else ret = ramdisk_write(buf, real_off, len); 
+  else {
+    size_t maxwrite = file_sz - file_table[fd].open_offset;
+    ret = len < maxwrite ? len : maxwrite ;
+    ret = ramdisk_write(buf, real_off, len); 
+  }
   file_table[fd].open_offset+=ret;
   return ret;
 }
