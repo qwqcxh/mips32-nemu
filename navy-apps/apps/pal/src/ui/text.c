@@ -112,7 +112,7 @@ PAL_InitText(
    // Read the words
    //
    g_TextLib.lpWordBuf = (LPBYTE)malloc(i);
-   printf("i is %u and first word is %x\n",i,*(uint32_t*)g_TextLib.lpWordBuf);//debug
+
    if (g_TextLib.lpWordBuf == NULL)
    {
       fclose(fpWord);
@@ -121,7 +121,9 @@ PAL_InitText(
    }
    fseek(fpWord, 0, SEEK_SET);
    fread(g_TextLib.lpWordBuf, i, 1, fpWord);
-
+   //debug
+   for(int k=0;k<i;k+=4)
+      printf("%x ",((uint32_t*)g_TextLib.lpWordBuf)[k]);//debug
    //
    // Close the words file
    //
