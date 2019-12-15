@@ -112,6 +112,7 @@ PAL_InitText(
    // Read the words
    //
    g_TextLib.lpWordBuf = (LPBYTE)malloc(i);
+   printf("i is %u and first word is %x\n",i,*(uint32_t*)g_TextLib.lpWordBuf);//debug
    if (g_TextLib.lpWordBuf == NULL)
    {
       fclose(fpWord);
@@ -247,6 +248,7 @@ PAL_GetWord(
       return NULL;
    }
 
+   printf("come here 1\n");//debug
    memcpy(buf, &g_TextLib.lpWordBuf[wNumWord * WORD_LENGTH], WORD_LENGTH);
    buf[WORD_LENGTH] = '\0';
 
