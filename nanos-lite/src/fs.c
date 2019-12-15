@@ -75,11 +75,11 @@ size_t fs_read(int fd, void *buf, size_t len){
     size_t maxread = file_sz - file_table[fd].open_offset;
     ret = len < maxread ? len : maxread ;
     ramdisk_read(buf, real_off, ret);
-    if(fd==58) {
-      printf("read word.dat!!!!!!!!!\n");
-      for(int k=0;k<ret;k+=4)
-        printf("%x ",((uint32_t*)buf)[k]);//debug
-    }
+    // if(fd==58) {
+    //   printf("read word.dat!!!!!!!!!\n");
+    //   for(int k=0;k<ret;k+=4)
+    //     printf("%x ",((uint32_t*)buf)[k]);//debug
+    // }
   }
   file_table[fd].open_offset+=ret;
   return ret;
