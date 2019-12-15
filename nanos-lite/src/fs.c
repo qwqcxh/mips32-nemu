@@ -73,7 +73,7 @@ size_t fs_read(int fd, void *buf, size_t len){
     if(fd==58) {
       printf("read word.dat!!!!!!!!!\n");
       for(int k=0;k<ret;k+=4)
-        printf("0x%x ",((uint32_t*)buf)[k]);//debug
+        printf("%x ",((uint32_t*)buf)[k]);//debug
     }
   }
   file_table[fd].open_offset+=ret;
