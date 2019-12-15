@@ -248,7 +248,7 @@ PAL_GetWord(
       return NULL;
    }
 
-   printf("come here 1\n");//debug
+   printf("come here wNumword is %d\n",wNumWord);//debug
    memcpy(buf, &g_TextLib.lpWordBuf[wNumWord * WORD_LENGTH], WORD_LENGTH);
    buf[WORD_LENGTH] = '\0';
 
