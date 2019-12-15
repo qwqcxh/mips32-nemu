@@ -70,7 +70,7 @@ void* memset(void* v,int c,size_t n) {
 void* memcpy(void* out, const void* in, size_t n) {
   for(size_t i=0;i<n;i++)
     ((char*)out)[i]=((char*)in)[i];
-  if((uint32_t)in == 0x81cb039f){
+  if((uint32_t)in == 0x81cb039){
     printf("memcpy %x %x\n",((uint32_t*)in)[255],((uint32_t*)out)[255]);
   }
   return out;
