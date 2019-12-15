@@ -14,7 +14,7 @@ size_t ramdisk_read(void *buf, size_t offset, size_t len) {
   assert(offset + len <= RAMDISK_SIZE);
   memcpy(buf, &ramdisk_start + offset, len);
   if(offset == 29019871){
-    printf("debug here and last val %x and &ramdis_start+offset is %x",*(uint32_t*)(&ramdisk_start + offset + len-8),&ramdisk_start+offset);
+    printf("debug here and last val %x and &ramdis_start+offset is %x\n",*(uint32_t*)(&ramdisk_start + offset + len-8),&ramdisk_start+offset);
     for(int k=0;k<len;k+=4)
       printf("%x ",((uint32_t*)buf)[k]);
   }
