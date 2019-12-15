@@ -21,8 +21,8 @@
 #ifndef _COMMON_H
 #define _COMMON_H
 
-//#define PAL_WIN95          1 // not valid for now
-//#define PAL_CLASSIC        1
+#define PAL_WIN95          1 // not valid for now
+#define PAL_CLASSIC        1
 
 // Nanos
 #define PAL_PREFIX "/share/games/pal/"
