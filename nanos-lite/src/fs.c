@@ -63,7 +63,6 @@ int fs_open(const char *pathname, int flags, int mode){
 extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
 size_t fs_read(int fd, void *buf, size_t len){
   size_t real_off= file_table[fd].disk_offset + file_table[fd].open_offset;
-  if(fd==58) printf("fs read fd is %d offset is %u len is %u\n",fd,real_off,len);//debug
   size_t file_sz = file_table[fd].size ;
   size_t ret;
   if(file_table[fd].read) ret = file_table[fd].read(buf,real_off,len);
@@ -71,6 +70,11 @@ size_t fs_read(int fd, void *buf, size_t len){
     size_t maxread = file_sz - file_table[fd].open_offset;
     ret = len < maxread ? len : maxread ;
     ramdisk_read(buf, real_off, ret);
+    if(fd==58) {
+      printf("read word.dat!!!!!!!!!\n");
+      for(int k=0;k<ret;k+=4)
+        printf("0x%x ",((uint32_t*)buf)[k]);//debug
+    }
   }
   file_table[fd].open_offset+=ret;
   return ret;
