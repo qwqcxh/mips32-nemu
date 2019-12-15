@@ -47,6 +47,11 @@ static Finfo file_table[] __attribute__((used)) = {
 void init_fs() {
   // TODO: initialize the size of /dev/fb
   file_table[4].size = screen_height()*screen_width();
+  for(int i=8;i<NR_FILES;i++){
+    file_table[i].open_offset = 0;
+    file_table[i].read = NULL;
+    file_table[i].write = NULL;
+  }
 }
 
 /***********work**************/
