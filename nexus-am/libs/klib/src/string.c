@@ -68,12 +68,12 @@ void* memset(void* v,int c,size_t n) {
 }
 
 void* memcpy(void* out, const void* in, size_t n) {
-  for(size_t i=0;i<n;i++){
+  for(size_t i=0;i<n;i++)
     ((char*)out)[i]=((char*)in)[i];
+  for(size_t i=0;i<n;i++)
     if(i%4==0){
       printf("i %d memcpy debug: %x %x\n",i,((uint32_t*)in)[i/4],((uint32_t*)out)[i/4]);
     }
-  }
   return out;
 }
 
