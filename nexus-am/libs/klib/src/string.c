@@ -70,10 +70,10 @@ void* memset(void* v,int c,size_t n) {
 void* memcpy(void* out, const void* in, size_t n) {
   char* p = (char*)in;
   char* q = (char*)out;
-  for(size_t i=0;i<n;i++){    
+  for(size_t i=0;i<n;i++)
     q[i]=p[i];
+  for(size_t i=0;i<n;i++) //debug
     if(i%4==0) printf("mymemcpy debug %x %x\n",((uint32_t*)in)[i/4],((uint32_t*)out)[i/4]);
-  }
   return out;
 }
 
