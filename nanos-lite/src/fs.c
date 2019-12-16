@@ -82,6 +82,7 @@ size_t fs_read(int fd, void *buf, size_t len){
     //     printf("%x ",((uint32_t*)buf)[k]);//debug
     // }
   }
+  printf("ret is %u\n",ret);//debug
   file_table[fd].open_offset+=ret;
   return ret;
 }
