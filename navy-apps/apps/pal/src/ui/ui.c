@@ -429,8 +429,6 @@ PAL_ReadMenu(
          }
       }
 
-      //debug
-      // printf("%s\n",PAL_GetWord(rgMenuItem[i].wNumWord)); //debug
       PAL_DrawText(PAL_GetWord(rgMenuItem[i].wNumWord), rgMenuItem[i].pos,
          bColor, TRUE, TRUE);
    }
