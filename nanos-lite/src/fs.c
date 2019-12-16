@@ -108,7 +108,7 @@ int fs_close(int fd){
 }
 
 size_t fs_lseek(int fd, size_t offset, int whence){
-  if(fd==63) printf("lseek offset %u whence %d\n",offset,whence); //debug
+  // if(fd==63) printf("lseek offset %u whence %d\n",offset,whence); //debug
   if(whence == SEEK_SET ) file_table[fd].open_offset = offset;
   else if(whence == SEEK_CUR) file_table[fd].open_offset+=offset;
   else file_table[fd].open_offset=file_table[fd].size+offset;
