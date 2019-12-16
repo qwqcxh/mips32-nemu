@@ -52,7 +52,7 @@ int main() {
 	// nemu_assert(strcmp( strcat(strcpy(str, str1), s[3]), s[4]) == 0);
 
 	// nemu_assert(memcmp(memset(str, '#', 5), s[5], 5) == 0);
-	memcpy(cpy2,cpy1+4,12);
+	memcpy(cpy2,cpy1+5,11);
 	printf("%s\n",cpy2);
 	return 0;
 }
