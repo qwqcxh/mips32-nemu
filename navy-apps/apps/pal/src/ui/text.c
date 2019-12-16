@@ -249,7 +249,7 @@ PAL_GetWord(
 
    //debug
    char* tmp = &g_TextLib.lpWordBuf[wNumWord * WORD_LENGTH];
-   puts("before memcpy addr %x:\n",tmp);
+   printf("before memcpy addr %x:\n",tmp);
    for(int i=0;i<WORD_LENGTH;i++) printf("%x ",tmp[i]);
    printf("\n");
 
@@ -257,7 +257,7 @@ PAL_GetWord(
    buf[WORD_LENGTH] = '\0';
  
    //debug
-   puts("after memcpy:\n");
+   printf("after memcpy:\n");
    for(int i=0;i<WORD_LENGTH;i++) printf("%x ",buf[i]);
    printf("\n");
    
