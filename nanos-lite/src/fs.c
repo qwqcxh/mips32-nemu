@@ -68,7 +68,6 @@ int fs_open(const char *pathname, int flags, int mode){
 extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
 size_t fs_read(int fd, void *buf, size_t len){
   size_t real_off= file_table[fd].disk_offset + file_table[fd].open_offset;
-  // printf("fd %d real_off %u open_off %u \n",fd,real_off,file_table[fd].open_offset);//debug
   size_t file_sz = file_table[fd].size ;
   size_t ret;
   if(file_table[fd].read) ret = file_table[fd].read(buf,real_off,len);
@@ -76,14 +75,8 @@ size_t fs_read(int fd, void *buf, size_t len){
     size_t maxread = file_sz - file_table[fd].open_offset;
     ret = len < maxread ? len : maxread ;
     ramdisk_read(buf, real_off, ret);
-    // if(fd==58) {
-    //   printf("read word.dat!!!!!!!!!\n");
-    //   for(int k=0;k<ret;k+=4)
-    //     printf("%x ",((uint32_t*)buf)[k]);//debug
-    // }
   }
   file_table[fd].open_offset+=ret;
-  // printf("new offset %u\n",file_table[fd].open_offset);//debug
   return ret;
 }
 
@@ -108,7 +101,6 @@ int fs_close(int fd){
 }
 
 size_t fs_lseek(int fd, size_t offset, int whence){
-  // if(fd==63) printf("lseek offset %u whence %d\n",offset,whence); //debug
   if(whence == SEEK_SET ) file_table[fd].open_offset = offset;
   else if(whence == SEEK_CUR) file_table[fd].open_offset+=offset;
   else file_table[fd].open_offset=file_table[fd].size+offset;
