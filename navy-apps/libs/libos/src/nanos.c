@@ -69,6 +69,7 @@ void *_sbrk(intptr_t increment) {
   if(_syscall_(SYS_brk,(intptr_t)(addr+increment),0,0)==0){
     char* ret=addr;
     addr+=increment;
+    printf("sbrk addr is %x",ret);//debug
     return ret;
   }
   else return (void*)-1;
