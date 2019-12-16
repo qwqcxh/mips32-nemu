@@ -72,7 +72,7 @@ void* memcpy(void* out, const void* in, size_t n) {
   char* q = (char*)out;
   for(size_t i=0;i<n;i++){    
     q[i]=p[i];
-    if((uint32_t)in == 0x81cb04af){
+    if((uint32_t)in == 0x81cb04cf){
       printf("n is %u  %x %x\n",n,((char*)p)[i],((char*)q)[i]);
       printf("output by word %x %x\n",((uint32_t*)p)[i],((uint32_t*)q)[i]);
       printf("out addr is %x\n",out);
