@@ -68,7 +68,7 @@ int fs_open(const char *pathname, int flags, int mode){
 extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
 size_t fs_read(int fd, void *buf, size_t len){
   size_t real_off= file_table[fd].disk_offset + file_table[fd].open_offset;
-  printf("fd %d real_off %u open_off %u \n",fd,real_off,file_table[fd].open_offset);//debug
+  // printf("fd %d real_off %u open_off %u \n",fd,real_off,file_table[fd].open_offset);//debug
   size_t file_sz = file_table[fd].size ;
   size_t ret;
   if(file_table[fd].read) ret = file_table[fd].read(buf,real_off,len);
@@ -83,7 +83,7 @@ size_t fs_read(int fd, void *buf, size_t len){
     // }
   }
   file_table[fd].open_offset+=ret;
-  printf("new offset %u\n",file_table[fd].open_offset);//debug
+  // printf("new offset %u\n",file_table[fd].open_offset);//debug
   return ret;
 }
 
