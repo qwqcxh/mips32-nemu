@@ -23,6 +23,12 @@ make_EHelper(st) {
   }
 }
 
+make_EHelper(lb){ //lb rt,offset(rs)
+  rtl_lm(&s0,&id_src->addr,decinfo.width);
+  rtl_sext(&reg_l(id_dest->reg),&s0,decinfo.width);
+  print_asm("lb %s,%s",id_dest->str,id_src->str);
+}
+
 make_EHelper(lbu) { //lbu rt,offset(rs)
   rtl_lm(&reg_l(id_dest->reg),&id_src->addr,decinfo.width);
   print_asm("lbu %s,%s",id_dest->str,id_src->str);
@@ -88,9 +94,4 @@ make_EHelper(swr){ //swr rt,offset(rs)
   int bytes=4-(id_src->addr&3);
   rtl_sm(&id_src->addr,&id_dest->val,bytes);
   print_asm("swr %s,%s",id_dest->str,id_src->str);
-}
-
-make_EHelper(lb){ //lb rt,offset(rs)
-  rtl_lm(&reg_l(id_dest->reg),&id_src->addr,decinfo.width);
-  print_asm("lb %s,%s",id_dest->str,id_src->str);
 }
