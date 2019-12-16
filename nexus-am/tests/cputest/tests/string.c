@@ -53,6 +53,6 @@ int main() {
 
 	// nemu_assert(memcmp(memset(str, '#', 5), s[5], 5) == 0);
 	memcpy(cpy2+1,((char*)cpy1)+3,10);
-	for(int i=0;i<10;i++) printf("%x ",((char*)cpy2)[i+1]);
+	for(int i=0;i<10;i++) printf("%x ",((char*)cpy2)[i+3]);
 	return 0;
 }
