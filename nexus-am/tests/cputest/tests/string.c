@@ -25,6 +25,6 @@ int main() {
 
 	// nemu_assert(memcmp(memset(str, '#', 5), s[5], 5) == 0);
 	memcpy(cpy2,cpy1+4,12);
-	printf(cpy2);
+	printf("%s\n",cpy2);
 	return 0;
 }
