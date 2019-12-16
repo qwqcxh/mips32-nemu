@@ -16,9 +16,9 @@ size_t ramdisk_read(void *buf, size_t offset, size_t len) {
   //memcpy(buf, &ramdisk_start + offset, len);
   char* q = (char*)buf;
   char* p = (char*)(&ramdisk_start+offset);
-  for(int i=0;i<len*4;i++) q[i]=p[i];//debug
+  for(int i=0;i<len;i++) q[i]=p[i];//debug
   if(offset == 29019871){
-    printf("debug here and last val %x and &ramdis_start+offset is %x\n",*(uint32_t*)(buf+len-8),&ramdisk_start+offset);
+    printf("debug here and last val %x and &ramdis_start+offset is %x\n",*(uint32_t*)(buf+len-4),&ramdisk_start+offset);
     for(int k=0;k<len;k+=4)
       printf("[%x %x] ",(*(uint32_t*)(buf+k*4)),((uint32_t*)(&ramdisk_start+offset))[k]);
   }
