@@ -64,12 +64,14 @@ int _write(int fd, void *buf, size_t count) {
 }
 
 extern char end;
+char debug[100];
 void *_sbrk(intptr_t increment) {
   static char* addr=&end;
   if(_syscall_(SYS_brk,(intptr_t)(addr+increment),0,0)==0){
     char* ret=addr;
     addr+=increment;
-    printf("sbrk addr is %x\n",(uint32_t)ret);//debug
+    sprintf(debug,"sbrk addr is %x\n",(uint32_t)ret);//debug
+    _write(1,debug,strlen(debug)); //debug
     return ret;
   }
   else return (void*)-1;
