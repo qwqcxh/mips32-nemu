@@ -70,9 +70,9 @@ void* memset(void* v,int c,size_t n) {
 void* memcpy(void* out, const void* in, size_t n) {
   char* p = (char*)in;
   char* q = (char*)out;
-  for(size_t i=0;i<n;i+=4){    
+  for(size_t i=0;i<n;i++){    
     q[i]=p[i];
-    if((uint32_t)in == 0x81cb044f){
+    if((uint32_t)in == 0x81cb044f && i%4==0){
       printf("n is %u  %x %x\n",n,((uint32_t*)in)[i],((uint32_t*)out)[i]);
     }
   }
