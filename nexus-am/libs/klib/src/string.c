@@ -73,7 +73,7 @@ void* memcpy(void* out, const void* in, size_t n) {
   for(size_t i=0;i<n;i++){    
     q[i]=p[i];
     if((uint32_t)in == 0x81cb047f && i%4==0){
-      printf("n is %u  %x %x\n",n,((uint32_t*)in)[i],((uint32_t*)out)[i]);
+      printf("n is %u  %x %x\n",n,((uint32_t*)in)[i],((uint32_t*)q)[i]);
     }
   }
     // ((char*)out)[i]=((char*)in)[i];
