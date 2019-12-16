@@ -19,7 +19,7 @@ size_t ramdisk_read(void *buf, size_t offset, size_t len) {
   if(offset == 29019871){
     for(int i=0;i<len/4;i++) q[i]=0xffffffff;//debug
     printf("debug here and last val %x and &ramdis_start+offset is %x\n",*(uint32_t*)(buf+len-4),&ramdisk_start+offset);
-    for(int k=0;k<len;k+=4)
+    for(int k=0;k<len/4;k++)
       printf("[%x %x] ",(*(uint32_t*)(buf+k*4)),((uint32_t*)(&ramdisk_start+offset))[k]);
   }
   return len;
