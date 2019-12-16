@@ -16,11 +16,11 @@ size_t ramdisk_read(void *buf, size_t offset, size_t len) {
   memcpy(buf, &ramdisk_start + offset, len);
   // uint32_t* q = (uint32_t*)buf;
   // uint32_t* p = (uint32_t*)(&ramdisk_start+offset);
-  if((offset - 29019871)%1024 == 0){
-    printf("debug here and last val %x and &ramdis_start+offset is %x\n",*(uint32_t*)(buf+len-4),&ramdisk_start+offset);
-    for(int k=0;k<len/4;k++)
-      printf("[%x %x] ",(*(uint32_t*)(buf+k*4)),((uint32_t*)(&ramdisk_start+offset))[k]);
-  }
+  // if((offset - 29019871)%1024 == 0){
+  //   printf("debug here and last val %x and &ramdis_start+offset is %x\n",*(uint32_t*)(buf+len-4),&ramdisk_start+offset);
+  //   for(int k=0;k<len/4;k++)
+  //     printf("[%x %x] ",(*(uint32_t*)(buf+k*4)),((uint32_t*)(&ramdisk_start+offset))[k]);
+  // }
   return len;
 }
 
