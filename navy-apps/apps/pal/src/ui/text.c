@@ -122,9 +122,9 @@ PAL_InitText(
    fseek(fpWord, 0, SEEK_SET);
    fread(g_TextLib.lpWordBuf, i, 1, fpWord);
    //debug
-   printf("get lpwordbuf info\n");//deubg
-   for(int k=0;k<i/4;k++)
-      printf("%x ",((uint32_t*)g_TextLib.lpWordBuf)[k]);//debug
+   // printf("get lpwordbuf info\n");//deubg
+   // for(int k=0;k<i/4;k++)
+   //    printf("%x ",((uint32_t*)g_TextLib.lpWordBuf)[k]);//debug
    
    // Close the words file
    //
@@ -252,9 +252,12 @@ PAL_GetWord(
    }
 
    printf("come here wNumword is %d\n",wNumWord);//debug
+   char* tmp = &g_TextLib.lpWordBuf[wNumWord * WORD_LENGTH];
+   printf("before memcpy:");
+   for(int i=0;i<WORD_LENGTH;i++) printf("buf[%d]=%x ",i,tmp[i]);//debug
+   printf("\n");
    memcpy(buf, &g_TextLib.lpWordBuf[wNumWord * WORD_LENGTH], WORD_LENGTH);
    buf[WORD_LENGTH] = '\0';
-   for(int i=0;i<WORD_LENGTH;i++) printf("buf[%d]=%x ",i,buf[i]);//debug
    //
    // Remove the trailing spaces
    //
