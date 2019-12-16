@@ -13,11 +13,11 @@ extern uint8_t ramdisk_end;
 size_t ramdisk_read(void *buf, size_t offset, size_t len) {
   //printf("offset is %u and len is %u\n",offset,len);//debug
   assert(offset + len <= RAMDISK_SIZE);
-  //memcpy(buf, &ramdisk_start + offset, len);
+  memcpy(buf, &ramdisk_start + offset, len);
   uint32_t* q = (uint32_t*)buf;
   // uint32_t* p = (uint32_t*)(&ramdisk_start+offset);
-  for(int i=0;i<len/4;i++) q[i]=0xffffffff;//debug
   if(offset == 29019871){
+    for(int i=0;i<len/4;i++) q[i]=0xffffffff;//debug
     printf("debug here and last val %x and &ramdis_start+offset is %x\n",*(uint32_t*)(buf+len-4),&ramdisk_start+offset);
     for(int k=0;k<len;k+=4)
       printf("[%x %x] ",(*(uint32_t*)(buf+k*4)),((uint32_t*)(&ramdisk_start+offset))[k]);
