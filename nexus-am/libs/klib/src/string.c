@@ -70,12 +70,13 @@ void* memset(void* v,int c,size_t n) {
 void* memcpy(void* out, const void* in, size_t n) {
   char* p = (char*)in;
   char* q = (char*)out;
-  for(size_t i=0;i<n;i++)
+  for(size_t i=0;i<n;i++){    
     q[i]=p[i];
-    // ((char*)out)[i]=((char*)in)[i];
-  if((uint32_t)in == 0x81cb042f){
-    printf("n is %u memcpy %x %x\n",n,((uint32_t*)in)[255],((uint32_t*)out)[255]);
+    if((uint32_t)in == 0x81cb042f){
+      printf("n is %u  %x %x\n",n,((char*)in)[i],((char*)out)[i]);
+    }
   }
+    // ((char*)out)[i]=((char*)in)[i];
   return out;
 }
 
