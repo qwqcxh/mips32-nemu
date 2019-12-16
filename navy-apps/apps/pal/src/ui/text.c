@@ -247,7 +247,9 @@ PAL_GetWord(
       return NULL;
    }
 
-   memcpy(buf, &g_TextLib.lpWordBuf[wNumWord * WORD_LENGTH], WORD_LENGTH);
+   // memcpy(buf, &g_TextLib.lpWordBuf[wNumWord * WORD_LENGTH], WORD_LENGTH);
+   char* tmp = &g_TextLib.lpWordBuf[wNumWord * WORD_LENGTH];
+   for(int i=0;i<WORD_LENGTH;i++) buf[i]= tmp[i];
    buf[WORD_LENGTH] = '\0';
 
    //
