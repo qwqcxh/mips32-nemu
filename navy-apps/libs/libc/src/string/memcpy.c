@@ -99,7 +99,6 @@ memcpy (void *__restrict dst0,
 
   while (len0--)
     *dst++ = *src++;
-  printf("in memcpy now !!!!!!!!!!\n");//debug
   return dst0;
 #endif /* not PREFER_SIZE_OVER_SPEED */
 }
