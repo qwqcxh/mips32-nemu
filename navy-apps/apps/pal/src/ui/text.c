@@ -112,7 +112,6 @@ PAL_InitText(
    // Read the words
    //
    g_TextLib.lpWordBuf = (LPBYTE)malloc(i);
-
    if (g_TextLib.lpWordBuf == NULL)
    {
       fclose(fpWord);
@@ -122,6 +121,7 @@ PAL_InitText(
    fseek(fpWord, 0, SEEK_SET);
    fread(g_TextLib.lpWordBuf, i, 1, fpWord);
 
+   //
    // Close the words file
    //
    fclose(fpWord);
