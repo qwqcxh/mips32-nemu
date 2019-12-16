@@ -40,7 +40,7 @@ char *s[] = {
 char str1[] = "Hello";
 char str[20];
 
-char cpy1[] ={0xb6,0x69,0xab,0xd7,0xa4,0xad,0x20,0x20,0x20,0x20};
+char cpy1[] ={0xaa,0xb6,0x69,0xab,0xd7,0xa4,0xad,0x20,0x20,0x20,0x20};
 unsigned cpy2[100];
 int main() {
 	// nemu_assert(strcmp(s[0], s[2]) == 0);
@@ -52,7 +52,7 @@ int main() {
 	// nemu_assert(strcmp( strcat(strcpy(str, str1), s[3]), s[4]) == 0);
 
 	// nemu_assert(memcmp(memset(str, '#', 5), s[5], 5) == 0);
-	memcpy(cpy2,((char*)cpy1),10);
+	memcpy(cpy2,((char*)cpy1)+1,10);
 	for(int i=0;i<10;i++) printf("%x ",((char*)cpy2)[i]);
 	return 0;
 }
