@@ -11,7 +11,7 @@ void (*ref_difftest_exec)(uint64_t n) = NULL;
 
 static bool is_skip_ref = false;
 static int skip_dut_nr_instr = 0;
-static bool is_detach = false;
+static bool is_detach = true;
 
 // this is used to let ref skip instructions which
 // can not produce consistent behavior with NEMU
@@ -93,8 +93,8 @@ static void checkregs(CPU_state *ref, vaddr_t pc) {
 
 void difftest_step(vaddr_t ori_pc, vaddr_t next_pc) {
   CPU_state ref_r;
-
-  if (is_detach||ori_pc < 0x83027ef0) return;
+  if(ori_pc == 0x83027ef0) is_detach = false;
+  if (is_detach) return;
 
   uint32_t opcode=decinfo.isa.instr.opcode;
   uint32_t func=decinfo.isa.instr.func;
