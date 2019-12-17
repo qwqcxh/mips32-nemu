@@ -98,7 +98,8 @@ void difftest_step(vaddr_t ori_pc, vaddr_t next_pc) {
   if((uint32_t)cpu.pc == 0x83027f00) { //debug
     //difftest_attach();
     char *mainargs = (char*)0x830000f0;
-    ref_difftest_memcpy_from_dut(0x830000f0, mainargs, 0x2efdc);
+    printf("%x!!!!!!!!!!!\n",*(uint32_t*)mainargs);
+    //ref_difftest_memcpy_from_dut(0x830000f0, mainargs, 0x2efdc);
     ref_difftest_setregs(&cpu);
     is_detach =  false;
     return;
