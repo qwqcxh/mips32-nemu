@@ -11,7 +11,7 @@ int main() {
 
 		x = *((volatile unsigned*)(buf + 1));
 		nemu_assert(x == 0x8899ccdd);
-		x = *((volatile unsigned*)(buf + 7));
+		x = *((volatile unsigned*)(buf + 3));
 		nemu_assert(x == 0x66778899);
 		buf[0] = buf[1] = 0;
 	}
