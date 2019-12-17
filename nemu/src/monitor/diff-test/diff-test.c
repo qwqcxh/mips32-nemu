@@ -95,7 +95,7 @@ static void checkregs(CPU_state *ref, vaddr_t pc) {
 
 void difftest_step(vaddr_t ori_pc, vaddr_t next_pc) {
   CPU_state ref_r;
-  if((uint32_t)cpu.pc == 0x83027f00) { //debug
+  if((uint32_t)cpu.pc == 0x80100594) { //debug
     //difftest_attach();
     ref_difftest_setregs(&cpu);
     is_detach =  false;
