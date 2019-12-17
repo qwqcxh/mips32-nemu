@@ -95,7 +95,7 @@ static void checkregs(CPU_state *ref, vaddr_t pc) {
 
 void difftest_step(vaddr_t ori_pc, vaddr_t next_pc) {
   CPU_state ref_r;
-  if((uint32_t)cpu.pc == 0x80100004) { //debug
+  if((uint32_t)cpu.pc == 0x3027f00) { //debug
     //difftest_attach();
     char *mainargs = (char*)0x830000f0;
     ref_difftest_memcpy_from_dut(0x830000f0, mainargs, 0x2efdc);
