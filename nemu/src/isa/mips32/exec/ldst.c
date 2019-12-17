@@ -1,7 +1,7 @@
 #include "cpu/exec.h"
 
 make_EHelper(ld) {
-  assert((id_src->addr&3) == 0 );//debug
+  assert(0);
   rtl_lm(&s0, &id_src->addr, decinfo.width);
   rtl_sr(id_dest->reg, &s0, 4);
 
