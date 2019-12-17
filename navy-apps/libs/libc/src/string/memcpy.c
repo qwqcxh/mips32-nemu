@@ -51,7 +51,7 @@ memcpy (void *__restrict dst0,
 	const void *__restrict src0,
 	size_t len0)
 {
-  printf("come to lib memcpy addr %u len %u\n",(unsigned)memcpy,len0);//debug
+  printf("memcpy in %s\n",__FILE__);//debug
 #if defined(PREFER_SIZE_OVER_SPEED) || defined(__OPTIMIZE_SIZE__)
   char *dst = (char *) dst0;
   char *src = (char *) src0;
