@@ -97,6 +97,8 @@ void difftest_step(vaddr_t ori_pc, vaddr_t next_pc) {
   CPU_state ref_r;
   if((uint32_t)cpu.pc == 0x80100004) { //debug
     //difftest_attach();
+    char *mainargs = (char*)0x830000f0;
+    ref_difftest_memcpy_from_dut(0x830000f0, mainargs, 0x30000);
     ref_difftest_setregs(&cpu);
     is_detach =  false;
     return;
@@ -148,5 +150,8 @@ void difftest_attach() {
   is_skip_ref = false;
   skip_dut_nr_instr = 0;
 
-  isa_difftest_attach();
+  // isa_difftest_attach();
+  char *mainargs = (char*)0x830000f0;
+  ref_difftest_memcpy_from_dut(0x830000f0, mainargs, 0x30000);
+  ref_difftest_setregs(&cpu);
 }
