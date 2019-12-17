@@ -30,6 +30,7 @@ QUICKREF
 #include <_ansi.h>
 #include <string.h>
 #include "local.h"
+#include <stdio.h>
 
 /* Nonzero if either X or Y is not aligned on a "long" boundary.  */
 #define UNALIGNED(X, Y) \
@@ -50,6 +51,7 @@ memcpy (void *__restrict dst0,
 	const void *__restrict src0,
 	size_t len0)
 {
+  printf("come to lib memcpy len %u\n",len0);//debug
 #if defined(PREFER_SIZE_OVER_SPEED) || defined(__OPTIMIZE_SIZE__)
   char *dst = (char *) dst0;
   char *src = (char *) src0;
@@ -97,6 +99,7 @@ memcpy (void *__restrict dst0,
       src = (char*)aligned_src;
     }
 
+  printf("come here len is %u\n",len0);//debug
   while (len0--)
     *dst++ = *src++;
   return dst0;
