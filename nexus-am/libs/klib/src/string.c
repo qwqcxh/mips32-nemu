@@ -68,7 +68,6 @@ void* memset(void* v,int c,size_t n) {
 }
 
 void* memcpy(void* out, const void* in, size_t n) {
-  printf("memcpy in %s\n",__FILE__);//debug
   char* p = (char*)in;
   char* q = (char*)out;
   for(size_t i=0;i<n;i++)

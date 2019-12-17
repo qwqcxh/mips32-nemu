@@ -51,7 +51,6 @@ memcpy (void *__restrict dst0,
 	const void *__restrict src0,
 	size_t len0)
 {
-  printf("memcpy in %s\n",__FILE__);//debug
 #if defined(PREFER_SIZE_OVER_SPEED) || defined(__OPTIMIZE_SIZE__)
   char *dst = (char *) dst0;
   char *src = (char *) src0;
@@ -99,7 +98,6 @@ memcpy (void *__restrict dst0,
       src = (char*)aligned_src;
     }
 
-  printf("come here len is %u\n",len0);//debug
   while (len0--)
     *dst++ = *src++;
   return dst0;
