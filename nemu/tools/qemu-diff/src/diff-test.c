@@ -31,6 +31,7 @@ void difftest_setregs(const void *r) {
 }
 
 void difftest_exec(uint64_t n) {
+  printf("gdb execute %ld instructions\n",n);//debug
   while (n --) gdb_si();
 }
 
