@@ -9,7 +9,7 @@ int main() {
 	for(int i = 0; i < 4; i++) {
 		*((volatile unsigned*)(buf + 3)) = 0xaabbccdd;
 
-		x= *(volatile unsigned*)(dst+1) = *((volatile unsigned*)(buf + 3));
+		x= *(volatile unsigned*)(dst+3) = *((volatile unsigned*)(buf + 3));
 		for(int i=0;i<7;i++) printf("%x ",dst[i]);
 		printf("\n");
 		nemu_assert(x == 0xaabbccdd);
