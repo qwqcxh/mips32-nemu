@@ -46,7 +46,7 @@ QUICKREF
 #define TOO_SMALL(LEN)  ((LEN) < BIGBLOCKSIZE)
 
 void *
-__inhibit_loop_to_libcall
+// __inhibit_loop_to_libcall
 memcpy (void *__restrict dst0,
 	const void *__restrict src0,
 	size_t len0)
