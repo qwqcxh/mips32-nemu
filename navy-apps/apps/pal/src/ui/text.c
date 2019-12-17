@@ -247,20 +247,8 @@ PAL_GetWord(
       return NULL;
    }
 
-   //debug
-   char* tmp = &g_TextLib.lpWordBuf[wNumWord * WORD_LENGTH];
-   printf("before memcpy addr %x buf addr %x memcpy addr %u:\n",tmp,buf,memcpy);
-   for(int i=0;i<WORD_LENGTH;i++) printf("%x ",tmp[i]);
-   printf("\n");
-
    memcpy(buf, &g_TextLib.lpWordBuf[wNumWord * WORD_LENGTH], WORD_LENGTH);
-   // for(int i=0;i<WORD_LENGTH;i++) buf[i]=tmp[i];
    buf[WORD_LENGTH] = '\0';
- 
-   //debug
-   printf("after memcpy:\n");
-   for(int i=0;i<WORD_LENGTH;i++) printf("%x ",buf[i]);
-   printf("\n");
    
    //
    // Remove the trailing spaces
