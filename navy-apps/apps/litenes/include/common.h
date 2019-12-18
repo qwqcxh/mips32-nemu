@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <unistd.h>
+#include <stdio.h>
 
 typedef uint8_t byte;
 typedef uint16_t word;

@@ -9,9 +9,11 @@ void (*ref_difftest_getregs)(void *c) = NULL;
 void (*ref_difftest_setregs)(const void *c) = NULL;
 void (*ref_difftest_exec)(uint64_t n) = NULL;
 
+void difftest_attach();
+
 static bool is_skip_ref = false;
 static int skip_dut_nr_instr = 0;
-static bool is_detach = false;
+static bool is_detach = true;
 
 // this is used to let ref skip instructions which
 // can not produce consistent behavior with NEMU
@@ -93,6 +95,15 @@ static void checkregs(CPU_state *ref, vaddr_t pc) {
 
 void difftest_step(vaddr_t ori_pc, vaddr_t next_pc) {
   CPU_state ref_r;
+  // if((uint32_t)cpu.pc == 0x83027f00) { //debug
+  //   //difftest_attach();
+  //   char *mainargs = (char*)0x830000f0;
+  //   printf("%x!!!!!!!!!!!\n",*(uint32_t*)mainargs);
+  //   //ref_difftest_memcpy_from_dut(0x830000f0, mainargs, 0x2efdc);
+  //   ref_difftest_setregs(&cpu);
+  //   is_detach =  false;
+  //   return;
+  // }
   if (is_detach) return;
 
   uint32_t opcode=decinfo.isa.instr.opcode;
@@ -140,5 +151,8 @@ void difftest_attach() {
   is_skip_ref = false;
   skip_dut_nr_instr = 0;
 
-  isa_difftest_attach();
+  // isa_difftest_attach();
+  char *mainargs = (char*)0x830000f0;
+  ref_difftest_memcpy_from_dut(0x830000f0, mainargs, 0x2efdc);
+  ref_difftest_setregs(&cpu);
 }

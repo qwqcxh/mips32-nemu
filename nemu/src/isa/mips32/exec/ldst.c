@@ -63,11 +63,12 @@ make_EHelper(lwl){ //lwl rt,offset(rs)
 make_EHelper(lwr){ //lwr rt,offset(rs)
   int bytes=4-(id_src->val&3);
   rtl_lm(&s0,&id_src->addr,bytes);
-  rtl_shli(&s0,&s0,8*(4-bytes));
+  // rtl_shli(&s0,&s0,8*(4-bytes));
+  // rtl_shri(&s0,&s0,8*(4-bytes));
   if(bytes==4) rtl_mv(&reg_l(id_dest->reg),&s0);
   else{
-    rtl_shli(&reg_l(id_dest->reg),&reg_l(id_dest->reg),bytes*8);
     rtl_shri(&reg_l(id_dest->reg),&reg_l(id_dest->reg),bytes*8);
+    rtl_shli(&reg_l(id_dest->reg),&reg_l(id_dest->reg),bytes*8);
     rtl_or(&reg_l(id_dest->reg),&reg_l(id_dest->reg),&s0);
   }
   print_asm("lwr %s,%s",id_dest->str,id_src->str);

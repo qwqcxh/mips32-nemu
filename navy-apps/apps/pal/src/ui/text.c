@@ -249,7 +249,7 @@ PAL_GetWord(
 
    memcpy(buf, &g_TextLib.lpWordBuf[wNumWord * WORD_LENGTH], WORD_LENGTH);
    buf[WORD_LENGTH] = '\0';
- 
+   
    //
    // Remove the trailing spaces
    //
