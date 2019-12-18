@@ -1,6 +1,7 @@
 #include <am.h>
 #include <mips32.h>
 #include <nemu.h>
+#include "klib.h"
 
 #define PG_ALIGN __attribute((aligned(PGSIZE)))
 
@@ -41,5 +42,8 @@ int _map(_AddressSpace *as, void *va, void *pa, int prot) {
 }
 
 _Context *_ucontext(_AddressSpace *as, _Area ustack, _Area kstack, void *entry, void *args) {
-  return NULL;
+  _Context* p = (_Context*)(ustack.end - sizeof(_Context));
+  memset(p,0,sizeof(_Context));
+  ustack.start = p;
+  return p;
 }
