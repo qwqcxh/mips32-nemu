@@ -1,14 +1,15 @@
 #include "common.h"
 
 extern _Context* do_syscall(_Context *c);
+extern _Context* schedule(_Context *prev);
 static _Context* do_event(_Event e, _Context* c) {
   switch (e.event) {
     case _EVENT_SYSCALL: do_syscall(c);break;
-    case _EVENT_YIELD: printf("yield succeed!\n");break;
+    case _EVENT_YIELD: c = schedule(c);printf("yield succeed!\n");break;
     default: panic("Unhandled event ID = %d", e.event);
   }
 
-  return NULL;
+  return c;
 }
 
 void init_irq(void) {

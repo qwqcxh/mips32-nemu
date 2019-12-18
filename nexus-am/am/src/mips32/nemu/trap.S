@@ -49,6 +49,8 @@ __am_asm_trap:
 
   move $a0, $sp
   jal __am_irq_handle
+  
+  move $sp, $v0   # modify sp to new context 
 
   lw $t0, OFFSET_LO($sp)
   lw $t1, OFFSET_HI($sp)
