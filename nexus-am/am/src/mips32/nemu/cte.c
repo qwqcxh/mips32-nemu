@@ -48,7 +48,8 @@ int _cte_init(_Context*(*handler)(_Event, _Context*)) {
 }
 
 _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
-  return NULL;
+  _Context* p = (_Context*)(stack.end - sizeof(_Context));
+  return p;
 }
 
 void _yield() {
