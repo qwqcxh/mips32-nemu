@@ -26,7 +26,7 @@ void init_proc() {
   context_kload(&pcb[0], (void *)hello_fun);
   context_uload(&pcb[1], "/bin/init");
   switch_boot_pcb();
-
+  printf("&pcb[0] = %x &pcb[1] = %x\n",&pcb[0],&pcb[1]);//debug
   Log("Initializing processes...");
 
   // load program here
