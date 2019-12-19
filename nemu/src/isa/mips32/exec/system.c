@@ -39,7 +39,7 @@ make_EHelper(mtc0){
 make_EHelper(cop0_func){
     switch(decinfo.isa.instr.func){
         case 0x18: //ERET
-            assert(cpu.epc != 0x70206772); //debug
+            // assert(cpu.epc != 0x70206772); //debug
             rtl_andi(&cpu.status,&cpu.status,0xfffffffd);
             rtl_j(cpu.epc+4);
             break;
