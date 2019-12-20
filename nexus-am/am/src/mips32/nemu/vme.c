@@ -38,6 +38,13 @@ void __am_switch(_Context *c) {
 }
 
 int _map(_AddressSpace *as, void *va, void *pa, int prot) {
+  assert((uint32_t)va % PGSIZE ==0 && (uint32_t)pa % PGSIZE ==0);
+  uint32_t pdx = PDX(va);
+  uint32_t ptx = PTX(va);
+  PDE* pgdir = (PDE*)(as->ptr);
+  PTE* pgtable = (PTE*)pgalloc_usr(1);
+  pgdir[pdx] = ((PDE)pgtable | 1);
+  pgtable[ptx] = ((PTE)pa | 1);
   return 0;
 }
 
