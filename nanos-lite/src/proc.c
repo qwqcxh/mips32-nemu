@@ -14,9 +14,9 @@ void hello_fun(void *arg) {
   // _AddressSpace* x=(_AddressSpace*)0x81d90004; //debug
   // uint32_t* y=(uint32_t*)0x81d90000;//debug
   // printf("hello_fun pcb[1].as.ptr is %x pcb[1].cp is %x\n",x->ptr,*y); //debug
-  int fp;
-  __asm__ __volatile__ ("sw $fp,%0":"=m"(fp));
-  printf("fp in hello fun is %x\n",fp);//debug
+  int sp;
+  __asm__ __volatile__ ("sw $sp,%0":"=m"(sp));
+  printf("fp in hello fun is %x\n",sp);//debug
   int j = 1;
   while (1) {
     Log("Hello World from Nanos-lite for the %dth time!", j);
