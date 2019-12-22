@@ -11,6 +11,7 @@ static inline paddr_t va2pa(vaddr_t addr, bool write) {
   printf("pvn is %x\n",pvn);//debug
   uint32_t pfn = -1;
   for(int i=0;i<TLBSIZE;i++){
+    printf("TLB[%d] pvn is %x\n",i,PVN(TLB[i].EntryHi));//debug
     if((TLB[i].EntryHi &1 ) && pvn == PVN(TLB[i].EntryHi)){
       pfn = (addr >> 12)&1 ? PFN(TLB[i].EntryLo1) : PFN(TLB[i].EntryLo0);
     }
