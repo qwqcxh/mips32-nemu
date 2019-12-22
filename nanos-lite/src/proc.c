@@ -12,11 +12,11 @@ void switch_boot_pcb() {
 
 void hello_fun(void *arg) {
   // _AddressSpace* x=(_AddressSpace*)0x81d90004; //debug
-  // uint32_t* y=(uint32_t*)0x81d90000;//debug
   // printf("hello_fun pcb[1].as.ptr is %x pcb[1].cp is %x\n",x->ptr,*y); //debug
   int sp;
+  uint32_t* y=(uint32_t*)0x81d90000;//debug
   __asm__ __volatile__ ("sw $sp,%0":"=m"(sp));
-  printf("fp in hello fun is %x\n",sp);//debug
+  printf("fp in hello fun is %x and pcb[1].cp is %x\n",sp,*y);//debug
   int j = 1;
   while (1) {
     Log("Hello World from Nanos-lite for the %dth time!", j);
