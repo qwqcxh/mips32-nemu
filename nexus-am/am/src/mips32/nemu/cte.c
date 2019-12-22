@@ -24,9 +24,10 @@ _Context* __am_irq_handle(_Context *c) {
     }
   }
 
-  _AddressSpace* x=(_AddressSpace*)0X81D90004;
+  _AddressSpace* x=(_AddressSpace*)0X81d90004;//debug
+  uint32_t* y=(uint32_t*)0x81d90000;//debug
   __am_switch(next);
-  printf("in irq_handler pcb[1].as.ptr is %x\n",x->ptr); //debug
+  printf("in irq_handler pcb[1].as.ptr is %x and pcb[1].cp is %x\n",x->ptr,*y); //debug
   return next;
 }
 
