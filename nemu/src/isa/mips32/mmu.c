@@ -6,7 +6,7 @@ bool tlbmiss = false;
 static inline paddr_t va2pa(vaddr_t addr, bool write) {
   //TODO
   if(addr >= 0x80000000) return addr;
-  printf("addr is %x\n and cpu.pc is %x",addr,cpu.pc);//debug
+  printf("addr is %x and cpu.pc is %x\n",addr,cpu.pc);//debug
   uint32_t pvn = PVN(addr);
   uint32_t pfn = -1;
   for(int i=0;i<TLBSIZE;i++){

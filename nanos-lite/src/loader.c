@@ -24,7 +24,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   int ph_offset=elfhdr.e_phoff;
   int ph_num=elfhdr.e_phnum;
   int ph_entry_size=elfhdr.e_phentsize;
-  printf("elf entry is %x ph_num is %d\n",elfhdr.e_entry,ph_num);//debug
   Elf_Phdr phdr;
   for(int i=0;i<ph_num;i++){
     fs_lseek(fd,ph_offset+i*ph_entry_size,SEEK_SET);
@@ -45,7 +44,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
         p_filesz -= readsz;
       }
       _map(&pcb->as,p_vaddr,page,1);
-      printf("add map va:%x to pa:%x\n",p_vaddr,page);//debug
       p_vaddr += PGSIZE;
       p_memsz -= PGSIZE;
     }
