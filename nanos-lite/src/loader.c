@@ -46,6 +46,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       _map(&pcb->as,p_vaddr,page,1);
       p_vaddr += PGSIZE;
       p_memsz -= PGSIZE;
+      printf("memsz is %x now\n",p_memsz);//debug
     }
   }
   return elfhdr.e_entry;
