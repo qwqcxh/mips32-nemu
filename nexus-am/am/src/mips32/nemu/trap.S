@@ -10,7 +10,7 @@ f(30) f(31)
 #define PUSH(n) sw $n, (n * 4)($sp);
 #define POP(n)  lw $n, (n * 4)($sp);
 
-#define CONTEXT_SIZE ((32 + 7) * 4)
+#define CONTEXT_SIZE ((31 + 7) * 4)
 #define OFFSET_SP     (29 * 4)
 #define OFFSET_LO     (32 * 4)
 #define OFFSET_HI     (33 * 4)
