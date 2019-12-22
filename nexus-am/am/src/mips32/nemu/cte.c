@@ -24,6 +24,7 @@ _Context* __am_irq_handle(_Context *c) {
     }
   }
 
+  printf("in irq_handler next as is %x\n",next->as); //debug
   __am_switch(next);
   return next;
 }
