@@ -1,5 +1,7 @@
 #include "cpu/exec.h"
+#include "nemu.h"
 
+extern TLBentry TLB[TLBSIZE];
 make_EHelper(syscall){
     rtl_mv(&cpu.epc,&cpu.pc);
     rtl_andi(&cpu.cause,&cpu.cause,0xffffff83);
@@ -30,6 +32,8 @@ make_EHelper(mfc0){
 make_EHelper(mtc0){
     switch(id_src->val){
         // case 8:rtl_mv(&cpu.badvaddr,&reg_l(id_dest->reg));break;
+        case 2 :rtl_mv(&cpu.entrylo0,&reg_l(id_dest->reg));break;
+        case 3 :rtl_mv(&cpu.entrylo1,&reg_l(id_dest->reg));break;
         case 12:rtl_mv(&cpu.status,&reg_l(id_dest->reg));break;
         case 13:rtl_mv(&cpu.cause,&reg_l(id_dest->reg));break;
         case 14:rtl_mv(&cpu.epc,&reg_l(id_dest->reg));break;
@@ -37,8 +41,18 @@ make_EHelper(mtc0){
     }
 }
 
+int randidx = TLBSIZE - 1;
 make_EHelper(cop0_func){
     switch(decinfo.isa.instr.func){
+        case 0x6 : {//TLBWR
+            int idx=-1;
+            for(int i=0;i<TLBSIZE;i++) if((TLB[i].EntryHi & 1) == 0) {idx = i;break;}
+            if(idx == -1) {idx=randidx;randidx = (randidx -1 + TLBSIZE)%TLBSIZE;}
+            TLB[idx].EntryHi  = cpu.entryhi;
+            TLB[idx].EntryLo0 = cpu.entrylo0;
+            TLB[idx].EntryLo1 = cpu.entrylo1;
+            break;
+        }
         case 0x18: //ERET
             rtl_andi(&cpu.status,&cpu.status,0xfffffffd);
             uint32_t ex_code = (cpu.cause>>2)&0x1f;
