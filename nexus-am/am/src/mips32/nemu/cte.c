@@ -24,8 +24,9 @@ _Context* __am_irq_handle(_Context *c) {
     }
   }
 
-  printf("in irq_handler next as is %x\n",next->as); //debug
+  _AddressSpace* x=(_AddressSpace*)0X81D90004;
   __am_switch(next);
+  printf("in irq_handler pcb[1].as.ptr is %x\n",x->ptr); //debug
   return next;
 }
 
