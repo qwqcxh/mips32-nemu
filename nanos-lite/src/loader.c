@@ -24,6 +24,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   int ph_offset=elfhdr.e_phoff;
   int ph_num=elfhdr.e_phnum;
   int ph_entry_size=elfhdr.e_phentsize;
+  printf("elf entry is %x ph_num is %d\n",elfhdr.e_entry,ph_num);//debug
   Elf_Phdr phdr;
   for(int i=0;i<ph_num;i++){
     fs_lseek(fd,ph_offset+i*ph_entry_size,SEEK_SET);
