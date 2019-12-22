@@ -31,7 +31,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     if(phdr.p_type!=PT_LOAD) continue;
     uint32_t p_offset=phdr.p_offset;
     uint32_t p_filesz=phdr.p_filesz;
-    uint32_t p_memsz=phdr.p_memsz;
+    int p_memsz=phdr.p_memsz;
     void*    p_vaddr=(void*)phdr.p_vaddr;
     while(p_memsz > 0){
       void* page = new_page(1);
