@@ -44,9 +44,9 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
         p_filesz -= readsz;
       }
       _map(&pcb->as,p_vaddr,page,1);
+      printf("add map va:%x to pa:%x\n",p_vaddr,page);//debug
       p_vaddr += PGSIZE;
       p_memsz -= PGSIZE;
-      printf("memsz is %x now\n",p_memsz);//debug
     }
   }
   return elfhdr.e_entry;
