@@ -3,17 +3,16 @@
 #include <klib.h>
 static _Context* (*user_handler)(_Event, _Context*) = NULL;
 
+extern void __am_switch(_Context *c);
+extern void __am_get_cur_as(_Context *c);
 _Context* __am_irq_handle(_Context *c) {
-  //debug
-  // for(int i=0;i<32;i++) printf("%d ",c->gpr[i]);
-  // printf("\n");
-  // printf("lo is %d hi is %d cause is %d status is %d epc is %d\n",c->lo,c->hi,c->cause,c->status,c->epc);
-  //over
+  __am_get_cur_as(c);
   _Context *next = c;
   if (user_handler) {
     _Event ev = {0};
     uint32_t ex_code = (c->cause>>2)&0x1f;
     switch (ex_code) {
+      case 2:  ev.event = _EVENT_TLBL; break;
       case 8:  ev.event = _EVENT_SYSCALL;break;
       case 13: ev.event = _EVENT_YIELD; break;
       default: ev.event = _EVENT_ERROR; break;
@@ -25,6 +24,7 @@ _Context* __am_irq_handle(_Context *c) {
     }
   }
 
+  __am_switch(next);
   return next;
 }
 
@@ -48,7 +48,7 @@ int _cte_init(_Context*(*handler)(_Event, _Context*)) {
 }
 
 _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
-  _Context* p = (_Context*)(stack.end - 37*4);
+  _Context* p = (_Context*)(stack.end - 38*4);
   p->epc = (uintptr_t)entry;
   p->gpr[29] = (uint32_t)p;
   return p;

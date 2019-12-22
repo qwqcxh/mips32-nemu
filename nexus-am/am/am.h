@@ -24,6 +24,7 @@ enum {
   _EVENT_PAGEFAULT,
   _EVENT_YIELD,
   _EVENT_SYSCALL,
+  _EVENT_TLBL,
 };
 
 enum {
@@ -84,6 +85,7 @@ void _unprotect(_AddressSpace *as);
 int _map(_AddressSpace *as, void *va, void *pa, int prot);
 _Context *_ucontext(_AddressSpace *as, _Area ustack, _Area kstack,
                                  void *entry, void *args);
+void __am_tlb_refill();                                 
 
 // ================= Multi-Processor Extension (MPE) =================
 

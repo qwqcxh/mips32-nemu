@@ -37,6 +37,21 @@ void __am_switch(_Context *c) {
   }
 }
 
+void __am_tlb_refill(){
+  //
+  uint32_t pvn;
+  __asm__ __volatile__ ("mfc0 $t0,$10;"
+                        "sw   $t0,%0":"=m"(pvn)
+                       );
+  printf("pvn is %x\n",pvn);//debug
+  return;
+  // PDE* pgdir = (PDE*)cur_as->ptr;
+  // uint32_t pgdir_idx = pvn >> 22 ;
+  // assert(pgdir[pgdir_idx]&1);
+  // PTE* pgtable = (PTE*)pgdir[pgdir_idx];
+  // uint32_t 
+}
+
 int _map(_AddressSpace *as, void *va, void *pa, int prot) {
   assert((uint32_t)va % PGSIZE ==0 && (uint32_t)pa % PGSIZE ==0);
   uint32_t pdx = PDX(va);
@@ -49,7 +64,8 @@ int _map(_AddressSpace *as, void *va, void *pa, int prot) {
 }
 
 _Context *_ucontext(_AddressSpace *as, _Area ustack, _Area kstack, void *entry, void *args) {
-  _Context* p = (_Context*)(ustack.end - sizeof(_Context) - 4);
+  _Context* p = (_Context*)(ustack.end - 38*4);
+  p->as = as;
   p->epc = (uint32_t)entry;
   p->gpr[29] = (uint32_t)p;
   return p;
