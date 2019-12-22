@@ -8,6 +8,7 @@ static inline paddr_t va2pa(vaddr_t addr, bool write) {
   if(addr >= 0x80000000) return addr;
   printf("addr is %x and cpu.pc is %x\n",addr,cpu.pc);//debug
   uint32_t pvn = PVN(addr);
+  printf("pvn is %x\n",pvn);//debug
   uint32_t pfn = -1;
   for(int i=0;i<TLBSIZE;i++){
     if((TLB[i].EntryHi &1 ) && pvn == PVN(TLB[i].EntryHi)){
@@ -15,12 +16,12 @@ static inline paddr_t va2pa(vaddr_t addr, bool write) {
     }
   }
   if(pfn!=-1){
+    printf("find realaddr\n");//debug
     return (pfn<<12) + (addr&0xfff);
   }
   else{
     tlbmiss = true;
-    //yield
-    // rtl_li(&cpu.epc,cpu.pc - 4);
+    //trap to kernel
     rtl_andi(&cpu.cause,&cpu.cause,0xffffff83);
     rtl_andi(&cpu.status,&cpu.status,0xfffffffd);
     rtl_ori(&cpu.cause,&cpu.cause,0x8);
