@@ -48,7 +48,7 @@ int _cte_init(_Context*(*handler)(_Event, _Context*)) {
 }
 
 _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
-  _Context* p = (_Context*)(stack.end - 38*4);
+  _Context* p = (_Context*)(stack.end - sizeof(_Context));
   p->epc = (uintptr_t)entry;
   p->gpr[29] = (uint32_t)p;
   return p;
