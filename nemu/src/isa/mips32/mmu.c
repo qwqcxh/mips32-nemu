@@ -19,6 +19,7 @@ static inline paddr_t va2pa(vaddr_t addr, bool write) {
   else{
     tlbmiss = true;
     //yield
+    printf("addr is %x\n",addr);//debug
     rtl_li(&cpu.epc,cpu.pc - 4);
     rtl_andi(&cpu.cause,&cpu.cause,0xffffff83);
     rtl_andi(&cpu.status,&cpu.status,0xfffffffd);
