@@ -84,7 +84,7 @@ int _map(_AddressSpace *as, void *va, void *pa, int prot) {
 }
 
 _Context *_ucontext(_AddressSpace *as, _Area ustack, _Area kstack, void *entry, void *args) {
-  _Context* p = (_Context*)(ustack.end - sizeof(_Context));
+  _Context* p = (_Context*)(ustack.end - 4 - sizeof(_Context));
   p->as  = as;
   printf("in _ucontext as is %x\n",as);//debug
   p->epc = (uint32_t)entry;
