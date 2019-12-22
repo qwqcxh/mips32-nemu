@@ -53,11 +53,11 @@ void __am_tlb_refill(){
 }
 
 int _map(_AddressSpace *as, void *va, void *pa, int prot) {
+  printf("_map as->ptr: %x va: %x pa: %x\n",as->ptr);//debug
   assert((uint32_t)va % PGSIZE ==0 && (uint32_t)pa % PGSIZE ==0);
   uint32_t pdx = PDX(va);
   uint32_t ptx = PTX(va);
   PDE* pgdir = (PDE*)(as->ptr);
-  printf("_map as->ptr is %x\n",as->ptr);//debug
   if(pgdir[pdx]&1){ //pgtable already exists
     PTE*pgtable  = (PTE*)((pgdir[pdx]>>12)<<12);
     pgtable[ptx] = ((PTE)pa | 1);
