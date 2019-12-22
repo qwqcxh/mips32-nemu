@@ -1,7 +1,6 @@
 #include "nemu.h"
 
 static inline paddr_t va2pa(vaddr_t addr, bool write) {
-  printf("addr is %x\n",addr);//debug
   return addr;
 }
 
