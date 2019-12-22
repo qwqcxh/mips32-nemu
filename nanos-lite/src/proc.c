@@ -35,6 +35,7 @@ void init_proc() {
 }
 
 _Context* schedule(_Context *prev) {
+  printf("in schedule pcb[1].as.ptr = %x\n",pcb[1].as.ptr);//debug
   current->cp = prev;
   current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
   return current->cp;
