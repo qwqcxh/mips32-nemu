@@ -44,7 +44,7 @@ void __am_tlb_refill(){
                         "sw   $k0,%0":"=m"(pvn)
                        );
   PDE* pgdir = (PDE*)cur_as->ptr;
-  printf("cur_as->ptr is %x\n",cur_as->ptr);//debug
+  printf("cur_as is %x and as->ptr is %x\n",cur_as,cur_as->ptr);//debug
   uint32_t pdx = PDX(pvn) ;
   assert(pgdir[pdx]&1);
   PTE* pgtable = (PTE*)pgdir[pdx];
@@ -84,8 +84,7 @@ int _map(_AddressSpace *as, void *va, void *pa, int prot) {
 }
 
 _Context *_ucontext(_AddressSpace *as, _Area ustack, _Area kstack, void *entry, void *args) {
-  printf("sizeof _Context is %d\n",sizeof(_Context));
-  _Context* p = (_Context*)(ustack.end - 38*4);
+  _Context* p = (_Context*)(ustack.end - sizeof(_Context));
   p->as  = as;
   p->epc = (uint32_t)entry;
   p->gpr[29] = (uint32_t)p;

@@ -14,7 +14,6 @@ void hello_fun(void *arg) {
   int j = 1;
   while (1) {
     Log("Hello World from Nanos-lite for the %dth time!", j);
-    printf("in hello_fun pcb[1].cp = %x\n",pcb[1].cp);//debug
     j ++;
     _yield();
   }
@@ -36,10 +35,7 @@ void init_proc() {
 }
 
 _Context* schedule(_Context *prev) {
-  //debug
-  printf("special pcb[1].cp = %x !!!!!!!!!\n",pcb[1].cp);
   current->cp = prev;
-  printf("current is %x and current->cp is %x\n",current,current->cp);//debug
   current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
   return current->cp;
 }
