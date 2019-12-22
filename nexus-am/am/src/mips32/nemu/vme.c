@@ -44,6 +44,7 @@ void __am_tlb_refill(){
                         "sw   $k0,%0":"=m"(pvn)
                        );
   PDE* pgdir = (PDE*)cur_as->ptr;
+  printf("cur_as->ptr is %x\n",pgdir);//debug
   uint32_t pdx = PDX(pvn) ;
   assert(pgdir[pdx]&1);
   PTE* pgtable = (PTE*)pgdir[pdx];
