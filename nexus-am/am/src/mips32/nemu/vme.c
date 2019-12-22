@@ -53,7 +53,7 @@ void __am_tlb_refill(){
 }
 
 int _map(_AddressSpace *as, void *va, void *pa, int prot) {
-  printf("_map as->ptr: %x va: %x pa: %x\n",as->ptr);//debug
+  printf("_map as->ptr: %x va: %x pa: %x\n",as->ptr,va,pa);//debug
   assert((uint32_t)va % PGSIZE ==0 && (uint32_t)pa % PGSIZE ==0);
   uint32_t pdx = PDX(va);
   uint32_t ptx = PTX(va);
