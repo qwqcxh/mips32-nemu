@@ -16,7 +16,8 @@ void hello_fun(void *arg) {
     Log("Hello World from Nanos-lite for the %dth time!", j);
     j ++;
     _AddressSpace* x=(_AddressSpace*)0x81d90004; //debug
-    printf("hello_fun pcb[1].as.ptr is %x\n",x->ptr); //debug
+    uint32_t* y=(uint32_t*)0x81d90000;//debug
+    printf("hello_fun pcb[1].as.ptr is %x pcb[1].cp is %x\n",x->ptr,*y); //debug
     _yield();
   }
 }
@@ -37,8 +38,9 @@ void init_proc() {
 }
 
 _Context* schedule(_Context *prev) {
-  _AddressSpace* x=(_AddressSpace*)0x81d90004;
-  printf("in schedule pcb[1].as.ptr = %x\n",x->ptr);//debug
+  _AddressSpace* x=(_AddressSpace*)0x81d90004; //debg
+  uint32_t* y=(uint32_t*)0x81d90000;//debug
+  printf("in schedule pcb[1].as.ptr = %x pcb[1].cp is %x\n",x->ptr,*y);//debug
   current->cp = prev;
   current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
   return current->cp;
