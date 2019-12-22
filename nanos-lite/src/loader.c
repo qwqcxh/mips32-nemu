@@ -70,11 +70,9 @@ void context_uload(PCB *pcb, const char *filename) {
   _protect(&pcb->as);
   uintptr_t entry = loader(pcb, filename);
 
-  // printf("pcb->as->ptr is %x in %s\n",pcb->as.ptr,__FUNCTION__);//debug
   _Area stack;
   stack.start = pcb->stack;
   stack.end = stack.start + sizeof(pcb->stack);
 
   pcb->cp = _ucontext(&pcb->as, stack, stack, (void *)entry, NULL);
-  printf("as.ptr is %x\n",pcb->as.ptr);//debug
 }
