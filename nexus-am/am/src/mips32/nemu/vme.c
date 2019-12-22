@@ -19,7 +19,7 @@ int _vme_init(void* (*pgalloc_f)(size_t), void (*pgfree_f)(void*)) {
 
 int _protect(_AddressSpace *as) {
   as->ptr = (PDE*)(pgalloc_usr(1));
-
+  printf("pgdir is %x!!!\n",as->ptr);
   return 0;
 }
 
@@ -57,6 +57,7 @@ int _map(_AddressSpace *as, void *va, void *pa, int prot) {
   uint32_t pdx = PDX(va);
   uint32_t ptx = PTX(va);
   PDE* pgdir = (PDE*)(as->ptr);
+  printf("_map as->ptr is %x\n",as->ptr);//debug
   if(pgdir[pdx]&1){ //pgtable already exists
     PTE*pgtable  = (PTE*)((pgdir[pdx]>>12)<<12);
     pgtable[ptx] = ((PTE)pa | 1);
@@ -71,8 +72,7 @@ int _map(_AddressSpace *as, void *va, void *pa, int prot) {
 
 _Context *_ucontext(_AddressSpace *as, _Area ustack, _Area kstack, void *entry, void *args) {
   _Context* p = (_Context*)(ustack.end - sizeof(_Context));
-  as->ptr = pgalloc_usr(1); //alloca a page dir
-  memset(as->ptr,0,PGSIZE);
+  p->as  = as;
   p->epc = (uint32_t)entry;
   p->gpr[29] = (uint32_t)p;
   return p;
