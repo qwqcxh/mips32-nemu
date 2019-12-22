@@ -15,6 +15,8 @@ void hello_fun(void *arg) {
   while (1) {
     Log("Hello World from Nanos-lite for the %dth time!", j);
     j ++;
+    uint32_t* x=(uint32_t*)0x81d90004; //debug
+    printf("hello_fun pcb[1].as.ptr is %x\n",*x); //debug
     _yield();
   }
 }
