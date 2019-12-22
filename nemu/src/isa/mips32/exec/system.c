@@ -48,7 +48,7 @@ make_EHelper(cop0_func){
             int idx=-1;
             for(int i=0;i<TLBSIZE;i++) if((TLB[i].EntryHi & 1) == 0) {idx = i;break;}
             if(idx == -1) {idx=randidx;randidx = (randidx -1 + TLBSIZE)%TLBSIZE;}
-            TLB[idx].EntryHi  = cpu.entryhi;
+            TLB[idx].EntryHi  = cpu.entryhi | 1;
             TLB[idx].EntryLo0 = cpu.entrylo0;
             TLB[idx].EntryLo1 = cpu.entrylo1;
             break;
