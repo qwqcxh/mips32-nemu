@@ -6,6 +6,7 @@ bool tlbmiss = false;
 static inline paddr_t va2pa(vaddr_t addr, bool write) {
   //TODO
   if(addr >= 0x80000000) return addr;
+  printf("addr is %x\n",addr);//debug
   uint32_t pvn = PVN(addr);
   uint32_t pfn = -1;
   for(int i=0;i<TLBSIZE;i++){
@@ -19,7 +20,6 @@ static inline paddr_t va2pa(vaddr_t addr, bool write) {
   else{
     tlbmiss = true;
     //yield
-    printf("addr is %x\n",addr);//debug
     rtl_li(&cpu.epc,cpu.pc - 4);
     rtl_andi(&cpu.cause,&cpu.cause,0xffffff83);
     rtl_andi(&cpu.status,&cpu.status,0xfffffffd);
