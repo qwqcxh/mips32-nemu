@@ -47,7 +47,7 @@ void __am_tlb_refill(){
   printf("cur_as is %x and as->ptr is %x\n",cur_as,cur_as->ptr);//debug
   uint32_t pdx = PDX(pvn) ;
   assert(pgdir[pdx]&1);
-  PTE* pgtable = (PTE*)pgdir[pdx];
+  PTE* pgtable = (PTE*)(pgdir[pdx] & 0xfffffffe);
   uint32_t ptxlo0 = PTX(pvn) & 0xfffffffe;
   uint32_t ptxlo1 = PTX(pvn) | 1;
   uint32_t ptx    = PTX(pvn); //for test
