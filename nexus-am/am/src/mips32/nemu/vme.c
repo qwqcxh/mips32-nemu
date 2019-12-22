@@ -40,16 +40,28 @@ void __am_switch(_Context *c) {
 void __am_tlb_refill(){
   //
   uint32_t pvn;
-  __asm__ __volatile__ ("mfc0 $t0,$10;"
-                        "sw   $t0,%0":"=m"(pvn)
+  __asm__ __volatile__ ("mfc0 $k0,$10;"
+                        "sw   $k0,%0":"=m"(pvn)
                        );
-  printf("pvn is %x\n",pvn);//debug
+  PDE* pgdir = (PDE*)cur_as->ptr;
+  uint32_t pdx = PDX(pvn) ;
+  assert(pgdir[pdx]&1);
+  PTE* pgtable = (PTE*)pgdir[pdx];
+  uint32_t ptxlo0 = PTX(pvn) & 0xfffffffe;
+  uint32_t ptxlo1 = PTX(pvn) | 1;
+  uint32_t ptx    = PTX(pvn); //for test
+  uint32_t entrylo0 = pgtable[ptxlo0];
+  uint32_t entrylo1 = pgtable[ptxlo1];
+  uint32_t realpage = pgtable[ptx];//for test
+  assert((entrylo0&1)&&(entrylo1&1));
+  printf("pvn is %x and realpage is %x\n",pvn,realpage);//for test
+  __asm__ __volatile__ ("lw $k0,%0;"
+                        "mtc0 $k0,$2;"
+                        "lw $k1,%1;"
+                        "mtc0 $k1,$3;"
+                        "tlbwr"::"m"(entrylo0),"m"(entrylo1)
+                       );
   return;
-  // PDE* pgdir = (PDE*)cur_as->ptr;
-  // uint32_t pgdir_idx = pvn >> 22 ;
-  // assert(pgdir[pgdir_idx]&1);
-  // PTE* pgtable = (PTE*)pgdir[pgdir_idx];
-  // uint32_t 
 }
 
 int _map(_AddressSpace *as, void *va, void *pa, int prot) {
