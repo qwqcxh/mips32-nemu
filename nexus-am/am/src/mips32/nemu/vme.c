@@ -44,7 +44,7 @@ void __am_tlb_refill(){
                         "sw   $k0,%0":"=m"(pvn)
                        );
   PDE* pgdir = (PDE*)cur_as->ptr;
-  printf("cur_as is %x and as->ptr is %x\n",cur_as,cur_as->ptr);//debug
+  // printf("cur_as is %x and as->ptr is %x\n",cur_as,cur_as->ptr);
   uint32_t pdx = PDX(pvn) ;
   assert(pgdir[pdx]&1);
   PTE* pgtable = (PTE*)(pgdir[pdx] & 0xfffffffe);
@@ -54,9 +54,8 @@ void __am_tlb_refill(){
   uint32_t entrylo0 = pgtable[ptxlo0];
   uint32_t entrylo1 = pgtable[ptxlo1];
   uint32_t realpage = pgtable[ptx];//for test
-  printf("entrylo0 is %x and entrylo1 is %x\n",entrylo0,entrylo1);//debug
+  printf("TLB REFILL: entrylo0 %x entrylo1 %x miss pvn %x phsicalpage %x\n",entrylo0,entrylo1,pvn,realpage);//debug
   assert((entrylo0&1)||(entrylo1&1));
-  printf("pvn is %x and realpage is %x\n",pvn,realpage);//for test
   __asm__ __volatile__ ("lw $k0,%0;"
                         "mtc0 $k0,$2;"
                         "lw $k1,%1;"

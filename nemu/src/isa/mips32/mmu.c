@@ -6,9 +6,9 @@ bool tlbmiss = false;
 static inline paddr_t va2pa(vaddr_t addr, bool write) {
   //TODO
   if(addr >= 0x80000000) return addr;
-  printf("addr is %x and cpu.pc is %x\n",addr,cpu.pc);//debug
   uint32_t pvn = PVN(addr);
-  printf("pvn is %x\n",pvn);//debug
+  printf("***************BEGIN*************");//debug
+  printf("%s : addr %x cpu.pc %x pvn %x\n",__FUNCTION__,addr,cpu.pc,pvn);//debug
   uint32_t pfn = -1;
   for(int i=0;i<TLBSIZE;i++){
     printf("TLB[%d] pvn is %x\n",i,PVN(TLB[i].EntryHi));//debug
@@ -17,7 +17,6 @@ static inline paddr_t va2pa(vaddr_t addr, bool write) {
     }
   }
   if(pfn!=-1){
-    printf("find realaddr\n");//debug
     return (pfn<<12) + (addr&0xfff);
   }
   else{
@@ -35,14 +34,18 @@ static inline paddr_t va2pa(vaddr_t addr, bool write) {
 
 uint32_t isa_vaddr_read(vaddr_t addr, int len) {
   uint32_t realaddr = va2pa(addr,false);
-  if(addr < 0x80000000) printf("realaddr of addr %x is %x\n",addr,realaddr);//debug
+  if(realaddr == (uint32_t)-1) printf("%s :realaddr of addr %x miss\n",__FUNCTION__,addr);//debug
+  else if(addr < 0x80000000 ) printf("%s :realaddr of addr %x is %x\n",__FUNCTION__,addr,realaddr);//debug
+  printf("****************END*****************");//debug
   if(tlbmiss) {tlbmiss = false; return 0;}
   else return paddr_read(realaddr, len);
 }
 
 void isa_vaddr_write(vaddr_t addr, uint32_t data, int len) {
   uint32_t realaddr = va2pa(addr, true);
-  if(addr < 0x80000000) printf("realaddr of addr %x is %x\n",addr,realaddr);//debug
+  if(realaddr == (uint32_t)-1) printf("%s :realaddr of addr %x miss\n",__FUNCTION__,addr);//debug
+  else if(addr < 0x80000000 ) printf("%s :realaddr of addr %x is %x\n",__FUNCTION__,addr,realaddr);//debug
+  printf("****************END*****************");//debug
   if(tlbmiss) {tlbmiss = false; return ;}
   else paddr_write(realaddr, data, len);
 }
