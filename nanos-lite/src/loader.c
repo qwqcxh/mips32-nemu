@@ -24,6 +24,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   int ph_offset=elfhdr.e_phoff;
   int ph_num=elfhdr.e_phnum;
   int ph_entry_size=elfhdr.e_phentsize;
+  pcb->max_brk = 0;//initial pa4.2
   Elf_Phdr phdr;
   for(int i=0;i<ph_num;i++){
     fs_lseek(fd,ph_offset+i*ph_entry_size,SEEK_SET);
@@ -33,6 +34,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     uint32_t p_filesz=phdr.p_filesz;
     int p_memsz=phdr.p_memsz;
     void*    p_vaddr=(void*)phdr.p_vaddr;
+    if((uintptr_t)(p_vaddr+p_memsz) > pcb->max_brk) pcb->max_brk =(uintptr_t)(p_vaddr + p_memsz); //pa4.2
     while(p_memsz > 0){
       void* page = new_page(1);
       memset(page,0,PGSIZE);
@@ -47,6 +49,10 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       p_vaddr += PGSIZE;
       p_memsz -= PGSIZE;
     }
+  }
+  if(pcb->max_brk % PGSIZE ==0){ //max_brk is in another page after date segment pa4.2
+    void* pa = new_page(1);
+    _map(&pcb->as,(void*)pcb->max_brk,pa,0);
   }
   return elfhdr.e_entry;
 }
