@@ -19,7 +19,7 @@ _Context* do_syscall(_Context *c) {
   switch (a[0]) {
     case SYS_yield: _yield();c->GPRx=0;break;
     case SYS_brk: program_break=(char*)c->GPR2; c->GPRx=0; break;
-    case SYS_exit: naive_uload(NULL,"/bin/init"); break;
+    case SYS_exit: _halt(c->GPR2);break;//naive_uload(NULL,"/bin/init"); break;
     case SYS_open:c->GPRx=fs_open((char*)c->GPR2,c->GPR3,c->GPR4);break;
     case SYS_read:c->GPRx=fs_read(c->GPR2,(void*)c->GPR3,c->GPR4);break;
     case SYS_close:c->GPRx=fs_close(c->GPR2);break;
