@@ -3,15 +3,22 @@
 
 extern TLBentry TLB[TLBSIZE];
 make_EHelper(syscall){
-    rtl_mv(&cpu.epc,&cpu.pc);
-    rtl_andi(&cpu.cause,&cpu.cause,0xffffff83);
-    rtl_andi(&cpu.status,&cpu.status,0xfffffffd);
     switch(decinfo.isa.instr.val>>6){
-        case 1:
+        case 1: //yield
+            rtl_mv(&cpu.epc,&cpu.pc);
+            rtl_andi(&cpu.cause,&cpu.cause,0xffffff83);
+            rtl_andi(&cpu.status,&cpu.status,0xfffffffd);
             rtl_ori(&cpu.cause,&cpu.cause,0x34);
             rtl_ori(&cpu.status,&cpu.status,0x2);
             break;
+        case 2: //tlb clear
+            for(int i=0;i<TLBSIZE;i++)
+                TLB[i].EntryHi = TLB[i].EntryLo0 = TLB[i].EntryLo1 = 0;
+            break;
         default:
+            rtl_mv(&cpu.epc,&cpu.pc);
+            rtl_andi(&cpu.cause,&cpu.cause,0xffffff83);
+            rtl_andi(&cpu.status,&cpu.status,0xfffffffd);
             rtl_ori(&cpu.cause,&cpu.cause,0x20);//set cause.execode
             rtl_ori(&cpu.status,&cpu.status,0x2);
     }

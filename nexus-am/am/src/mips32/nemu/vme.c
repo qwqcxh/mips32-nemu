@@ -65,14 +65,20 @@ void __am_tlb_refill(){
   return;
 }
 
+void __am_tlb_clear(){
+  __asm__ __volatile__ ("syscall 2");
+}
+
 int _map(_AddressSpace *as, void *va, void *pa, int prot) {
   printf("_map as->ptr: %x va: %x pa: %x\n",as->ptr,va,pa);//debug
   assert((uint32_t)va % PGSIZE ==0 && (uint32_t)pa % PGSIZE ==0);
+  if(as==NULL) as=cur_as;//not sure
   uint32_t pdx = PDX(va);
   uint32_t ptx = PTX(va);
   PDE* pgdir = (PDE*)(as->ptr);
   if(pgdir[pdx]&1){ //pgtable already exists
     PTE*pgtable  = (PTE*)((pgdir[pdx]>>12)<<12);
+    if(pgtable[ptx]&1) return 1;//this va is mapped
     pgtable[ptx] = ((PTE)pa | 1);
   }
   else{

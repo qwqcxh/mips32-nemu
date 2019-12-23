@@ -85,7 +85,8 @@ void _unprotect(_AddressSpace *as);
 int _map(_AddressSpace *as, void *va, void *pa, int prot);
 _Context *_ucontext(_AddressSpace *as, _Area ustack, _Area kstack,
                                  void *entry, void *args);
-void __am_tlb_refill();                                 
+void __am_tlb_refill();
+void __am_tlb_clear();                                 
 
 // ================= Multi-Processor Extension (MPE) =================
 
