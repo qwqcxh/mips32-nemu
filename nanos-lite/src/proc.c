@@ -24,7 +24,7 @@ extern void context_kload(PCB *pcb, void *entry);
 extern void context_uload(PCB *pcb, const char *filename) ;
 void init_proc() {
   context_kload(&pcb[0], (void *)hello_fun);
-  context_uload(&pcb[1], "/bin/init");
+  context_uload(&pcb[1], "/bin/dummy");
   switch_boot_pcb();
   printf("&pcb[0] = %x &pcb[1] = %x pcb[0].cp=%x pcb[1].cp=%x\n",&pcb[0],&pcb[1],pcb[0].cp,pcb[1].cp);//debug
   Log("Initializing processes...");

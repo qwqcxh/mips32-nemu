@@ -19,7 +19,7 @@ int _vme_init(void* (*pgalloc_f)(size_t), void (*pgfree_f)(void*)) {
 
 int _protect(_AddressSpace *as) {
   as->ptr = (PDE*)(pgalloc_usr(1));
-  printf("pgdir is %x!!!\n",as->ptr);
+  printf("pgdir is %x!!!\n",as->ptr); //debug
   return 0;
 }
 
