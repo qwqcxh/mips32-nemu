@@ -36,7 +36,7 @@ static inline paddr_t va2pa(vaddr_t addr, bool write) {
 uint32_t isa_vaddr_read(vaddr_t addr, int len) {
   uint32_t realaddr = va2pa(addr,false);
   if(realaddr == (uint32_t)-1) printf("%s :realaddr of addr %x miss\n",__FUNCTION__,addr);//debug
-  else if(addr < 0x80000000 ) {
+  else if(addr < 0x80000000 || cpu.pc < 0x80000000) {
     printf("%s :realaddr of addr %x is %x value is %x\n",__FUNCTION__,addr,realaddr,paddr_read(realaddr,len));//debug
     printf("****************END*****************\n");//debug
   }
@@ -47,7 +47,7 @@ uint32_t isa_vaddr_read(vaddr_t addr, int len) {
 void isa_vaddr_write(vaddr_t addr, uint32_t data, int len) {
   uint32_t realaddr = va2pa(addr, true);
   if(realaddr == (uint32_t)-1) printf("%s :realaddr of addr %x miss\n",__FUNCTION__,addr);//debug
-  else if(addr < 0x80000000 ) {
+  else if(addr < 0x80000000 || cpu.pc < 0x80000000) {
     printf("%s :realaddr of addr %x is %x write_data %x\n",__FUNCTION__,addr,realaddr,data);//debug
     printf("****************END*****************\n");//debug
   }
