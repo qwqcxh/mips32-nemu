@@ -22,6 +22,7 @@ static inline paddr_t va2pa(vaddr_t addr, bool write) {
   else{
     tlbmiss = true;
     //trap to kernel
+    rtl_mv(&cpu.epc,&cpu.pc);
     rtl_andi(&cpu.cause,&cpu.cause,0xffffff83);
     rtl_andi(&cpu.status,&cpu.status,0xfffffffd);
     rtl_ori(&cpu.cause,&cpu.cause,0x8);
