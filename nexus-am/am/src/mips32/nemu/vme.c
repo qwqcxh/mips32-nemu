@@ -55,7 +55,7 @@ void __am_tlb_refill(){
   uint32_t entrylo1 = pgtable[ptxlo1];
   uint32_t realpage = pgtable[ptx];//for test
   printf("entrylo0 is %x and entrylo1 is %x\n",entrylo0,entrylo1);//debug
-  assert((entrylo0&1)&&(entrylo1&1));
+  assert((entrylo0&1)||(entrylo1&1));
   printf("pvn is %x and realpage is %x\n",pvn,realpage);//for test
   __asm__ __volatile__ ("lw $k0,%0;"
                         "mtc0 $k0,$2;"
