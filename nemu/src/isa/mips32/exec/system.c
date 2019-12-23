@@ -5,7 +5,7 @@ extern TLBentry TLB[TLBSIZE];
 make_EHelper(syscall){
     switch(decinfo.isa.instr.val>>6){
         case 1: //yield
-            rtl_mv(&cpu.epc,&cpu.pc);
+            rtl_li(&cpu.epc,cpu.pc+4);
             rtl_andi(&cpu.cause,&cpu.cause,0xffffff83);
             rtl_andi(&cpu.status,&cpu.status,0xfffffffd);
             rtl_ori(&cpu.cause,&cpu.cause,0x34);
@@ -66,7 +66,7 @@ make_EHelper(cop0_func){
             switch (ex_code) {
                 case 2:  rtl_j(cpu.epc);break;
                 case 8:  rtl_j(cpu.epc+4);break;//syscall
-                case 13: rtl_j(cpu.epc+4); break; //YIELD
+                case 13: rtl_j(cpu.epc); break; //YIELD
                 default: assert(0);
             }
             break;
