@@ -59,7 +59,7 @@ make_EHelper(cop0_func){
             switch (ex_code) {
                 case 2:  rtl_j(cpu.epc);break;
                 case 8:  rtl_j(cpu.epc+4);break;//syscall
-                case 13: rtl_j(cpu.epc); break; //YIELD
+                case 13: rtl_j(cpu.epc+4); break; //YIELD
                 default: assert(0);
             }
             break;
