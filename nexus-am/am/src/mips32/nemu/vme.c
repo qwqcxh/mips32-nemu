@@ -50,11 +50,11 @@ void __am_tlb_refill(){
   PTE* pgtable = (PTE*)(pgdir[pdx] & 0xfffffffe);
   uint32_t ptxlo0 = PTX(pvn) & 0xfffffffe;
   uint32_t ptxlo1 = PTX(pvn) | 1;
-  uint32_t ptx    = PTX(pvn); //for test
+  // uint32_t ptx    = PTX(pvn); //for test
   uint32_t entrylo0 = pgtable[ptxlo0];
   uint32_t entrylo1 = pgtable[ptxlo1];
-  uint32_t realpage = pgtable[ptx];//for test
-  printf("TLB REFILL: entrylo0 %x entrylo1 %x miss pvn %x phsicalpage %x\n",entrylo0,entrylo1,pvn,realpage);//debug
+  // uint32_t realpage = pgtable[ptx];//for test
+  // printf("TLB REFILL: entrylo0 %x entrylo1 %x miss pvn %x phsicalpage %x\n",entrylo0,entrylo1,pvn,realpage);//debug
   assert((entrylo0&1)||(entrylo1&1));
   __asm__ __volatile__ ("lw $k0,%0;"
                         "mtc0 $k0,$2;"
@@ -66,7 +66,7 @@ void __am_tlb_refill(){
 }
 
 int _map(_AddressSpace *as, void *va, void *pa, int prot) {
-  printf("_map as->ptr: %x va: %x pa: %x\n",as->ptr,va,pa);//debug
+  // printf("_map as->ptr: %x va: %x pa: %x\n",as->ptr,va,pa);//debug
   assert((uint32_t)va % PGSIZE ==0 && (uint32_t)pa % PGSIZE ==0);
   uint32_t pdx = PDX(va);
   uint32_t ptx = PTX(va);
