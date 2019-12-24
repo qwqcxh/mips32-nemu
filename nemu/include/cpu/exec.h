@@ -24,7 +24,7 @@ typedef struct {
 
 extern bool tlbmiss;
 static inline uint32_t instr_fetch(vaddr_t *pc, int len) {
-  uint32_t instr = vaddr_read(*pc, len); //test
+  uint32_t instr = vaddr_read(*pc, len); 
   if(tlbmiss) tlbmiss = false;
 #ifdef DEBUG
   uint8_t *p_instr = (void *)&instr;

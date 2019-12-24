@@ -16,7 +16,7 @@ static inline paddr_t va2pa(vaddr_t addr, bool write) {
       pfn = (addr >> 12)&1 ? PFN(TLB[i].EntryLo1) : PFN(TLB[i].EntryLo0);
     }
   }
-  if(pfn!=-1){
+  if(pfn!=-1 && pfn!=0 ){
     return (pfn<<12) + (addr&0xfff);
   }
   else{
