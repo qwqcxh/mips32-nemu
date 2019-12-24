@@ -22,8 +22,10 @@ typedef struct {
 #define EX(ex)             EXW(ex, 0)
 #define EMPTY              EX(inv)
 
+extern bool tlbmiss;
 static inline uint32_t instr_fetch(vaddr_t *pc, int len) {
-  uint32_t instr = vaddr_read(*pc, len);
+  uint32_t instr = vaddr_read(*pc, len); //test
+  if(tlbmiss) tlbmiss = false;
 #ifdef DEBUG
   uint8_t *p_instr = (void *)&instr;
   int i;
