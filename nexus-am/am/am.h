@@ -87,6 +87,7 @@ _Context *_ucontext(_AddressSpace *as, _Area ustack, _Area kstack,
                                  void *entry, void *args);
 int mm_brk(uintptr_t brk);
 void __am_tlb_refill();                                 
+void __am_tlb_clear();
 
 // ================= Multi-Processor Extension (MPE) =================
 

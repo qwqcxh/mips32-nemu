@@ -11,6 +11,10 @@ make_EHelper(syscall){
             rtl_ori(&cpu.cause,&cpu.cause,0x34);
             rtl_ori(&cpu.status,&cpu.status,0x2);
             break;
+        case 2: //tlb clear
+            for(int i=0;i<TLBSIZE;i++)
+                TLB[i].EntryHi = TLB[i].EntryLo0 = TLB[i].EntryLo1 = 0;
+            break;
         default: //syscall should mov pc to epc and eret to epc+4
             rtl_mv(&cpu.epc,&cpu.pc);
             rtl_andi(&cpu.cause,&cpu.cause,0xffffff83);

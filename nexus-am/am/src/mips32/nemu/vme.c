@@ -65,6 +65,10 @@ void __am_tlb_refill(){
   return;
 }
 
+void __am_tlb_clear(){
+  __asm__ __volatile__ ("syscall 2");
+}
+
 int _map(_AddressSpace *as, void *va, void *pa, int prot) {
   // printf("_map as->ptr: %x va: %x pa: %x\n",as->ptr,va,pa);//debug
   assert((uint32_t)va % PGSIZE ==0 && (uint32_t)pa % PGSIZE ==0);
