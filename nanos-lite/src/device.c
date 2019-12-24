@@ -3,6 +3,7 @@
 #include "fs.h"
 
 size_t serial_write(const void *buf, size_t offset, size_t len) {
+  printf("%s\n",__FUNCTION__);//debug
   _yield();
   for(int i=0;i<len;i++) _putc(((char*)buf)[i]);
   return len;
@@ -17,6 +18,7 @@ static const char *keyname[256] __attribute__((used)) = {
 };
 
 size_t events_read(void *buf, size_t offset, size_t len) {
+    printf("%s\n",__FUNCTION__);//debug
     _yield();
     int key = read_key();
     int down = 0;
@@ -41,6 +43,7 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
+  printf("%s\n",__FUNCTION__);//debug
   _yield();
   int width  = screen_width();
   offset/=4;
