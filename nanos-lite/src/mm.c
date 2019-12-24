@@ -6,7 +6,7 @@ static void *pf = NULL;
 void* new_page(size_t nr_page) {
   void *p = pf;
   pf += PGSIZE * nr_page;
-  printf("pf now is %x\n",pf);//debug
+  // printf("pf now is %x\n",pf);//debug
   assert(pf < (void *)_heap.end);
   return p;
 }
