@@ -14,6 +14,7 @@ make_EHelper(syscall){
         case 2: //tlb clear
             for(int i=0;i<TLBSIZE;i++)
                 TLB[i].EntryHi = TLB[i].EntryLo0 = TLB[i].EntryLo1 = 0;
+            printf("tlb is cleared\n");//debug
             break;
         default: //syscall should mov pc to epc and eret to epc+4
             rtl_mv(&cpu.epc,&cpu.pc);
