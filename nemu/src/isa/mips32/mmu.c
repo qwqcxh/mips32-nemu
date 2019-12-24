@@ -40,7 +40,7 @@ uint32_t isa_vaddr_read(vaddr_t addr, int len) {
     printf("%s :realaddr of addr %x is %x value is %x\n",__FUNCTION__,addr,realaddr,paddr_read(realaddr,len));//debug
     printf("****************END*****************\n");//debug
   }
-  if(tlbmiss) {tlbmiss = false; return 0;}
+  if(tlbmiss) return 0;//tlbmiss should be set to false in rtl_lm
   else return paddr_read(realaddr, len);
 }
 
