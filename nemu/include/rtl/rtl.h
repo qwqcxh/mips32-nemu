@@ -80,8 +80,7 @@ static inline void interpret_rtl_idiv64_r(rtlreg_t* dest,
 extern bool tlbmiss;
 static inline void interpret_rtl_lm(rtlreg_t *dest, const rtlreg_t* addr, int len) {
   rtlreg_t val = vaddr_read(*addr, len);
-  if(tlbmiss) tlbmiss = false;
-  else *dest = val; 
+  if(!tlbmiss) *dest = val; 
 }
 
 static inline void interpret_rtl_sm(const rtlreg_t* addr, const rtlreg_t* src1, int len) {
