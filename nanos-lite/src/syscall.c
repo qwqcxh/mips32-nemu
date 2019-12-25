@@ -26,7 +26,7 @@ _Context* do_syscall(_Context *c) {
     case SYS_read:printf("sys_read: cpu.epc %x\n",c->epc); c->GPRx=fs_read(c->GPR2,(void*)c->GPR3,c->GPR4);break;
     case SYS_close:printf("sys_close: cpu.epc %x\n",c->epc); c->GPRx=fs_close(c->GPR2);break;
     case SYS_lseek:printf("sys_lseek: cpu.epc %x\n",c->epc); c->GPRx=fs_lseek(c->GPR2,c->GPR3,c->GPR4);break;
-    case SYS_write:printf("sys_write: cpu.epc %x\n",c->epc); c->GPRx = fs_write(c->GPR2,(void*)c->GPR3,c->GPR4);break;
+    case SYS_write:/*printf("sys_write: cpu.epc %x\n",c->epc);*/ c->GPRx = fs_write(c->GPR2,(void*)c->GPR3,c->GPR4);break;
     case SYS_execve:printf("sys_execve: cpu.epc %x\n",c->epc); naive_uload(NULL,(char*)c->GPR2);break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
