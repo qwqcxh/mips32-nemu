@@ -371,6 +371,7 @@ PAL_InitFont(
    gpFont = (LPFONT)calloc(1, sizeof(FONT));
    if (gpFont == NULL)
    {
+      printf("failed at test1\n");//debug
       return -1;
    }
 
@@ -392,6 +393,7 @@ PAL_InitFont(
    gpFont->lpBufChar = (LPWORD)calloc(gpFont->nChar, sizeof(WORD));
    if (gpFont->lpBufChar == NULL)
    {
+      printf("failed at test2\n");//debug
       free(gpFont);
       gpFont = NULL;
       return -1;
@@ -413,6 +415,7 @@ PAL_InitFont(
    gpFont->lpBufGlyph = (LPBYTE)calloc(gpFont->nChar, 30);
    if (gpFont->lpBufGlyph == NULL)
    {
+      printf("failed at test3\n");//debug
       free(gpFont->lpBufChar);
       free(gpFont);
       gpFont = NULL;
