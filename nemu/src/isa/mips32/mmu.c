@@ -41,7 +41,7 @@ uint32_t isa_vaddr_read(vaddr_t addr, int len) {
     printf("%s :realaddr of addr %x is %x value is %x\n",__FUNCTION__,addr,realaddr,paddr_read(realaddr,len));//debug
     printf("****************END*****************\n");//debug
   }
-  if(tlbmiss) {printf("miss addr %x at cpu.pc %x\n",addr,cpu.pc);return 0;}//tlbmiss should be set to false in rtl_lm
+  if(tlbmiss) {printf("miss addr %x at cpu.epc %x\n",addr,cpu.epc);return 0;}//tlbmiss should be set to false in rtl_lm
   else return paddr_read(realaddr, len);
 }
 
@@ -52,6 +52,6 @@ void isa_vaddr_write(vaddr_t addr, uint32_t data, int len) {
     printf("%s :realaddr of addr %x is %x write_data %x\n",__FUNCTION__,addr,realaddr,data);//debug
     printf("****************END*****************\n");//debug
   }
-  if(tlbmiss) {tlbmiss = false;printf("miss addr %x at cpu.pc %x\n",addr,cpu.pc); return ;}
+  if(tlbmiss) {tlbmiss = false;printf("miss addr %x at cpu.epc %x\n",addr,cpu.epc); return ;}
   else paddr_write(realaddr, data, len);
 }
