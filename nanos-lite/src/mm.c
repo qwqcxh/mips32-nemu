@@ -18,6 +18,7 @@ void free_page(void *p) {
 extern PCB *current ;
 /* The brk() system call handler. */
 int mm_brk(uintptr_t brk) {
+  printf("%s: brk addr is %x\n",brk);//debug
   if(brk<=current->max_brk) return 0;
   void* va = (void*)PGROUNDUP(current->max_brk);
   while(va<(void*)brk){
