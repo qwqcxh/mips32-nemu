@@ -20,7 +20,7 @@ vaddr_t exec_once(void) {
   update_pc();
   static bool flag=false;//debug
   if(cpu.pc == 0x400263cc) flag=true;//debug
-  if(flag && cpu.pc < 0x80000000) {printf("pc: %x\n",cpu.pc);isa_reg_display();}//fprintf(stderr,"pc: 0x%x\n",cpu.pc);//debug
+  if(flag && cpu.pc == 0x40026440) {printf("pc: %x\n",cpu.pc);isa_reg_display();}//fprintf(stderr,"pc: 0x%x\n",cpu.pc);//debug
 
   return decinfo.seq_pc;
 }
