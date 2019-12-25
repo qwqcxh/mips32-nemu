@@ -10,4 +10,5 @@ int main() {
   p[0]='a';p[1]='b';p[2]='c';p[3]='\0';
   printf("addr of p: %x and val %s\n",p,p);
   free(p);
+  printf("end ok\n");
 }
