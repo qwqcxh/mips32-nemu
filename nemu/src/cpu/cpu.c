@@ -17,7 +17,9 @@ vaddr_t exec_once(void) {
   decinfo.seq_pc = cpu.pc;
   isa_exec(&decinfo.seq_pc);
   update_pc();
-  printf("pc: 0x%x",cpu.pc);//debug
+  // static bool flag=false;//debug
+  // if(cpu.pc == 0x) flag=true;//debug
+  // if(flag==true) printf("pc: 0x%x\n",cpu.pc);//debug
 
   return decinfo.seq_pc;
 }
