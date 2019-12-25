@@ -21,7 +21,7 @@ int mm_brk(uintptr_t brk) {
   printf("%s: brk addr is %x and max_brk %x\n",__FUNCTION__,brk,current->max_brk);//debug
   if(brk<=current->max_brk) return 0;
   void* va = (void*)PGROUNDUP(current->max_brk);
-  while(va<(void*)brk){
+  while(va<=(void*)brk){
     void* pa = new_page(1);
     _map(&current->as,va,pa,0);
     va+=PGSIZE;
