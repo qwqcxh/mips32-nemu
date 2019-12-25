@@ -18,7 +18,7 @@ vaddr_t exec_once(void) {
   isa_exec(&decinfo.seq_pc);
   update_pc();
   static bool flag=false;//debug
-  if(cpu.pc == 0x801007d8) flag=true;//debug
+  if(cpu.pc == 0x4000f34c) flag=true;//debug
   if(flag==true) fprintf(stderr,"pc: 0x%x\n",cpu.pc);//debug
 
   return decinfo.seq_pc;
