@@ -18,9 +18,9 @@ vaddr_t exec_once(void) {
   decinfo.seq_pc = cpu.pc;
   isa_exec(&decinfo.seq_pc);
   update_pc();
-  static bool flag=false;//debug
-  if(cpu.pc == 0x400263cc) flag=true;//debug
-  if(flag && cpu.pc < 0x40026764 && cpu.pc >= 0x400263cc) {printf("pc: %x\n",cpu.pc);isa_reg_display();}//fprintf(stderr,"pc: 0x%x\n",cpu.pc);//debug
+  // static bool flag=false;//debug
+  // if(cpu.pc == 0x400263cc) flag=true;//debug
+  if(cpu.pc < 0x40001a0 && cpu.pc >= 0x40000134) {printf("pc: %x\n",cpu.pc);isa_reg_display();}//fprintf(stderr,"pc: 0x%x\n",cpu.pc);//debug
 
   return decinfo.seq_pc;
 }
