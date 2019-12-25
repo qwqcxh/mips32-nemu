@@ -386,6 +386,7 @@ PAL_InitFont(
    gpFont->nChar = ftell(fp);
    gpFont->nChar /= 2;
 
+   printf("gpFont->nchar is %d\n",gpFont->nChar);//debug
    //
    // Read all the character codes.
    //
