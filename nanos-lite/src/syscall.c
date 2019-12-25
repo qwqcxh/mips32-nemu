@@ -21,13 +21,13 @@ _Context* do_syscall(_Context *c) {
     case SYS_yield: _yield();c->GPRx=0;break;
     case SYS_brk: c->GPRx = mm_brk(c->GPR2); break;
       // program_break=(char*)c->GPR2; c->GPRx=0; break;
-    case SYS_exit: naive_uload(NULL,"/bin/init"); break;
-    case SYS_open:c->GPRx=fs_open((char*)c->GPR2,c->GPR3,c->GPR4);break;
-    case SYS_read:c->GPRx=fs_read(c->GPR2,(void*)c->GPR3,c->GPR4);break;
-    case SYS_close:c->GPRx=fs_close(c->GPR2);break;
-    case SYS_lseek:c->GPRx=fs_lseek(c->GPR2,c->GPR3,c->GPR4);break;
-    case SYS_write:c->GPRx = fs_write(c->GPR2,(void*)c->GPR3,c->GPR4);break;
-    case SYS_execve:naive_uload(NULL,(char*)c->GPR2);break;
+    case SYS_exit:printf("sys_exit: cpu.epc %x\n",c->epc); naive_uload(NULL,"/bin/init"); break;
+    case SYS_open:printf("sys_open: cpu.epc %x\n",c->epc); c->GPRx=fs_open((char*)c->GPR2,c->GPR3,c->GPR4);break;
+    case SYS_read:printf("sys_read: cpu.epc %x\n",c->epc); c->GPRx=fs_read(c->GPR2,(void*)c->GPR3,c->GPR4);break;
+    case SYS_close:printf("sys_close: cpu.epc %x\n",c->epc); c->GPRx=fs_close(c->GPR2);break;
+    case SYS_lseek:printf("sys_lseek: cpu.epc %x\n",c->epc); c->GPRx=fs_lseek(c->GPR2,c->GPR3,c->GPR4);break;
+    case SYS_write:printf("sys_write: cpu.epc %x\n",c->epc); c->GPRx = fs_write(c->GPR2,(void*)c->GPR3,c->GPR4);break;
+    case SYS_execve:printf("sys_execve: cpu.epc %x\n",c->epc); naive_uload(NULL,(char*)c->GPR2);break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 
