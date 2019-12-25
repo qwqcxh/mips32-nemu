@@ -22,6 +22,7 @@ make_EHelper(syscall){
             rtl_andi(&cpu.status,&cpu.status,0xfffffffd);          
             rtl_ori(&cpu.cause,&cpu.cause,0x20);//set cause.execode
             rtl_ori(&cpu.status,&cpu.status,0x2);
+            printf("sysid is %d\n",cpu.gpr[2]._32); //debug
     }
     rtl_j(0x80000180);
 }
