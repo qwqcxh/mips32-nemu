@@ -13,13 +13,14 @@ void decinfo_set_jmp(bool is_jmp) {
 
 void isa_exec(vaddr_t *pc);
 
+extern void isa_reg_display();
 vaddr_t exec_once(void) {
   decinfo.seq_pc = cpu.pc;
   isa_exec(&decinfo.seq_pc);
   update_pc();
-  // static bool flag=false;//debug
-  // if(cpu.pc == 0x4000f3b4) flag=true;//debug
-  if(cpu.pc<=0x80000000) fprintf(stderr,"pc: 0x%x\n",cpu.pc);//debug
+  static bool flag=false;//debug
+  if(cpu.pc == 0x400263cc) flag=true;//debug
+  if(flag) {printf("pc: %x\n",cpu.pc);isa_reg_display();}//fprintf(stderr,"pc: 0x%x\n",cpu.pc);//debug
 
   return decinfo.seq_pc;
 }
