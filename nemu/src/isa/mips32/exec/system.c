@@ -16,8 +16,8 @@ make_EHelper(syscall){
                 TLB[i].EntryHi = TLB[i].EntryLo0 = TLB[i].EntryLo1 = 0;
             printf("tlb is cleared\n");//debug
             return ;
-        default: //syscall should mov pc to epc and eret to epc+4
-            rtl_mv(&cpu.epc,&cpu.pc);
+        default: //syscall
+            rtl_li(&cpu.epc,cpu.pc+4);
             rtl_andi(&cpu.cause,&cpu.cause,0xffffff83);
             rtl_andi(&cpu.status,&cpu.status,0xfffffffd);          
             rtl_ori(&cpu.cause,&cpu.cause,0x20);//set cause.execode
