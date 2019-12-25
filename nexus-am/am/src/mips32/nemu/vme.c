@@ -46,7 +46,10 @@ void __am_tlb_refill(){
   PDE* pgdir = (PDE*)cur_as->ptr;
   // printf("cur_as is %x and as->ptr is %x\n",cur_as,cur_as->ptr);
   uint32_t pdx = PDX(pvn) ;
-  assert(pgdir[pdx]&1);
+  if((pgdir[pdx]&1)==0){ //debug
+    printf("bug here ,pvn %x\n",pvn);
+    assert(pgdir[pdx]&1);
+  }
   PTE* pgtable = (PTE*)(pgdir[pdx] & 0xfffffffe);
   uint32_t ptxlo0 = PTX(pvn) & 0xfffffffe;
   uint32_t ptxlo1 = PTX(pvn) | 1;
