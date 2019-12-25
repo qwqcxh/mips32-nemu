@@ -6,7 +6,7 @@ static _Context* do_event(_Event e, _Context* c) {
   _Context* ret = NULL;
   switch (e.event) {
     case _EVENT_TLBL: __am_tlb_refill();ret=c;break;//printf("TLB REFILL: cpu.epc %x\n",c->epc);break;
-    case _EVENT_SYSCALL: ret = do_syscall(c);printf("syscall finished\n");break;
+    case _EVENT_SYSCALL: ret = do_syscall(c);printf("syscall finished and cpu.epc is %x\n",ret->epc);break;
     case _EVENT_YIELD: __am_tlb_clear();ret = schedule(c);printf("schedule before %x after %x and cpu.epc %x\n",c,ret,ret->epc);break;
     default: panic("Unhandled event ID = %d", e.event);
   }
