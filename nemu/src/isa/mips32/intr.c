@@ -9,7 +9,7 @@ void raise_intr(uint32_t NO, vaddr_t epc) {  //no use in mips32 because there is
 
 #define IRQ_TIMER 0           // for mips32
 bool isa_query_intr(void) {
- if ( cpu.INTR ) {
+ if ( cpu.INTR && (cpu.status&2)) {
     cpu.INTR = false;
     rtl_mv(&cpu.epc,&cpu.pc);
     rtl_andi(&cpu.cause,&cpu.cause,0xffffff83);
