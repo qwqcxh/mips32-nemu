@@ -20,13 +20,13 @@ extern PCB *current ;
 int mm_brk(uintptr_t brk) {
   printf("%s: max_brk %x brk %x\n",__FUNCTION__,current->max_brk,brk);//debug
   if(brk < current->max_brk) return 0;
-  void* va = (void*)PGROUNDUP(current->max_brk);
-  while(va<=(void*)brk){
+  void* va = (void*)current->max_brk;//we ensure max_brk is aligned with  page
+  while(va <= (void*)brk){
     void* pa = new_page(1);
     _map(&current->as,va,pa,0);
     va+=PGSIZE;
   }
-  current->max_brk = brk;
+  current->max_brk = (uintptr_t)va;
   return 0;
 }
 

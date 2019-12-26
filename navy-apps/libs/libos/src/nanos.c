@@ -65,15 +65,14 @@ int _write(int fd, void *buf, size_t count) {
 
 extern char end;
 char debug[100];
-static uint32_t addr= -1;
 void *_sbrk(intptr_t increment) {
-  if(addr==-1) addr = ((uint32_t)(&end)+4095)&0xfffff000;
-  sprintf(debug,"addr begin %x!!!\n",addr);//debug
-  _write(1,debug,strlen(debug));//debug
-  assert(0);//debug
+  static void* addr= &end;
+  // sprintf(debug,"addr begin %x!!!\n",addr);//debug
+  // _write(1,debug,strlen(debug));//debug
+  // assert(0);//debug
   // static char* addr=0x84000000; //just for test
   if(_syscall_(SYS_brk,(intptr_t)(addr+increment),0,0)==0){
-    void* ret=(void*)addr;
+    void* ret=addr;
     addr+=increment;
     sprintf(debug,"before _sbrk %x after %x increment %d\n",ret,addr,increment);//debug
     _write(1,debug,strlen(debug));//debug
