@@ -10,9 +10,6 @@ extern int fs_close(int fd);
 
 extern void naive_uload(PCB *pcb, const char *filename);
 
-// extern char end;
-// char* program_break=&end;
-// extern int mm_brk(uintptr_t brk);
 _Context* do_syscall(_Context *c) {
   uintptr_t a[4];
   a[0] = c->GPR1;
@@ -20,7 +17,6 @@ _Context* do_syscall(_Context *c) {
   switch (a[0]) {
     case SYS_yield: _yield();c->GPRx=0;break;
     case SYS_brk: /*printf("sys_brk: cpu.epc %x\n",c->epc);*/ c->GPRx = mm_brk(c->GPR2); break;
-      // program_break=(char*)c->GPR2; c->GPRx=0; break;
     case SYS_exit:/*printf("sys_exit: cpu.epc %x\n",c->epc);*/ assert(0);naive_uload(NULL,"/bin/init"); break;
     case SYS_open:/*printf("sys_open: cpu.epc %x\n",c->epc);*/ c->GPRx=fs_open((char*)c->GPR2,c->GPR3,c->GPR4);break;
     case SYS_read:/*printf("sys_read: cpu.epc %x\n",c->epc);*/ c->GPRx=fs_read(c->GPR2,(void*)c->GPR3,c->GPR4);break;
