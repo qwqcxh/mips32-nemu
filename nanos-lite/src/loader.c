@@ -17,6 +17,11 @@ extern size_t fs_write(int fd, const void *buf, size_t len);
 extern size_t fs_lseek(int fd, size_t offset, int whence);
 extern int fs_close(int fd);
 
+uint32_t min3(uint32_t a,uint32_t b,uint32_t c){
+  uint32_t x = a < b ? a : b;
+  return x < c ? x : c;
+}
+
 static uintptr_t loader(PCB *pcb, const char *filename) {
   int fd = fs_open(filename,0,0);
   Elf_Ehdr elfhdr;
@@ -30,24 +35,28 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     fs_lseek(fd,ph_offset+i*ph_entry_size,SEEK_SET);
     fs_read(fd,&phdr,sizeof(Elf_Phdr));
     if(phdr.p_type!=PT_LOAD) continue;
-    uint32_t p_offset=phdr.p_offset;
-    uint32_t p_filesz=phdr.p_filesz;
-    int p_memsz=phdr.p_memsz;
-    void*    p_vaddr=(void*)phdr.p_vaddr;
-    if((uintptr_t)(p_vaddr+p_memsz) > pcb->max_brk) pcb->max_brk =(uintptr_t)(p_vaddr + p_memsz); //pa4.2
+    uint32_t p_offset=phdr.p_offset; //offset of a segment
+    uint32_t p_filesz=phdr.p_filesz; //filesize of a segment
+
+    void* p_vaddr  = (void*)phdr.p_vaddr; //virtual addr of this segment
+    void* va_align = (void*)PGROUNDDOWN((uint32_t)p_vaddr);
+    uint32_t extra_byte = p_vaddr - va_align;
+    int p_memsz=phdr.p_memsz + extra_byte;
+
+    if((uintptr_t)(va_align+p_memsz) > pcb->max_brk) pcb->max_brk =(uintptr_t)(va_align + p_memsz); //pa4.2
     while(p_memsz > 0){
       void* page = new_page(1);
       memset(page,0,PGSIZE);
-      uint32_t readsz = p_filesz < PGSIZE ? p_filesz : PGSIZE;
+      uint32_t readsz = min3(p_filesz,PGSIZE,PGSIZE-extra_byte);
       if(p_filesz){
         fs_lseek(fd,p_offset,SEEK_SET);
-        fs_read(fd,page,readsz);
+        fs_read(fd,page+extra_byte,readsz);
         p_offset += readsz;
         p_filesz -= readsz;
       }
-      _map(&pcb->as,(void*)PGROUNDDOWN((uint32_t)p_vaddr),page,1);
-      p_vaddr += PGSIZE;
-      p_memsz -= PGSIZE;
+      _map(&pcb->as,va_align,page,1);
+      va_align += PGSIZE;
+      p_memsz  -= PGSIZE;
     }
   }
   pcb->max_brk = PGROUNDUP(pcb->max_brk);//initialize heap start
