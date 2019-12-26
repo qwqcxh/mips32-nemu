@@ -70,9 +70,11 @@ void *_sbrk(intptr_t increment) {
   if(_syscall_(SYS_brk,(intptr_t)(addr+increment),0,0)==0){
     char* ret=addr;
     addr+=increment;
+    sprintf(debug,"before _sbrk %x after %x\n",ret,addr);//debug
+    _write(1,debug,strlen(debug));//debug
     return ret;
   }
-  else return (void*)-1;
+  else {assert(0);return (void*)-1;}
 }
 
 int _read(int fd, void *buf, size_t count) {
