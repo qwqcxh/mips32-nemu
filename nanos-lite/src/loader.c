@@ -17,6 +17,11 @@ extern size_t fs_write(int fd, const void *buf, size_t len);
 extern size_t fs_lseek(int fd, size_t offset, int whence);
 extern int fs_close(int fd);
 
+uint32_t min3(uint32_t a,uint32_t b,uint32_t c){
+  uint32_t x = a < b ? a : b;
+  return x < c ? x : c;
+}
+
 static uintptr_t loader(PCB *pcb, const char *filename) {
   int fd = fs_open(filename,0,0);
   Elf_Ehdr elfhdr;
@@ -42,7 +47,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     while(p_memsz > 0){
       void* page = new_page(1);
       memset(page,0,PGSIZE);
-      uint32_t readsz = p_filesz < PGSIZE ? p_filesz : PGSIZE;
+      uint32_t readsz = min3(p_filesz,PGSIZE,PGSIZE-extra_byte);
       if(p_filesz){
         fs_lseek(fd,p_offset,SEEK_SET);
         fs_read(fd,page+extra_byte,readsz);
