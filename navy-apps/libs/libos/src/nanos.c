@@ -70,6 +70,8 @@ void *_sbrk(intptr_t increment) {
   if(_syscall_(SYS_brk,(intptr_t)(addr+increment),0,0)==0){
     char* ret=addr;
     addr+=increment;
+    sprintf(debug,"before _sbrk %x after %x increment %d\n",ret,addr,increment);//debug
+    _write(1,debug,strlen(debug));//debug
     return ret;
   }
   else return (void*)-1;
