@@ -50,10 +50,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       p_memsz -= PGSIZE;
     }
   }
-  if(pcb->max_brk % PGSIZE ==0){ //max_brk is in another page after date segment pa4.2
-    void* pa = new_page(1);
-    _map(&pcb->as,(void*)pcb->max_brk,pa,0);
-  }
+  pcb->max_brk = PGROUNDUP(pcb->max_brk);//initialize heap start
   printf("%s :pcb->max_brk %x\n",__FUNCTION__,pcb->max_brk);//debug
   return elfhdr.e_entry;
 }

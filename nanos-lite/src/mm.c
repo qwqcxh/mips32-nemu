@@ -19,7 +19,7 @@ extern PCB *current ;
 /* The brk() system call handler. */
 int mm_brk(uintptr_t brk) {
   printf("%s: max_brk %x brk %x\n",__FUNCTION__,current->max_brk,brk);//debug
-  if(brk<=current->max_brk) return 0;
+  if(brk < current->max_brk) return 0;
   void* va = (void*)PGROUNDUP(current->max_brk);
   while(va<=(void*)brk){
     void* pa = new_page(1);
