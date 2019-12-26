@@ -40,8 +40,8 @@ void __am_switch(_Context *c) {
 void __am_tlb_refill(){
   //
   uint32_t pvn;
-  __asm__ __volatile__ ("mfc0 $k0,$10;"
-                        "sw   $k0,%0":"=m"(pvn)
+  __asm__ __volatile__ ("mfc0 $t0,$10;"
+                        "sw   $t0,%0":"=m"(pvn)
                        );
   PDE* pgdir = (PDE*)cur_as->ptr;
   // printf("cur_as is %x and as->ptr is %x\n",cur_as,cur_as->ptr);
@@ -57,10 +57,10 @@ void __am_tlb_refill(){
   // uint32_t realpage = pgtable[ptx];//for test
   // printf("TLB REFILL: entrylo0 %x entrylo1 %x miss pvn %x phsicalpage %x\n",entrylo0,entrylo1,pvn,realpage);//debug
   assert((entrylo0&1)||(entrylo1&1));
-  __asm__ __volatile__ ("lw $k0,%0;"
-                        "mtc0 $k0,$2;"
-                        "lw $k1,%1;"
-                        "mtc0 $k1,$3;"
+  __asm__ __volatile__ ("lw $t0,%0;"
+                        "mtc0 $t0,$2;"
+                        "lw $t1,%1;"
+                        "mtc0 $t1,$3;"
                         "tlbwr"::"m"(entrylo0),"m"(entrylo1)
                        );
   return;
