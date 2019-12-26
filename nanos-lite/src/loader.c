@@ -51,7 +51,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     }
   }
   pcb->max_brk = PGROUNDUP(pcb->max_brk);//initialize heap start
-  // printf("%s :pcb->max_brk %x\n",__FUNCTION__,pcb->max_brk);//debug
   return elfhdr.e_entry;
 }
 

@@ -6,7 +6,6 @@ static void *pf = NULL;
 void* new_page(size_t nr_page) {
   void *p = pf;
   pf += PGSIZE * nr_page;
-  // printf("pf now is %x\n",pf);//debug
   assert(pf < (void *)_heap.end);
   return p;
 }
@@ -18,7 +17,6 @@ void free_page(void *p) {
 extern PCB *current ;
 /* The brk() system call handler. */
 int mm_brk(uintptr_t brk) {
-  printf("%s: max_brk %x brk %x\n",__FUNCTION__,current->max_brk,brk);//debug
   if(brk < current->max_brk) return 0;
   void* va = (void*)current->max_brk;//we ensure max_brk is aligned with  page
   while(va <= (void*)brk){
