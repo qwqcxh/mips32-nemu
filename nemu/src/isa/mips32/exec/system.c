@@ -14,7 +14,7 @@ make_EHelper(syscall){
         case 2: //tlb clear
             for(int i=0;i<TLBSIZE;i++)
                 TLB[i].EntryHi = TLB[i].EntryLo0 = TLB[i].EntryLo1 = 0;
-            printf("tlb is cleared\n");//debug
+            // printf("tlb is cleared\n");//debug
             return ;
         default: //syscall
             rtl_li(&cpu.epc,cpu.pc+4);

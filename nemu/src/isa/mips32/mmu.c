@@ -22,7 +22,6 @@ static inline paddr_t va2pa(vaddr_t addr, bool write) {
   else{
     tlbmiss = true;
     //trap to kernel
-    // assert(cpu.pc < 0x80000000);
     rtl_mv(&cpu.epc,&cpu.pc);
     rtl_andi(&cpu.cause,&cpu.cause,0xffffff83);
     rtl_andi(&cpu.status,&cpu.status,0xfffffffd);
@@ -36,22 +35,22 @@ static inline paddr_t va2pa(vaddr_t addr, bool write) {
 
 uint32_t isa_vaddr_read(vaddr_t addr, int len) {
   uint32_t realaddr = va2pa(addr,false);
-  if(realaddr == (uint32_t)-1) printf("%s :realaddr of addr %x miss\n",__FUNCTION__,addr);//debug
-  else if(addr < 0x80000000 && cpu.pc == 0x80000000) {
-    printf("%s :realaddr of addr %x is %x value is %x\n",__FUNCTION__,addr,realaddr,paddr_read(realaddr,len));//debug
-    printf("****************END*****************\n");//debug
-  }
-  if(tlbmiss) {printf("miss addr %x at cpu.epc %x\n",addr,cpu.epc);return 0;}//tlbmiss should be set to false in rtl_lm
+  // if(realaddr == (uint32_t)-1) printf("%s :realaddr of addr %x miss\n",__FUNCTION__,addr);//debug
+  // else if(addr < 0x80000000 && cpu.pc == 0x80000000) {
+  //   printf("%s :realaddr of addr %x is %x value is %x\n",__FUNCTION__,addr,realaddr,paddr_read(realaddr,len));//debug
+  //   printf("****************END*****************\n");//debug
+  // }
+  if(tlbmiss) return 0;//tlbmiss should be set to false in rtl_lm
   else return paddr_read(realaddr, len);
 }
 
 void isa_vaddr_write(vaddr_t addr, uint32_t data, int len) {
   uint32_t realaddr = va2pa(addr, true);
-  if(realaddr == (uint32_t)-1) printf("%s :realaddr of addr %x miss\n",__FUNCTION__,addr);//debug
-  else if(addr < 0x80000000 && cpu.pc == 0x80000000) {
-    printf("%s :realaddr of addr %x is %x write_data %x\n",__FUNCTION__,addr,realaddr,data);//debug
-    printf("****************END*****************\n");//debug
-  }
-  if(tlbmiss) {tlbmiss = false;printf("miss addr %x at cpu.epc %x\n",addr,cpu.epc); return ;}
+  // if(realaddr == (uint32_t)-1) printf("%s :realaddr of addr %x miss\n",__FUNCTION__,addr);//debug
+  // else if(addr < 0x80000000 && cpu.pc == 0x80000000) {
+  //   printf("%s :realaddr of addr %x is %x write_data %x\n",__FUNCTION__,addr,realaddr,data);//debug
+  //   printf("****************END*****************\n");//debug
+  // }
+  if(tlbmiss) {tlbmiss = false;return ;}
   else paddr_write(realaddr, data, len);
 }
