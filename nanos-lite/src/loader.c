@@ -54,6 +54,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     void* pa = new_page(1);
     _map(&pcb->as,(void*)pcb->max_brk,pa,0);
   }
+  printf("%s :pcb->max_brk %x\n",__FUNCTION__,pcb->max_brk);//debug
   return elfhdr.e_entry;
 }
 
