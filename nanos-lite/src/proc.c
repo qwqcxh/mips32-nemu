@@ -10,6 +10,13 @@ void switch_boot_pcb() {
   current = &pcb_boot;
 }
 
+static PCB* fg_pcb = &pcb[1];
+void switch_pcb(int i){
+    if(i >= 2 && i <= 4){
+        fg_pcb = &pcb[i-1];
+    }
+}
+
 void hello_fun(void *arg) {
   int j = 1;
   while (1) {
@@ -36,19 +43,16 @@ void init_proc() {
 }
 
 _Context* schedule(_Context *prev) {
-  // static int count=100;
+  static int count=100;
   current->cp = prev;
-  if(current==&pcb[0]) current=&pcb[1];
-  else if(current==&pcb[1]) current=&pcb[2];
-  else if(current==&pcb[2]) current=&pcb[3];
-  else if(current==&pcb[3]) current=&pcb[0];
-  else current=&pcb[0];
-  // if(current==&pcb[0]) current=&pcb[1];
-  // else if(current==&pcb[1]){
-  //   count = (count-1+100)%100;
-  //   if(count==0) current=&pcb[0];
-  // }
-  // else current = &pcb[1];
+  
+  if(current==&pcb[0]) current=fg_pcb;
+  else if(current==fg_pcb){
+    count = (count-1+100)%100;
+    if(count==0) current=&pcb[0];
+  }
+  else current = &pcb[0];
   // current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
+
   return current->cp;
 }
