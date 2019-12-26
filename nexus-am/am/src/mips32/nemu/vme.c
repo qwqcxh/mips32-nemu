@@ -77,7 +77,7 @@ int _map(_AddressSpace *as, void *va, void *pa, int prot) {
   PDE* pgdir = (PDE*)(as->ptr);
   if(pgdir[pdx]&1){ //pgtable already exists
     PTE*pgtable  = (PTE*)((pgdir[pdx]>>12)<<12);
-    // if(pgtable[ptx]&1) return 1;//already mapped pa4.2
+    if(pgtable[ptx]&1) return 1;//already mapped pa4.2
     pgtable[ptx] = ((PTE)pa | 1);
   }
   else{
