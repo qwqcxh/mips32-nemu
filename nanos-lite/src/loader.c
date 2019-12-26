@@ -45,7 +45,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
         p_offset += readsz;
         p_filesz -= readsz;
       }
-      _map(&pcb->as,p_vaddr,page,1);
+      _map(&pcb->as,(void*)PGROUNDDOWN((uint32_t)p_vaddr),page,1);
       p_vaddr += PGSIZE;
       p_memsz -= PGSIZE;
     }
