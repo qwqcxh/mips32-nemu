@@ -7,7 +7,18 @@ void raise_intr(uint32_t NO, vaddr_t epc) {  //no use in mips32 because there is
    */
 }
 
+#define IRQ_TIMER 0           // for mips32
 bool isa_query_intr(void) {
+ if ( cpu.INTR ) {
+    cpu.INTR = false;
+    rtl_mv(&cpu.epc,&cpu.pc);
+    rtl_andi(&cpu.cause,&cpu.cause,0xffffff83);
+    rtl_andi(&cpu.status,&cpu.status,0xfffffffd);
+    rtl_ori(&cpu.cause,&cpu.cause,0); //execode of interrupt is 0 
+    rtl_ori(&cpu.status,&cpu.status,0x2); //close interrupt
+    rtl_j(0x80000180);
+    return true;
+  }
   return false;
 }
 

@@ -13,6 +13,7 @@ typedef struct {
   rtlreg_t status,lo,hi,cause,epc;//fuck source code!!! 
   vaddr_t pc;
   rtlreg_t entryhi, entrylo0, entrylo1, index; //cp0 register
+  bool INTR;
 
 } CPU_state;
 
