@@ -37,10 +37,11 @@ _Context* schedule(_Context *prev) {
   static int count=10;
   current->cp = prev;
   if(current==&pcb[0]) current=&pcb[1];
-  else{
+  else if(current==&pcb[1]){
     count = (count-1+10)%10;
     if(count==0) current=&pcb[0];
   }
+  else current = &pcb[1];
   // current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
   return current->cp;
 }
