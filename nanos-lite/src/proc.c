@@ -25,7 +25,9 @@ extern void context_uload(PCB *pcb, const char *filename) ;
 void init_proc() {
   // context_kload(&pcb[0], (void *)hello_fun);
   context_uload(&pcb[0],"/bin/hello");
-  context_uload(&pcb[1], "/bin/slider");
+  context_uload(&pcb[1], "/bin/pal");
+  context_uload(&pcb[2],"/bin/pal");
+  context_uload(&pcb[3],"/bin/pal");
   switch_boot_pcb();
   Log("Initializing processes...");
 
@@ -34,14 +36,19 @@ void init_proc() {
 }
 
 _Context* schedule(_Context *prev) {
-  static int count=100;
+  // static int count=100;
   current->cp = prev;
   if(current==&pcb[0]) current=&pcb[1];
-  else if(current==&pcb[1]){
-    count = (count-1+100)%100;
-    if(count==0) current=&pcb[0];
-  }
-  else current = &pcb[1];
+  else if(current==&pcb[1]) current=&pcb[2];
+  else if(current==&pcb[2]) current=&pcb[3];
+  else if(current==&pcb[3]) current=&pcb[0];
+  else current=&pcb[0];
+  // if(current==&pcb[0]) current=&pcb[1];
+  // else if(current==&pcb[1]){
+  //   count = (count-1+100)%100;
+  //   if(count==0) current=&pcb[0];
+  // }
+  // else current = &pcb[1];
   // current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
   return current->cp;
 }
